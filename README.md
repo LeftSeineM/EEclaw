@@ -1,5 +1,5 @@
 # EEclaw 项目说明
-项目简介：EE Info 是清华大学电子系网络学堂桌面客户端，用于管理课程、作业、通知和 AI 智能体。
+项目简介：EEclaw 是清华大学电子系网络学堂桌面客户端，用于管理课程、作业、通知和 AI 智能体。
 功能特性：EE 工作台、EE 智能体、日程表、课程详情、设置等。
 ## 如何在本地运行
 1. 克隆仓库：`git clone https://github.com/LeftSeineM/EEclaw.git`
