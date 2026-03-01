@@ -12,4 +12,4 @@
 ## exe应用使用说明：
 ### 登录：清华学号 + 统一身份认证
 ### 设置：主题、数据存储路径
-### 配置EE智能体：推荐在设置中配置智谱API，网址：https://open.bigmodel.cn/（或配置本地Ollama）
+### 配置EE智能体：推荐在设置中配置智谱API，网址：https://open.bigmodel.cn/\n（或配置本地Ollama）
