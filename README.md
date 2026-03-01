@@ -1,5 +1,6 @@
 # EEclaw 项目说明
-
+项目简介：EE Info 是清华大学电子系网络学堂桌面客户端，用于管理课程、作业、通知和 AI 智能体。
+功能特性：EE 工作台、EE 智能体、日程表、课程详情、设置等。
 ## 如何在本地运行
 1. 克隆仓库：`git clone https://github.com/LeftSeineM/EEclaw.git`
 2. 安装依赖：`npm install`
@@ -8,5 +9,7 @@
 ## 如何下载安装包
 请前往 [Releases](你的仓库链接/releases) 页面下载最新的 .exe 文件。
 
-## 应用的使用：
-### 2
+## exe应用使用说明：
+### 登录：清华学号 + 统一身份认证
+### 设置：主题、数据存储路径
+### 配置EE智能体：推荐在设置中配置智谱API，网址：https://open.bigmodel.cn/（或配置本地Ollama）
