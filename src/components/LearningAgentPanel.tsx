@@ -374,7 +374,7 @@ const LearningAgentPanel: React.FC<LearningAgentPanelProps> = ({ learnData: lear
               <div
                 className={`max-w-[85%] rounded-lg px-3 py-2 text-[11px] ${
                   m.role === 'user'
-                    ? 'bg-emerald-500/20 text-emerald-100 border border-emerald-500/30'
+                    ? 'ee-user-msg bg-emerald-500/20 text-emerald-100 border border-emerald-500/30'
                     : 'bg-slate-800/80 text-slate-200 border border-slate-700/80'
                 }`}
               >

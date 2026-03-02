@@ -101,7 +101,7 @@ const DateTimeWheelPicker: React.FC<DateTimeWheelPickerProps> = ({
   };
 
   return (
-    <div className={className}>
+    <div className={`ee-deadline-picker ${className}`.trim()}>
       <button
         type="button"
         onClick={() => setOpen(!open)}

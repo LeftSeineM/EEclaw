@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const SETTINGS_KEY = 'ee-info-settings';
 
@@ -15,13 +16,12 @@ declare global {
 }
 
 export interface AppSettings {
-  theme: 'light' | 'dark' | 'system';
+  theme?: 'light' | 'dark' | 'cyberpunk' | 'system';
   modelApi1?: { name: string; apiKey?: string; baseUrl?: string; model?: string };
   modelApi2?: { name: string; apiKey?: string; baseUrl?: string; model?: string; think?: boolean };
 }
 
 const defaultSettings: AppSettings = {
-  theme: 'system',
   modelApi1: {
     name: '智谱 GLM 4.7 Flash',
     apiKey: '',
@@ -55,14 +55,15 @@ function saveSettings(s: AppSettings) {
 }
 
 const SettingsPanel: React.FC = () => {
+  const { theme, setTheme } = useTheme();
   const [settings, setSettings] = useState<AppSettings>(loadSettings);
   const [dataPath, setDataPath] = useState<string | null>(null);
   const [effectivePath, setEffectivePath] = useState('');
   const [dataPathInput, setDataPathInput] = useState('');
 
   useEffect(() => {
-    saveSettings(settings);
-  }, [settings]);
+    saveSettings({ ...settings, theme });
+  }, [settings, theme]);
 
   useEffect(() => {
     window.eeInfo?.storage?.getDataPath?.().then((r) => {
@@ -104,10 +105,6 @@ const SettingsPanel: React.FC = () => {
     }
   };
 
-  const setTheme = (theme: AppSettings['theme']) => {
-    setSettings((prev) => ({ ...prev, theme }));
-  };
-
   const setModelApi1 = (updates: Partial<NonNullable<AppSettings['modelApi1']>>) => {
     setSettings((prev) => ({
       ...prev,
@@ -123,24 +120,24 @@ const SettingsPanel: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 min-h-0 overflow-y-auto p-4">
+    <div className="ee-settings-panel flex-1 min-h-0 overflow-y-auto p-4">
       <div className="max-w-xl mx-auto space-y-6">
         {/* 1. 主题 */}
         <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
           <h3 className="text-sm font-semibold text-slate-200 mb-3">主题</h3>
-          <div className="flex gap-2">
-            {(['light', 'dark', 'system'] as const).map((t) => (
+          <div className="flex flex-wrap gap-2">
+            {(['light', 'dark', 'cyberpunk', 'system'] as const).map((t) => (
               <button
                 key={t}
                 type="button"
                 onClick={() => setTheme(t)}
                 className={`px-3 py-1.5 rounded-md text-[11px] border transition ${
-                  settings.theme === t
+                  theme === t
                     ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400'
                     : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:border-slate-600'
                 }`}
               >
-                {t === 'light' ? '浅色' : t === 'dark' ? '深色' : '跟随系统'}
+                {t === 'light' ? '浅色' : t === 'dark' ? '深色' : t === 'cyberpunk' ? '赛博朋克' : '跟随系统'}
               </button>
             ))}
           </div>

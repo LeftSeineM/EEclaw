@@ -33,6 +33,16 @@ contextBridge.exposeInMainWorld('eeInfo', {
     setDataPath: (path) => ipcRenderer.invoke('storage:setDataPath', path),
     selectFolder: () => ipcRenderer.invoke('storage:selectFolder')
   },
+  courseSelection: {
+    fetchTrainingPlan: () => ipcRenderer.invoke('courseSelection:fetchTrainingPlan'),
+    getData: () => ipcRenderer.invoke('courseSelection:getData'),
+    setData: (data) => ipcRenderer.invoke('courseSelection:setData', data),
+    onLog: (cb) => {
+      const handler = (_, msg) => cb(msg);
+      ipcRenderer.on('courseSelection:log', handler);
+      return () => ipcRenderer.removeListener('courseSelection:log', handler);
+    }
+  },
   agent: {
     getSessions: () => ipcRenderer.invoke('agent:getSessions'),
     saveSessions: (sessions) => ipcRenderer.invoke('agent:saveSessions', sessions),

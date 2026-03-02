@@ -6,23 +6,12 @@ import ContentDetailModal, { type ContentItem } from './components/ContentDetail
 import TaskList from './components/TaskList';
 import SettingsPanel from './components/SettingsPanel';
 import LearningAgentPanel from './components/LearningAgentPanel';
+import CourseSelectionPanel from './components/CourseSelectionPanel';
 
-const COURSE_COLORS = [
-  'red',
-  'amber',
-  'emerald',
-  'blue',
-  'violet',
-  'pink',
-  'cyan',
-  'orange'
-] as const;
-
-function getCourseColor(courseName: string): string {
+function getCourseColorIndex(courseName: string): number {
   let h = 0;
   for (let i = 0; i < courseName.length; i++) h = (h << 5) - h + courseName.charCodeAt(i);
-  const idx = Math.abs(h) % COURSE_COLORS.length;
-  return COURSE_COLORS[idx];
+  return (Math.abs(h) % 8) + 1; // 1-8 for wood theme
 }
 
 const navItems = [
@@ -203,7 +192,7 @@ const App: React.FC = () => {
       />
 
       {/* 左侧边栏 */}
-      <aside className="w-64 border-r border-slate-800 flex flex-col bg-slate-950/80 backdrop-blur">
+      <aside className="ee-sidebar-left w-[var(--ee-sidebar-left-width)] min-w-[var(--ee-sidebar-left-width)] shrink-0 border-r border-slate-800 flex flex-col bg-slate-950/80 backdrop-blur">
         <div className="px-4 py-4 border-b border-slate-800 flex items-center gap-2">
           <div className="h-7 w-7 rounded-md bg-emerald-500/80 flex items-center justify-center text-xs font-semibold">
             EE
@@ -263,11 +252,13 @@ const App: React.FC = () => {
       {/* 中间主视图 */}
       <main className="flex-1 flex flex-col bg-slate-950/60">
         {/* 顶部栏 */}
-        <header className="h-12 border-b border-slate-800 flex items-center justify-between px-4 shrink-0">
+        <header className="ee-app-header h-12 border-b border-slate-800 flex items-center justify-between px-4 shrink-0">
           {activeNav === 'settings' ? (
             <span className="text-sm font-medium text-slate-200">设置</span>
           ) : activeNav === 'agent' ? (
             <span className="text-sm font-medium text-slate-200">EE智能体</span>
+          ) : activeNav === 'courses' ? (
+            <span className="text-sm font-medium text-slate-200">课程选课</span>
           ) : (
           <>
           <div className="flex items-center gap-2 text-sm text-slate-300">
@@ -335,18 +326,24 @@ const App: React.FC = () => {
 
         {/* 中间内容 */}
         {activeNav === 'settings' ? (
-          <SettingsPanel />
+          <section className="flex-1 min-h-0 overflow-auto relative">
+            <SettingsPanel />
+          </section>
         ) : activeNav === 'agent' ? (
           <section className="flex-1 min-h-0 flex flex-col gap-3 p-4 overflow-hidden">
             <div className="flex-1 min-h-0 rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-4 flex flex-col">
               <LearningAgentPanel learnData={learnData} />
             </div>
           </section>
+        ) : activeNav === 'courses' ? (
+          <section className="flex-1 min-h-0 overflow-hidden flex flex-col">
+            <CourseSelectionPanel />
+          </section>
         ) : (
         <section className="flex-1 min-h-0 flex flex-col gap-3 p-4 overflow-hidden">
           {/* 上：当前课程表 */}
-          <div className="flex-1 min-h-0 rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-4 flex flex-col">
-            <div className="flex items-center justify-between mb-3">
+          <div className="flex-1 min-h-0 rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-4 flex flex-col overflow-hidden">
+            <div className="ee-header-khaki flex items-center justify-between mb-3 -mx-4 -mt-4 px-4 pt-4 pb-2 rounded-t-xl">
               <div>
                 <h2 className="text-sm font-semibold tracking-tight">当前课程表</h2>
                 <p className="text-xs text-slate-400 mt-0.5">
@@ -360,7 +357,7 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex-1 rounded-lg border border-slate-700/80 bg-slate-950/40 overflow-y-auto min-h-0">
+            <div className="ee-wood-timetable flex-1 rounded-lg border border-slate-700/80 bg-slate-950/40 overflow-y-auto min-h-0">
               {selectedCourse ? (
                 <CourseDetailPanel
                   course={selectedCourse}
@@ -380,8 +377,8 @@ const App: React.FC = () => {
           </div>
 
           {/* 下：近期信息汇总 */}
-          <div className="flex-1 min-h-0 rounded-xl border border-slate-800 bg-slate-900/40 backdrop-blur-sm p-4 flex flex-col">
-            <div className="flex items-center justify-between mb-3">
+          <div className="flex-1 min-h-0 rounded-xl border border-slate-800 bg-slate-900/40 backdrop-blur-sm p-4 flex flex-col overflow-hidden">
+            <div className="ee-header-khaki flex items-center justify-between mb-3 -mx-4 -mt-4 px-4 pt-4 pb-2 rounded-t-xl">
               <div>
                 <h2 className="text-sm font-semibold tracking-tight">近期信息汇总</h2>
                 <p className="text-xs text-slate-400 mt-0.5">
@@ -396,7 +393,7 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex-1 rounded-lg border border-slate-700/80 bg-slate-950/40 overflow-y-auto min-h-0">
+            <div className="ee-wood-info flex-1 rounded-lg border border-slate-700/80 bg-slate-950/40 overflow-y-auto min-h-0">
               {fetchError && (
                 <div className="mx-3 mt-2 rounded-lg bg-red-500/10 border border-red-500/30 px-3 py-2 text-xs text-red-400">
                   {fetchError}
@@ -424,17 +421,7 @@ const App: React.FC = () => {
                     .slice(0, 10)
                     .map((item, i) => {
                         const courseName = item.courseName || '';
-                        const color = getCourseColor(courseName);
-                        const colorBorder: Record<string, string> = {
-                          red: 'border-l-red-500',
-                          amber: 'border-l-amber-500',
-                          emerald: 'border-l-emerald-500',
-                          blue: 'border-l-blue-500',
-                          violet: 'border-l-violet-500',
-                          pink: 'border-l-pink-500',
-                          cyan: 'border-l-cyan-500',
-                          orange: 'border-l-orange-500'
-                        };
+                        const colorIdx = getCourseColorIndex(courseName);
                         const isRead = getIsRead(item);
                         return (
                           <li key={i}>
@@ -445,14 +432,16 @@ const App: React.FC = () => {
                                 setContentModalOpen(true);
                                 markAsRead(item);
                               }}
-                              className={`w-full text-left rounded-lg border border-slate-700/60 border-l-4 px-3 py-2 transition hover:bg-slate-800/60 cursor-pointer ${colorBorder[color]} ${
+                              data-course-color={colorIdx}
+                              data-read={String(isRead)}
+                              className={`ee-wood-item w-full text-left rounded-lg border border-slate-700/60 border-l-4 px-3 py-2 transition cursor-pointer ${
                                 isRead ? 'bg-slate-900/40' : 'bg-amber-500/5'
-                              }`}
+                              } hover:bg-slate-800/60`}
                             >
-                              <p className={`truncate flex items-center gap-1.5 ${isRead ? 'text-slate-500' : 'text-slate-200'}`}>
+                              <p className={`ee-wood-item-title truncate flex items-center gap-1.5 ${isRead ? 'text-slate-500' : 'text-slate-200'}`}>
                                 {item.bt}
                               </p>
-                              <p className="text-slate-500 text-[10px] mt-0.5">
+                              <p className="ee-wood-item-meta text-slate-500 text-[10px] mt-0.5">
                                 {courseName} · {'fbsj' in item ? item.fbsj : 'jzsj' in item ? item.jzsj : (item as HomeworkItem).status}
                               </p>
                             </button>
@@ -472,7 +461,7 @@ const App: React.FC = () => {
       </main>
 
       {/* 右侧边栏：日程表 + 未完成作业 */}
-      <aside className="w-96 border-l border-slate-800 bg-slate-950/80 backdrop-blur flex flex-col">
+      <aside className="ee-sidebar-right w-[var(--ee-sidebar-right-width)] min-w-[var(--ee-sidebar-right-width)] shrink-0 border-l border-slate-800 bg-slate-950/80 backdrop-blur flex flex-col">
         <header className="h-12 border-b border-slate-800 flex items-center justify-between px-3 shrink-0">
           <div className="flex flex-col">
             <span className="text-xs font-medium text-slate-200">日程表</span>
@@ -511,8 +500,8 @@ const App: React.FC = () => {
               }
             };
             return (
-              <div className="rounded-lg border border-slate-800 bg-slate-950/60 overflow-hidden flex flex-col h-full">
-                <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800 bg-slate-900/60 shrink-0">
+              <div className="ee-wood-homework rounded-lg border border-slate-800 bg-slate-950/60 overflow-hidden flex flex-col h-full">
+                <div className="ee-header-khaki ee-wood-header flex items-center justify-between px-3 py-2 border-b border-slate-800 bg-slate-900/60 shrink-0">
                   <span className="text-[11px] text-slate-400">未完成作业</span>
                   <span className="text-[10px] text-slate-500">{unfinished.length} 个</span>
                 </div>
@@ -521,9 +510,9 @@ const App: React.FC = () => {
                     <table className="w-full border-collapse text-[10px]">
                       <thead>
                         <tr>
-                          <th className="p-2 text-left border-b border-slate-700/80 bg-slate-900/80 text-slate-500 font-medium">任务</th>
-                          <th className="p-2 text-left border-b border-slate-700/80 bg-slate-900/80 text-slate-500 font-medium w-20">课程</th>
-                          <th className="p-2 text-left border-b border-slate-700/80 bg-slate-900/80 text-slate-500 font-medium w-20">截止</th>
+                          <th className="ee-wood-table-header p-2 text-left border-b border-slate-700/80 bg-slate-900/80 text-slate-500 font-medium">任务</th>
+                          <th className="ee-wood-table-header p-2 text-left border-b border-slate-700/80 bg-slate-900/80 text-slate-500 font-medium w-20">课程</th>
+                          <th className="ee-wood-table-header p-2 text-left border-b border-slate-700/80 bg-slate-900/80 text-slate-500 font-medium w-20">截止</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -531,8 +520,8 @@ const App: React.FC = () => {
                           const deadline = new Date(h.jzsj || 0).getTime();
                           const isOverdue = h.isUnsubmitted && deadline < now;
                           return (
-                            <tr key={i} className={isOverdue ? 'bg-red-500/5' : ''}>
-                              <td className="p-2 border-b border-slate-700/60 align-top">
+                            <tr key={i} className={`${isOverdue ? 'bg-red-500/5' : ''} ${i % 2 === 1 ? 'ee-wood-table-cell-alt' : ''}`}>
+                              <td className="ee-wood-table-cell p-2 border-b border-slate-700/60 align-top">
                                 <button
                                   type="button"
                                   onClick={() => h.submitUrl && window.eeInfo?.shell?.openExternal?.(h.submitUrl)}
@@ -542,8 +531,8 @@ const App: React.FC = () => {
                                   {h.bt}
                                 </button>
                               </td>
-                              <td className="p-2 border-b border-slate-700/60 text-slate-500 truncate max-w-[80px]">{h.courseName}</td>
-                              <td className="p-2 border-b border-slate-700/60 text-slate-500 whitespace-nowrap">
+                              <td className="ee-wood-table-cell p-2 border-b border-slate-700/60 text-slate-500 truncate max-w-[80px]">{h.courseName}</td>
+                              <td className="ee-wood-table-cell p-2 border-b border-slate-700/60 text-slate-500 whitespace-nowrap">
                                 {formatDeadline(h.jzsj)}
                                 {isOverdue && <span className="text-red-400 ml-0.5">逾期</span>}
                               </td>

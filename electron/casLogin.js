@@ -7,6 +7,8 @@ const https = require('https');
 const { URL } = require('url');
 const { sm2 } = require('sm-crypto');
 
+const INFO_BASE = 'https://info.tsinghua.edu.cn';
+const INFO_LOGIN = 'https://info.tsinghua.edu.cn/';
 const LEARN_LOGIN = 'https://learn.tsinghua.edu.cn/f/login';
 const LEARN_BASE = 'https://learn.tsinghua.edu.cn';
 const ID_BASE = 'https://id.tsinghua.edu.cn';
@@ -53,13 +55,48 @@ class CookieJar {
   }
 
   toLearnCookies() {
+    return this.toDomainCookies('learn.tsinghua.edu.cn');
+  }
+
+  toInfoCookies() {
+    return this.toDomainCookies('info.tsinghua.edu.cn');
+  }
+
+  /** 返回指定域及其子域的 cookies（用于持久化） */
+  toDomainCookies(domainPart) {
     const list = [];
     for (const [, c] of this.cookies) {
-      if (c.host.includes('learn.tsinghua.edu.cn')) {
+      if (c.host && c.host.includes(domainPart)) {
+        const domain = c.host.startsWith('.') ? c.host : '.' + c.host;
         list.push({
           name: c.name,
           value: c.value,
-          domain: '.learn.tsinghua.edu.cn',
+          domain,
+          path: c.path || '/',
+          expires: c.expires ? Math.floor(c.expires / 1000) : null
+        });
+      }
+    }
+    return list;
+  }
+
+  /** 返回所有 tsinghua 相关域 cookies（info + learn + id），用于培养方案与网络学堂 */
+  toAllTsinghuaCookies() {
+    const seen = new Set();
+    const list = [];
+    const domains = ['info.tsinghua.edu.cn', 'learn.tsinghua.edu.cn', 'id.tsinghua.edu.cn', 'id.sigs.tsinghua.edu.cn', 'zhjw.cic.tsinghua.edu.cn', 'cic.tsinghua.edu.cn'];
+    for (const [, c] of this.cookies) {
+      if (!c.host) continue;
+      const key = `${c.host}::${c.name}`;
+      if (seen.has(key)) continue;
+      const match = domains.some(d => c.host.includes(d));
+      if (match) {
+        seen.add(key);
+        const domain = c.host.startsWith('.') ? c.host : '.' + c.host;
+        list.push({
+          name: c.name,
+          value: c.value,
+          domain,
           path: c.path || '/',
           expires: c.expires ? Math.floor(c.expires / 1000) : null
         });
@@ -127,16 +164,31 @@ async function loginProgrammatic(username, password) {
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
   try {
-    const learnUrl = new URL(LEARN_LOGIN);
-    const learnRes = await request({
-      hostname: learnUrl.hostname,
-      path: learnUrl.pathname,
+    // 从 info 信息门户入口获取 CAS 地址（培养方案、选课需从 info 进入）
+    const infoUrl = new URL(INFO_LOGIN);
+    const infoRes = await request({
+      hostname: infoUrl.hostname,
+      path: infoUrl.pathname || '/',
       method: 'GET',
       headers: { 'User-Agent': ua }
     });
-    jar.setFromHeaders(learnRes.headers['set-cookie'], LEARN_LOGIN);
+    jar.setFromHeaders(infoRes.headers['set-cookie'], INFO_LOGIN);
 
-    const casLoginUrl = extractCasUrl(learnRes.body);
+    let casLoginUrl = extractCasUrl(infoRes.body);
+    if (!casLoginUrl && infoRes.body.includes('id.tsinghua')) {
+      const m = infoRes.body.match(/href=["']([^"']*id\.tsinghua[^"']*)["']/);
+      if (m) casLoginUrl = m[1].startsWith('http') ? m[1] : new URL(m[1], INFO_BASE).href;
+    }
+    if (!casLoginUrl) {
+      const learnRes = await request({
+        hostname: new URL(LEARN_LOGIN).hostname,
+        path: new URL(LEARN_LOGIN).pathname,
+        method: 'GET',
+        headers: { 'User-Agent': ua }
+      });
+      jar.setFromHeaders(learnRes.headers['set-cookie'], LEARN_LOGIN);
+      casLoginUrl = extractCasUrl(learnRes.body);
+    }
     if (!casLoginUrl) return { success: false, error: '无法获取 CAS 登录地址' };
 
     const casUrl = new URL(casLoginUrl);
@@ -208,9 +260,17 @@ async function loginProgrammatic(username, password) {
       followCount++;
     }
 
+    const allCookies = jar.toAllTsinghuaCookies();
+    if (allCookies.length > 0) {
+      return { success: true, cookies: allCookies };
+    }
     const learnCookies = jar.toLearnCookies();
     if (learnCookies.length > 0) {
       return { success: true, cookies: learnCookies };
+    }
+    const infoCookies = jar.toInfoCookies();
+    if (infoCookies.length > 0) {
+      return { success: true, cookies: infoCookies };
     }
 
     if (
@@ -230,19 +290,22 @@ async function loginProgrammatic(username, password) {
       };
     }
 
-    if (lastRes.location && lastRes.location.includes('learn.tsinghua.edu.cn')) {
-      const u = new URL(lastRes.location);
-      const finalRes = await request({
-        hostname: u.hostname,
-        path: u.pathname + u.search,
-        method: 'GET',
-        headers: {
-          'User-Agent': ua,
-          Cookie: jar.getHeader(lastRes.location) || ''
-        }
-      });
-      jar.setFromHeaders(finalRes.headers['set-cookie'], lastRes.location);
-      const fc = jar.toLearnCookies();
+    if (lastRes.location) {
+      const loc = lastRes.location;
+      if (loc.includes('info.tsinghua.edu.cn') || loc.includes('learn.tsinghua.edu.cn')) {
+        const u = new URL(loc.startsWith('http') ? loc : new URL(loc, ID_BASE).href);
+        const finalRes = await request({
+          hostname: u.hostname,
+          path: u.pathname + u.search,
+          method: 'GET',
+          headers: {
+            'User-Agent': ua,
+            Cookie: jar.getHeader(loc) || ''
+          }
+        });
+        jar.setFromHeaders(finalRes.headers['set-cookie'], loc);
+      }
+      const fc = jar.toAllTsinghuaCookies();
       if (fc.length > 0) return { success: true, cookies: fc };
     }
 
@@ -253,24 +316,32 @@ async function loginProgrammatic(username, password) {
 }
 
 /**
- * 获取 CAS 登录页 URL（用于 BrowserWindow 直接打开，跳过 learn 的浏览器检测）
+ * 获取 CAS 登录页 URL（用于 BrowserWindow）
+ * 优先从 info 入口获取，失败则回退 learn
  */
 async function getCasLoginUrl() {
   const ua =
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
   try {
-    const learnUrl = new URL(LEARN_LOGIN);
-    const res = await request({
-      hostname: learnUrl.hostname,
-      path: learnUrl.pathname,
+    const infoRes = await request({
+      hostname: new URL(INFO_LOGIN).hostname,
+      path: new URL(INFO_LOGIN).pathname || '/',
       method: 'GET',
       headers: { 'User-Agent': ua }
     });
-    const url = extractCasUrl(res.body);
+    let url = extractCasUrl(infoRes.body);
+    if (url) return url;
+    const learnRes = await request({
+      hostname: new URL(LEARN_LOGIN).hostname,
+      path: new URL(LEARN_LOGIN).pathname,
+      method: 'GET',
+      headers: { 'User-Agent': ua }
+    });
+    url = extractCasUrl(learnRes.body);
     return url || LEARN_LOGIN;
   } catch {
     return LEARN_LOGIN;
   }
 }
 
-module.exports = { loginProgrammatic, getCasLoginUrl, CookieJar };
+module.exports = { loginProgrammatic, getCasLoginUrl, CookieJar, INFO_LOGIN, INFO_BASE };

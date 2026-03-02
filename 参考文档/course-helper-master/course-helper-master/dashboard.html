@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Helper - 清华选课助手</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #45a049;
+      --primary-light: #e8f5e9;
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --text: #333333;
+      --text-light: #666666;
+      --border: #e0e0e0;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 
+                   'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* 顶部导航栏 */
+    .navbar {
+      background: var(--card-bg);
+      padding: 1rem 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .navbar-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-light);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* 主容器 */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* 统计卡片区域 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .stat-sub {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    /* 主内容区域 */
+    .main-content {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 2rem;
+    }
+
+    /* 侧边栏 - 课程组列表 */
+    .sidebar {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .group-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .group-item {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .group-item:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .group-item.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .group-item.completed {
+      opacity: 0.6;
+    }
+
+    .group-name {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .group-progress {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .badge {
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .badge-success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .badge-warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    /* 主区域 - 课程详情 */
+    .detail-panel {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-light);
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.3;
+    }
+
+    .course-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .course-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .course-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+    }
+
+    .course-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.8rem;
+    }
+
+    .course-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .course-id {
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+
+    .course-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.2rem;
+      color: #FFC107;
+    }
+
+    .course-info {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .course-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* 加载状态 */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem;
+    }
+
+    .spinner {
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 进度条 */
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    /* 课程详情模态框 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .modal.show {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 800px;
+      width: 100%;
+      margin-top: 2rem;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    .comments-section {
+      margin-top: 1.5rem;
+    }
+
+    .comment-item {
+      padding: 1rem;
+      border-left: 3px solid var(--primary);
+      background: var(--primary-light);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .comment-rating {
+      color: #FFC107;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      🎓 Course Helper
+    </div>
+    <div class="navbar-actions">
+      <button class="btn btn-outline" id="xuankeshequ">
+        ↗️ 进入选课社区贡献评价
+      </button>
+      <button class="btn btn-outline" id="refreshTrainingPlan">
+        🔄 更新培养方案
+      </button>
+      <button class="btn btn-outline" id="refreshReviews">
+        📊 更新选课评价
+      </button>
+      <button class="btn btn-outline" id="fetchNextSemester">
+        📋 下学期推荐课
+      </button>
+      <button class="btn btn-outline" id="fetchCourseSchedule">
+        🗓️ 抓取开课信息
+      </button>
+      <button class="btn btn-primary" id="exportData">
+        📥 导出数据
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主容器 -->
+  <div class="container">
+    <!-- 统计卡片 -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-label">总学分要求</div>
+        <div class="stat-value" id="totalRequired">--</div>
+        <div class="stat-sub">应完成学分</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">已完成学分</div>
+        <div class="stat-value" id="totalCompleted">--</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="completionProgress" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">剩余学分</div>
+        <div class="stat-value" id="totalRemaining">--</div>
+        <div class="stat-sub">还需完成</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">未完成课程组</div>
+        <div class="stat-value" id="incompleteGroups">--</div>
+        <div class="stat-sub">个课程组待修</div>
+      </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+      <!-- 侧边栏 - 课程组列表 -->
+      <aside class="sidebar">
+        <h2 class="sidebar-title">课程组</h2>
+        <div class="filter-tabs">
+          <button class="tab active" data-filter="all">全部</button>
+          <button class="tab" data-filter="incomplete">未完成</button>
+          <button class="tab" data-filter="required">必修</button>
+          <button class="tab" data-filter="elective">限选</button>
+        </div>
+        <div class="group-list" id="groupList">
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 主区域 - 课程详情 -->
+      <main class="detail-panel">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state-icon">📚</div>
+          <h3>选择一个课程组查看详情</h3>
+          <p>从左侧列表中选择课程组</p>
+        </div>
+        <div id="courseDetail" style="display: none;">
+          <h2 id="groupTitle">课程组名称</h2>
+          <div class="course-grid" id="courseGrid"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- 课程详情模态框 -->
+  <div class="modal" id="courseModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalCourseTitle">课程名称</h2>
+          <div class="course-id" id="modalCourseId">课程号</div>
+        </div>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <div id="modalCourseInfo"></div>
+      <div class="comments-section" id="modalComments"></div>
+    </div>
+  </div>
+
+
+  <!-- 进度 Toast -->
+  <div id="progressToast" style="display:none;position:fixed;bottom:24px;right:24px;background:#fff;border:1px solid #ddd;border-radius:12px;padding:16px 20px;min-width:280px;box-shadow:0 4px 20px rgba(0,0,0,0.15);z-index:9999;">
+    <div id="progressToastTitle" style="font-weight:600;margin-bottom:8px;"></div>
+    <div style="background:#f0f0f0;border-radius:4px;height:6px;margin-bottom:8px;">
+      <div id="progressToastBar" style="background:#4f46e5;height:6px;border-radius:4px;width:0%;transition:width 0.3s;"></div>
+    </div>
+    <div id="progressToastText" style="font-size:0.85rem;color:#666;"></div>
+  </div>
+  <script src="scripts/parser.js"></script>
+  <script src="scripts/analyser.js"></script>
+  <script src="scripts/exporter.js"></script>
+  <script src="scripts/dashboard.js"></script>
+  <script src="scripts/fetcher-ui.js"></script>
+</body>
+</html>

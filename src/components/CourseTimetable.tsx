@@ -16,6 +16,13 @@ interface CourseTimetableProps {
 }
 
 const MAX_PERIOD = 6;
+const COURSE_COLOR_COUNT = 8;
+
+function getCourseColorIndex(courseName: string): number {
+  let h = 0;
+  for (let i = 0; i < courseName.length; i++) h = (h << 5) - h + courseName.charCodeAt(i);
+  return (Math.abs(h) % COURSE_COLOR_COUNT) + 1; // 1-8
+}
 
 const CourseTimetable: React.FC<CourseTimetableProps> = ({ courses, onCourseClick }) => {
   const grid: (Course | null)[][] = Array.from({ length: MAX_PERIOD + 1 }, () =>
@@ -40,18 +47,18 @@ const CourseTimetable: React.FC<CourseTimetableProps> = ({ courses, onCourseClic
   }
 
   return (
-    <div className="flex flex-col h-full min-h-[280px]">
+    <div className="ee-wood-timetable flex flex-col h-full min-h-[280px] rounded-lg border border-slate-700 bg-slate-950/40">
       <div className="flex-1 min-h-0 overflow-auto">
         <table className="w-full border-collapse text-xs table-fixed" style={{ minWidth: 560 }}>
           <thead>
             <tr>
-              <th className="w-12 p-2 border border-slate-700 bg-slate-900/80 text-slate-400 font-medium text-[10px]">
+              <th className="ee-wood-header w-12 p-2 border border-slate-700 bg-slate-900/80 text-slate-400 font-medium text-[10px]">
                 节次
               </th>
               {WEEKDAY_NAMES.map((name) => (
                 <th
                   key={name}
-                  className="p-2 border border-slate-700 bg-slate-900/80 text-slate-400 font-medium"
+                  className="ee-wood-header p-2 border border-slate-700 bg-slate-900/80 text-slate-400 font-medium"
                 >
                   {name}
                 </th>
@@ -61,22 +68,30 @@ const CourseTimetable: React.FC<CourseTimetableProps> = ({ courses, onCourseClic
           <tbody>
             {grid.slice(0, MAX_PERIOD).map((row, rowIdx) => (
               <tr key={rowIdx}>
-                <td className="p-1 border border-slate-700/80 bg-slate-950/60 text-slate-500 text-center w-12">
+                <td
+                  className={`ee-wood-cell p-1 border border-slate-700/80 bg-slate-950/60 text-slate-500 text-center w-12 text-[10px] ${
+                    rowIdx % 2 === 1 ? 'ee-wood-cell-alt' : ''
+                  }`}
+                >
                   {rowIdx + 1}
                 </td>
                 {row.map((c, colIdx) => (
                   <td
                     key={colIdx}
-                    className="p-1 border border-slate-700/80 align-top bg-slate-950/40 min-h-[48px]"
+                    className={`ee-wood-cell p-1 border border-slate-700/80 align-top bg-slate-950/40 min-h-[48px] ${
+                      rowIdx % 2 === 1 ? 'ee-wood-cell-alt' : ''
+                    }`}
                   >
                     {c ? (
                       <button
+                        type="button"
                         onClick={() => onCourseClick(c)}
-                        className="w-full h-full min-h-[44px] rounded-md p-2 text-left bg-slate-800/80 hover:bg-emerald-500/20 hover:border-emerald-500/40 border border-slate-700/80 transition"
+                        data-course-color={getCourseColorIndex(c.kcm)}
+                        className="ee-wood-course w-full h-full min-h-[44px] rounded-md p-2 text-left border border-slate-700/80 bg-slate-800/80 text-slate-200 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition"
                       >
-                        <p className="font-medium text-slate-200 truncate text-[11px]">{c.kcm}</p>
-                        <p className="text-slate-500 text-[10px] mt-0.5 truncate">{c.jsm}</p>
-                        <p className="text-slate-500 text-[9px] mt-0.5 truncate">{c.skdd || c.skddxx || ''}</p>
+                        <p className="font-medium truncate text-[11px]">{c.kcm}</p>
+                        <p className="ee-wood-course-sub text-[10px] mt-0.5 truncate">{c.jsm}</p>
+                        <p className="ee-wood-placeholder text-[9px] mt-0.5 truncate">{c.skdd || c.skddxx || ''}</p>
                       </button>
                     ) : null}
                   </td>
@@ -88,13 +103,15 @@ const CourseTimetable: React.FC<CourseTimetableProps> = ({ courses, onCourseClic
       </div>
       {unplaced.length > 0 && (
         <div className="mt-2 pt-2 border-t border-slate-700/80">
-          <p className="text-[10px] text-slate-500 mb-1">未解析时间 ({unplaced.length})</p>
+          <p className="ee-wood-placeholder text-slate-500 text-[10px] mb-1">未解析时间 ({unplaced.length})</p>
           <div className="flex flex-wrap gap-1">
             {unplaced.map((c) => (
               <button
                 key={c.wlkcid}
+                type="button"
                 onClick={() => onCourseClick(c)}
-                className="px-2 py-1 rounded-md border border-slate-700 bg-slate-800/60 hover:bg-slate-700/80 text-slate-300 text-[10px] truncate max-w-[120px]"
+                data-course-color={getCourseColorIndex(c.kcm)}
+                className="ee-wood-course px-2 py-1 rounded-md border border-slate-700 bg-slate-800/60 text-slate-300 hover:bg-slate-700/80 text-[10px] truncate max-w-[120px] transition"
               >
                 {c.kcm}
               </button>

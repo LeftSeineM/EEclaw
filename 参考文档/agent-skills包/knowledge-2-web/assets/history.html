@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安史之乱 - 历史知识卡片</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #8B2B24;
+            --bg-cream: #F9F5F1;
+            --accent-gold: #B58D59;
+            --text-dark: #3A3530;
+            --card-border: #E5DED4;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .header-line {
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--card-border);
+        }
+
+        .icon-box {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 8px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-q {
+            background-color: #FDF2F2;
+            color: var(--primary-red);
+            border-left: 4px solid var(--primary-red);
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Header Section -->
+    <header class="max-w-6xl mx-auto mb-12 text-center">
+        <p class="text-gray-500 tracking-widest uppercase text-sm mb-2">BACKGROUND & ANALYSIS</p>
+        <h1 class="text-4xl md:text-5xl text-[var(--primary-red)] mb-4">大唐转折：安史之乱</h1>
+        <div class="flex justify-center items-center gap-4">
+            <div class="h-[1px] w-12 bg-gray-300"></div>
+            <p class="text-lg italic font-medium">从盛世巅峰到藩镇割据的八年浩劫</p>
+            <div class="h-[1px] w-12 bg-gray-300"></div>
+        </div>
+        <div class="mt-8 bg-white p-6 rounded-lg border border-dashed border-[#B58D59] max-w-3xl mx-auto">
+            <h3 class="text-[var(--accent-gold)] font-bold mb-2">核心命题</h3>
+            <p class="text-xl">安史之乱不仅是唐朝由盛转衰的转折点，更是中国古代社会从开放走向封闭的分水岭。</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto space-y-12">
+        
+        <!-- Section 1: Deep Causes (Reference Style) -->
+        <section>
+            <div class="flex items-center gap-2 mb-6">
+                <div class="header-line"></div>
+                <h2 class="text-2xl font-bold text-[var(--primary-red)]">深层原因：盛世下的阴影</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Left Grid -->
+                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="card p-5">
+                        <div class="flex items-start gap-4">
+                            <div class="icon-box shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">政治腐败</h4>
+                                <p class="text-sm text-gray-600">玄宗晚年沉迷享乐，杨国忠等奸臣专权，朝政日益荒废。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-5">
+                        <div class="flex items-start gap-4">
+                            <div class="icon-box shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">节度使权力膨胀</h4>
+                                <p class="text-sm text-gray-600">内弱外强，安禄山兼任三镇节度使，掌握唐朝1/3兵力。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-5">
+                        <div class="flex items-start gap-4">
+                            <div class="icon-box shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">军事力量失衡</h4>
+                                <p class="text-sm text-gray-600">中央军久无实战，边疆军常年征战，形成倒悬之势。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-5">
+                        <div class="flex items-start gap-4">
+                            <div class="icon-box shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">社会矛盾加剧</h4>
+                                <p class="text-sm text-gray-600">土地兼并严重，农民流离失所，社会动荡一触即发。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Info -->
+                <div class="card bg-[#FAF7F2] p-6 border-[var(--accent-gold)] border-opacity-30">
+                    <div class="w-full aspect-square bg-gray-200 rounded mb-4 flex items-center justify-center overflow-hidden">
+                        <!-- SVG Placeholder for An Lushan portrait -->
+                        <svg viewBox="0 0 200 200" class="w-full h-full text-gray-400">
+                           <rect width="200" height="200" fill="#E5E7EB"/>
+                           <circle cx="100" cy="80" r="40" fill="#9CA3AF"/>
+                           <path d="M40 160 Q100 120 160 160" stroke="#9CA3AF" stroke-width="10" fill="none"/>
+                           <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#4B5563">人物画像：安禄山</text>
+                        </svg>
+                    </div>
+                    <div class="badge-q">
+                        <p class="font-bold text-sm mb-1">💡 核心问题</p>
+                        <p class="text-sm">唐玄宗为何信任安禄山？安禄山长年“装傻充愣”，甚至认杨贵妃为干娘，成功蒙蔽了玄宗。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Timeline -->
+        <section>
+            <div class="flex items-center gap-2 mb-6">
+                <div class="header-line"></div>
+                <h2 class="text-2xl font-bold text-[var(--primary-red)]">战争进程：八年硝烟</h2>
+            </div>
+            <div class="relative overflow-x-auto scroll-container pb-4">
+                <div class="flex gap-6 min-w-[1200px]">
+                    <!-- Timeline Items -->
+                    <div class="flex-1">
+                        <div class="text-[var(--primary-red)] font-bold mb-2">755年11月</div>
+                        <div class="card p-4 text-sm border-t-4 border-t-[var(--primary-red)]">
+                            <p class="font-bold">范阳起兵</p>
+                            安禄山以“清君侧”为名起兵15万。
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-[var(--primary-red)] font-bold mb-2">756年6月</div>
+                        <div class="card p-4 text-sm">
+                            <p class="font-bold">潼关失守</p>
+                            唐玄宗逃往四川，马嵬坡兵变爆发。
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-[var(--primary-red)] font-bold mb-2">756年7月</div>
+                        <div class="card p-4 text-sm">
+                            <p class="font-bold">灵武即位</p>
+                            唐肃宗即位，唐军开始组织大反攻。
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-[var(--primary-red)] font-bold mb-2">757年1月</div>
+                        <div class="card p-4 text-sm">
+                            <p class="font-bold">叛军内讧</p>
+                            安禄山被其子杀死，叛军陷入分裂。
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-[var(--primary-red)] font-bold mb-2">763年2月</div>
+                        <div class="card p-4 text-sm border-t-4 border-t-green-600">
+                            <p class="font-bold">平定乱事</p>
+                            史朝义兵败自杀，八年战乱终告结束。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Impact & Reflection -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Impact -->
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="header-line"></div>
+                    <h2 class="text-2xl font-bold text-[var(--primary-red)]">深远影响</h2>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 rounded-full bg-[var(--accent-gold)] flex items-center justify-center text-white text-xs shrink-0 mt-1">1</span>
+                        <div>
+                            <span class="font-bold">人口锐减与经济破坏：</span>
+                            <span class="text-gray-600">人口从5000万骤降至3000万，中原大地满目疮痍。</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 rounded-full bg-[var(--accent-gold)] flex items-center justify-center text-white text-xs shrink-0 mt-1">2</span>
+                        <div>
+                            <span class="font-bold">藩镇割据形成：</span>
+                            <span class="text-gray-600">中央集权削弱，地方节度使拥兵自重，唐朝进入分裂割据。</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 rounded-full bg-[var(--accent-gold)] flex items-center justify-center text-white text-xs shrink-0 mt-1">3</span>
+                        <div>
+                            <span class="font-bold">经济重心南移：</span>
+                            <span class="text-gray-600">北方动乱加速人口南迁，江南经济地位提升。</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 rounded-full bg-[var(--accent-gold)] flex items-center justify-center text-white text-xs shrink-0 mt-1">4</span>
+                        <div>
+                            <span class="font-bold">文化风格转向：</span>
+                            <span class="text-gray-600">从盛唐豪放转向沉郁顿挫，如杜甫《春望》记录的悲凉。</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Perspectives -->
+            <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                <div class="bg-[var(--primary-red)] p-4 text-white">
+                    <h3 class="font-bold flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6.1H3"/><path d="M21 12.1H3"/><path d="M15.1 18.1H3"/></svg>
+                        历史人物视角
+                    </h3>
+                </div>
+                <div class="p-6 space-y-6">
+                    <div class="relative pl-6 border-l-2 border-gray-100">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-200"></div>
+                        <p class="font-bold text-[var(--primary-red)] mb-1">唐玄宗：悔恨的君主</p>
+                        <p class="text-sm italic text-gray-500">“我早年励精图治，晚年却溺于享乐。马嵬坡之死，是我余生无法释怀的痛苦。”</p>
+                    </div>
+                    <div class="relative pl-6 border-l-2 border-gray-100">
+                        <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-200"></div>
+                        <p class="font-bold text-[var(--primary-red)] mb-1">安禄山：野心家的末路</p>
+                        <p class="text-sm italic text-gray-500">“我以肥胖和愚笨做保护色，我终结了一个盛世，但也开启了我的悲剧。”</p>
+                    </div>
+                    <div class="mt-4 p-4 bg-amber-50 rounded-lg text-sm text-amber-800">
+                        <strong>趣味冷知识：</strong> 安禄山体重超300斤，却能在玄宗面前轻快地跳“胡旋舞”，这种反差极大地增强了玄宗对他的好感。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Misconceptions -->
+        <section class="card p-8 bg-zinc-900 text-white">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span class="text-yellow-500">⚠</span> 易错点纠偏
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div class="space-y-2">
+                    <p class="text-zinc-400">误区：安史之乱后唐朝就灭亡了。</p>
+                    <p class="text-white">事实：唐朝在平乱后又延续了140多年。虽已非盛世，但制度仍具韧性。</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-zinc-400">误区：安史之乱纯粹是安禄山的个人野心。</p>
+                    <p class="text-white">事实：本质是唐朝制度（如节度使制）与社会矛盾积累的必然爆发。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-gray-200 text-center text-gray-400 text-sm pb-12">
+        <p>《安史之乱》历史课堂教学辅助资料 | 核心命题：盛极必衰与制度转型</p>
+    </footer>
+
+</body>
+</html>

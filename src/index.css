@@ -2,6 +2,423 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ee-sidebar-left-width: 16rem;   /* 256px，左侧栏统一宽度 */
+  --ee-sidebar-right-width: 24rem; /* 384px，右侧栏统一宽度 */
+}
+
+/* 默认深色 */
 body {
-  @apply bg-slate-950 text-slate-100 antialiased;
+  @apply antialiased;
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+/* ========== 浅色主题（暖色系，少灰多浅橘黄） ========== */
+[data-theme="light"] body,
+[data-theme="light"] #root {
+  background-color: #fffbf5 !important;
+}
+
+/* 浅色主题：复用 EE智能体 配色到全局，统一色板 */
+[data-theme="light"] [class*="bg-slate-950"] {
+  background-color: #fffbeb !important;
+}
+[data-theme="light"] .text-slate-100,
+[data-theme="light"] .text-slate-50 {
+  color: #5D4B32 !important;
+}
+[data-theme="light"] .text-slate-200 {
+  color: #6B5B45 !important;
+}
+[data-theme="light"] .text-slate-300 {
+  color: #7D6B52 !important;
+}
+[data-theme="light"] .text-slate-400,
+[data-theme="light"] .text-slate-500,
+[data-theme="light"] .text-slate-600 {
+  color: #92400e !important;
+}
+[data-theme="light"] .bg-slate-900,
+[data-theme="light"] .bg-slate-900\/40,
+[data-theme="light"] .bg-slate-900\/50,
+[data-theme="light"] .bg-slate-900\/60,
+[data-theme="light"] .bg-slate-900\/80 {
+  background-color: #fef3c7 !important;
+}
+[data-theme="light"] .bg-slate-950\/40,
+[data-theme="light"] .bg-slate-950\/60 {
+  background-color: #fffbeb !important;
+}
+[data-theme="light"] .bg-slate-950\/80 {
+  background-color: #fff7ed !important;
+}
+[data-theme="light"] .bg-slate-800,
+[data-theme="light"] .bg-slate-800\/70,
+[data-theme="light"] .bg-slate-800\/80 {
+  background-color: #fed7aa !important;
+}
+[data-theme="light"] .border-slate-800,
+[data-theme="light"] .border-slate-700 {
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] .border-slate-600 {
+  border-color: #fb923c !important;
+}
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  background-color: #fffbeb !important;
+  color: #5D4B32 !important;
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #B8956E !important;
+}
+[data-theme="light"] .bg-amber-500\/5 {
+  background-color: rgba(251, 146, 60, 0.2) !important;
+}
+[data-theme="light"] .bg-emerald-500\/20,
+[data-theme="light"] .bg-emerald-500\/10 {
+  background-color: rgba(251, 146, 60, 0.25) !important;
+}
+[data-theme="light"] .text-emerald-400,
+[data-theme="light"] .text-emerald-500 {
+  color: #c2410c !important;
+}
+[data-theme="light"] .border-emerald-500\/30,
+[data-theme="light"] .border-emerald-500\/40,
+[data-theme="light"] .border-emerald-500\/50 {
+  border-color: rgba(234, 88, 12, 0.5) !important;
+}
+[data-theme="light"] .bg-red-500\/5 {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+/* 浅色主题：表头、按钮等与 EE智能体 同色 */
+[data-theme="light"] .ee-header-khaki {
+  background-color: #fef3c7 !important;
+}
+[data-theme="light"] .ee-header-khaki .text-slate-400,
+[data-theme="light"] .ee-header-khaki .text-slate-500 {
+  color: #92400e !important;
+}
+[data-theme="light"] .ee-header-khaki h2 {
+  color: #5D4B32 !important;
+}
+[data-theme="light"] .ee-user-msg {
+  color: #5D4B32 !important;
+}
+[data-theme="light"] .ee-theme-btn-unselected {
+  background-color: #fed7aa !important;
+  border-color: #fdba74 !important;
+  color: #5D4B32 !important;
+}
+[data-theme="light"] .ee-theme-btn-unselected:hover {
+  background-color: #fef3c7 !important;
+  border-color: #fb923c !important;
+}
+/* 课表、信息栏、作业栏：与 EE智能体 同色 */
+[data-theme="light"] .ee-wood-timetable,
+[data-theme="light"] .ee-wood-info,
+[data-theme="light"] .ee-wood-homework {
+  background-color: #fffbeb !important;
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] .ee-wood-timetable .ee-wood-header,
+[data-theme="light"] .ee-wood-info .ee-wood-header,
+[data-theme="light"] .ee-wood-homework .ee-wood-header,
+[data-theme="light"] .ee-wood-homework .ee-wood-table-header {
+  background-color: #fef3c7 !important;
+  border-color: #fdba74 !important;
+  color: #5D4B32 !important;
+}
+[data-theme="light"] .ee-wood-timetable .ee-wood-cell,
+[data-theme="light"] .ee-wood-timetable .ee-wood-cell-alt,
+[data-theme="light"] .ee-wood-timetable .ee-wood-course,
+[data-theme="light"] .ee-wood-timetable .ee-wood-course-sub,
+[data-theme="light"] .ee-wood-timetable .ee-wood-placeholder,
+[data-theme="light"] .ee-wood-info .ee-wood-item,
+[data-theme="light"] .ee-wood-info .ee-wood-item-title,
+[data-theme="light"] .ee-wood-info .ee-wood-item-meta,
+[data-theme="light"] .ee-wood-homework .ee-wood-table-cell,
+[data-theme="light"] .ee-wood-homework .ee-wood-table-cell-alt {
+  background-color: #fffbeb !important;
+  border-color: #fdba74 !important;
+  color: #5D4B32 !important;
+}
+[data-theme="light"] .ee-wood-timetable .ee-wood-cell-alt,
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-read="true"],
+[data-theme="light"] .ee-wood-homework .ee-wood-table-cell-alt {
+  background-color: #fef3c7 !important;
+}
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="1"] { background-color: #F5D5D5 !important; }
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="2"] { background-color: #D5F0E6 !important; }
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="3"] { background-color: #E5D5F5 !important; }
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="4"] { background-color: #F5E5D5 !important; }
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="5"] { background-color: #D5E5F5 !important; }
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="6"] { background-color: #D5F0F0 !important; }
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="7"] { background-color: #D5F5E5 !important; }
+[data-theme="light"] .ee-wood-timetable .ee-wood-course[data-course-color="8"] { background-color: #F5F0D5 !important; }
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-read="false"] {
+  background-color: #fed7aa !important;
+}
+[data-theme="light"] .ee-wood-timetable .ee-wood-course:hover,
+[data-theme="light"] .ee-wood-info .ee-wood-item:hover {
+  background-color: #fef3c7 !important;
+}
+[data-theme="light"] .ee-wood-timetable .ee-wood-course-sub,
+[data-theme="light"] .ee-wood-timetable .ee-wood-placeholder {
+  color: #92400e !important;
+}
+[data-theme="light"] .ee-wood-info .ee-wood-item-meta {
+  color: #c2410c !important;
+}
+[data-theme="light"] .ee-wood-info .ee-wood-item .text-slate-500 {
+  color: #c2410c !important;
+}
+[data-theme="light"] .ee-wood-homework .ee-wood-table-cell {
+  color: #92400e !important;
+}
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="1"],
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="2"],
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="3"],
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="4"],
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="5"],
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="6"],
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="7"],
+[data-theme="light"] .ee-wood-info .ee-wood-item[data-course-color="8"] {
+  border-left-color: #fdba74 !important;
+}
+/* 浅色主题：近期信息词条边框用主题色 */
+[data-theme="light"] .ee-wood-info .ee-wood-item {
+  border-color: #fdba74 !important;
+}
+/* 浅色主题：设置截止用浅浅橙色 */
+[data-theme="light"] .ee-deadline-picker button {
+  background-color: #fed7aa !important;
+  border-color: #fdba74 !important;
+  color: #92400e !important;
+}
+[data-theme="light"] .ee-deadline-picker button:hover {
+  background-color: #fef3c7 !important;
+  border-color: #fb923c !important;
+}
+/* 浅色主题：去除所有灰色，hover/active/focus 用暖色高亮 */
+[data-theme="light"] [class*="hover:bg-slate"]:hover {
+  background-color: #fef3c7 !important;
+}
+[data-theme="light"] [class*="hover:bg-slate-800"]:hover {
+  background-color: #fed7aa !important;
+}
+[data-theme="light"] [class*="hover:text-slate"]:hover {
+  color: #92400e !important;
+}
+[data-theme="light"] [class*="hover:border-slate"]:hover {
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] [class*="focus:border-slate"]:focus {
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] [class*="focus:ring-slate"]:focus {
+  --tw-ring-color: rgba(253, 186, 116, 0.5) !important;
+}
+[data-theme="light"] [class*="hover:bg-slate"]:active {
+  background-color: #fef3c7 !important;
+}
+[data-theme="light"] .border-slate-500 {
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] .placeholder-slate-500::placeholder {
+  color: #B8956E !important;
+}
+[data-theme="light"] .ring-offset-slate-900 {
+  --tw-ring-offset-color: #fffbeb !important;
+}
+[data-theme="light"] .border-slate-700\/80,
+[data-theme="light"] .border-slate-700\/60 {
+  border-color: #fdba74 !important;
+}
+/* 浅色主题：近期信息/课表/作业栏外围边框、滚动条去灰 */
+[data-theme="light"] .ee-wood-info,
+[data-theme="light"] .ee-wood-timetable,
+[data-theme="light"] .ee-wood-homework {
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] .ee-wood-info::-webkit-scrollbar,
+[data-theme="light"] .ee-wood-timetable::-webkit-scrollbar,
+[data-theme="light"] .ee-wood-homework::-webkit-scrollbar {
+  width: 6px;
+}
+[data-theme="light"] .ee-wood-info::-webkit-scrollbar-track,
+[data-theme="light"] .ee-wood-timetable::-webkit-scrollbar-track,
+[data-theme="light"] .ee-wood-homework::-webkit-scrollbar-track {
+  background: #fffbeb;
+  border-radius: 3px;
+}
+[data-theme="light"] .ee-wood-info::-webkit-scrollbar-thumb,
+[data-theme="light"] .ee-wood-timetable::-webkit-scrollbar-thumb,
+[data-theme="light"] .ee-wood-homework::-webkit-scrollbar-thumb {
+  background: #fdba74;
+  border-radius: 3px;
+}
+[data-theme="light"] .ee-wood-info::-webkit-scrollbar-thumb:hover,
+[data-theme="light"] .ee-wood-timetable::-webkit-scrollbar-thumb:hover,
+[data-theme="light"] .ee-wood-homework::-webkit-scrollbar-thumb:hover {
+  background: #fb923c;
+}
+/* 浅色主题：设置面板 - 未选中按钮用浅色、输入框调浅，避免深橙色 */
+[data-theme="light"] .ee-settings-panel .bg-slate-800\/60,
+[data-theme="light"] .ee-settings-panel .bg-slate-800\/80 {
+  background-color: #fff7ed !important;
+}
+[data-theme="light"] .ee-settings-panel .border-slate-700,
+[data-theme="light"] .ee-settings-panel .border-slate-600 {
+  border-color: #fed7aa !important;
+}
+[data-theme="light"] .ee-settings-panel .text-slate-400,
+[data-theme="light"] .ee-settings-panel .text-slate-500 {
+  color: #9a3412 !important;
+}
+[data-theme="light"] .ee-settings-panel input,
+[data-theme="light"] .ee-settings-panel select {
+  background-color: #fffbeb !important;
+  border-color: #fed7aa !important;
+  color: #5D4B32 !important;
+}
+[data-theme="light"] .ee-settings-panel input:focus,
+[data-theme="light"] .ee-settings-panel select:focus {
+  border-color: #fdba74 !important;
+}
+[data-theme="light"] .ee-settings-panel input::placeholder {
+  color: #b45309 !important;
+}
+[data-theme="light"] .ee-settings-panel button:hover {
+  border-color: #fdba74 !important;
+}
+
+/* ========== 赛博朋克主题（标准配色：赛博黑+电光蓝+霓虹紫+铁锈橙） ========== */
+/* 经典赛博：#0A0E17（底）+ #00FFFF（主）+ #9900FF（辅）+ #FF4500（点缀） */
+[data-theme="cyberpunk"] body,
+[data-theme="cyberpunk"] #root {
+  background-color: #0A0E17 !important;
+}
+[data-theme="cyberpunk"] .ee-sidebar-left,
+[data-theme="cyberpunk"] .ee-sidebar-right,
+[data-theme="cyberpunk"] .ee-app-header {
+  background-color: #161B29 !important;
+  border-color: #9900FF !important;
+}
+[data-theme="cyberpunk"] .ee-sidebar-left .text-slate-400,
+[data-theme="cyberpunk"] .ee-sidebar-left .text-slate-300,
+[data-theme="cyberpunk"] .ee-sidebar-left .text-slate-500,
+[data-theme="cyberpunk"] .ee-sidebar-right .text-slate-400,
+[data-theme="cyberpunk"] .ee-sidebar-right .text-slate-300,
+[data-theme="cyberpunk"] .ee-sidebar-right .text-slate-500,
+[data-theme="cyberpunk"] .ee-app-header .text-slate-200,
+[data-theme="cyberpunk"] .ee-app-header .text-slate-300,
+[data-theme="cyberpunk"] .ee-app-header .text-slate-400,
+[data-theme="cyberpunk"] .ee-app-header .text-slate-500 {
+  color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .ee-sidebar-left .text-slate-50,
+[data-theme="cyberpunk"] .ee-sidebar-right .text-slate-50 {
+  color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .ee-sidebar-left .bg-emerald-500\/80,
+[data-theme="cyberpunk"] .ee-sidebar-left .bg-emerald-400\/80 {
+  background-color: #00FFFF !important;
+  color: #0A0E17 !important;
+}
+[data-theme="cyberpunk"] .ee-sidebar-left .bg-emerald-500\/20,
+[data-theme="cyberpunk"] .ee-sidebar-left .bg-slate-800,
+[data-theme="cyberpunk"] .ee-sidebar-left .bg-slate-900 {
+  background-color: rgba(0, 255, 255, 0.08) !important;
+}
+[data-theme="cyberpunk"] .ee-sidebar-left .text-emerald-400,
+[data-theme="cyberpunk"] .ee-sidebar-left .border-emerald-500\/50 {
+  color: #00FFFF !important;
+  border-color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .ee-sidebar-right .bg-slate-800,
+[data-theme="cyberpunk"] .ee-sidebar-right .bg-slate-900,
+[data-theme="cyberpunk"] .ee-sidebar-right .bg-slate-950\/60 {
+  background-color: rgba(22, 27, 41, 0.9) !important;
+}
+[data-theme="cyberpunk"] [class*="bg-slate-950"]:not(.ee-sidebar-left):not(.ee-sidebar-right) {
+  background-color: #0A0E17 !important;
+}
+[data-theme="cyberpunk"] .bg-slate-950\/40,
+[data-theme="cyberpunk"] .bg-slate-950\/60 {
+  background-color: rgba(10, 14, 23, 0.98) !important;
+}
+[data-theme="cyberpunk"] .bg-slate-900,
+[data-theme="cyberpunk"] .bg-slate-900\/50,
+[data-theme="cyberpunk"] .bg-slate-900\/60 {
+  background-color: #161B29 !important;
+}
+[data-theme="cyberpunk"] .bg-slate-800,
+[data-theme="cyberpunk"] .bg-slate-800\/70,
+[data-theme="cyberpunk"] .bg-slate-800\/80 {
+  background-color: #1E1A30 !important;
+}
+[data-theme="cyberpunk"] .text-slate-100,
+[data-theme="cyberpunk"] .text-slate-50 {
+  color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .text-slate-200 {
+  color: #7DF9FF !important;
+}
+[data-theme="cyberpunk"] .text-slate-300 {
+  color: #5CE1E6 !important;
+}
+[data-theme="cyberpunk"] .text-slate-400,
+[data-theme="cyberpunk"] .text-slate-500 {
+  color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .text-slate-600 {
+  color: #9900FF !important;
+}
+[data-theme="cyberpunk"] .border-slate-800,
+[data-theme="cyberpunk"] .border-slate-700 {
+  border-color: #9900FF !important;
+}
+[data-theme="cyberpunk"] .border-slate-600 {
+  border-color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .bg-emerald-500\/80,
+[data-theme="cyberpunk"] .bg-emerald-400\/80 {
+  background-color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .text-emerald-400,
+[data-theme="cyberpunk"] .text-emerald-500 {
+  color: #00FFFF !important;
+}
+[data-theme="cyberpunk"] .bg-emerald-500\/20,
+[data-theme="cyberpunk"] .bg-emerald-500\/10 {
+  background-color: rgba(0, 255, 255, 0.12) !important;
+}
+[data-theme="cyberpunk"] .border-emerald-500\/30,
+[data-theme="cyberpunk"] .border-emerald-500\/40,
+[data-theme="cyberpunk"] .border-emerald-500\/50 {
+  border-color: rgba(0, 255, 255, 0.5) !important;
+}
+[data-theme="cyberpunk"] input,
+[data-theme="cyberpunk"] select {
+  background-color: #161B29 !important;
+  color: #00FFFF !important;
+  border-color: #9900FF !important;
+}
+[data-theme="cyberpunk"] .hover\:bg-slate-800:hover,
+[data-theme="cyberpunk"] .hover\:bg-slate-700:hover {
+  background-color: #1E1A30 !important;
+}
+[data-theme="cyberpunk"] .hover\:text-emerald-400:hover {
+  color: #FF4500 !important;
+}
+[data-theme="cyberpunk"] .text-red-400 {
+  color: #FF4500 !important;
+}
+[data-theme="cyberpunk"] .bg-red-500\/5 {
+  background-color: rgba(255, 69, 0, 0.15) !important;
 }

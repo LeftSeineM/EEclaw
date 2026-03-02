@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Course Helper",
+  "version": "0.2.0",
+  "description": "清华选课助手 - 培养方案管理与选课评价",
+  "permissions": ["tabs", "storage", "scripting", "cookies"],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://id.tsinghua.edu.cn/*",
+        "https://webvpn.tsinghua.edu.cn/*",
+        "http://zhjwxk.cic.tsinghua.edu.cn/*",
+        "https://learn.tsinghua.edu.cn/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "scripts/*.js",
+        "dashboard.html"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_title": "Course Helper - 清华选课助手"
+  }
+}

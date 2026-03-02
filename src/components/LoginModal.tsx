@@ -82,8 +82,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
               EE
             </div>
             <div>
-              <h2 className="text-base font-semibold">登录网络学堂</h2>
-              <p className="text-xs text-slate-400">清华大学统一身份认证</p>
+              <h2 className="text-base font-semibold">登录信息门户</h2>
+              <p className="text-xs text-slate-400">清华大学信息门户 · 培养方案 · 选课</p>
             </div>
           </div>
           <button
@@ -162,7 +162,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
             <button
               type="button"
               className="text-emerald-500 hover:underline ml-0.5"
-              onClick={() => navigator.clipboard?.writeText('https://learn.tsinghua.edu.cn/f/login')}
+              onClick={() => navigator.clipboard?.writeText('https://info.tsinghua.edu.cn/')}
             >
               点击复制链接
             </button>

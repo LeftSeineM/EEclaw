@@ -95,7 +95,7 @@ function setupIpc() {
   ipcMain.handle('auth:openLoginInBrowser', async () => {
     const { shell } = require('electron');
     const { exec } = require('child_process');
-    const url = 'https://learn.tsinghua.edu.cn/f/login';
+    const url = 'https://info.tsinghua.edu.cn/';
     try {
       await shell.openExternal(url);
       return { ok: true };
@@ -138,6 +138,30 @@ function setupIpc() {
   ipcMain.handle('agent:getMemory', () => agentStore.loadMemory());
   ipcMain.handle('agent:saveMemory', (_, memories) => {
     agentStore.saveMemory(memories);
+    return { ok: true };
+  });
+
+  const courseSelectionCrawler = require('./courseSelectionCrawler');
+  const fs = require('fs');
+  ipcMain.handle('courseSelection:fetchTrainingPlan', async (event) => {
+    const onLog = (msg) => {
+      try { event.sender.send('courseSelection:log', msg); } catch (_) {}
+    };
+    return courseSelectionCrawler.fetchTrainingPlanHTML({ onLog });
+  });
+  ipcMain.handle('courseSelection:getData', () => {
+    const p = require('path').join(storageConfig.getDataBasePath(), 'course-selection-data.json');
+    try {
+      if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8'));
+    } catch (_) {}
+    return null;
+  });
+  ipcMain.handle('courseSelection:setData', (_, data) => {
+    const path = require('path');
+    const base = storageConfig.getDataBasePath();
+    if (!fs.existsSync(base)) fs.mkdirSync(base, { recursive: true });
+    const p = path.join(base, 'course-selection-data.json');
+    fs.writeFileSync(p, JSON.stringify(data || {}, null, 2), 'utf8');
     return { ok: true };
   });
 

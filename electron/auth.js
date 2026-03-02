@@ -7,6 +7,7 @@ const { session } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+const INFO_BASE_URL = 'https://info.tsinghua.edu.cn';
 const LEARN_LOGIN_URL = 'https://learn.tsinghua.edu.cn/f/login';
 const LEARN_BASE_URL = 'https://learn.tsinghua.edu.cn';
 const AUTH_STORE_FILE = 'auth-session.json';
@@ -36,7 +37,7 @@ function persistAuthState(cookies) {
     cookies: cookies.map(c => ({
       name: c.name,
       value: c.value,
-      domain: c.domain,
+      domain: c.domain || '.tsinghua.edu.cn',
       path: c.path || '/',
       expires: (c.expirationDate ?? c.expires) ? Math.floor(c.expirationDate ?? c.expires) : null
     })),
@@ -175,7 +176,7 @@ function loginWithCredentials(mainWindow, username, password) {
       parent: mainWindow || undefined,
       modal: false,
       show: false,
-      title: '登录清华大学网络学堂',
+      title: '登录清华大学信息门户',
       backgroundColor: '#f5f5f5',
       webPreferences: {
         session: loginSession,
@@ -207,12 +208,22 @@ function loginWithCredentials(mainWindow, username, password) {
         return;
       }
 
-      // 已登录：在 learn.tsinghua.edu.cn 且不在 /f/login
-      if (url.startsWith(LEARN_BASE_URL) && !url.includes('/f/login')) {
+      // 已登录：在 info 或 learn 且不在登录页
+      const onInfo = url.startsWith(INFO_BASE_URL) && !url.includes('/login');
+      const onLearn = url.startsWith(LEARN_BASE_URL) && !url.includes('/f/login');
+      if (onInfo || onLearn) {
         try {
-          const cookies = await loginSession.cookies.get({ url: LEARN_BASE_URL });
-          const valid = Array.isArray(cookies) && cookies.length > 0 && cookies.some((c) => c.name && c.value);
-          if (!valid) {
+          const allCookies = [];
+          for (const base of [INFO_BASE_URL, LEARN_BASE_URL, 'https://id.tsinghua.edu.cn']) {
+            const c = await loginSession.cookies.get({ url: base });
+            if (Array.isArray(c)) allCookies.push(...c);
+          }
+          const byKey = new Map();
+          for (const c of allCookies) {
+            if (c.name && c.value) byKey.set(`${c.domain || ''}::${c.name}`, c);
+          }
+          const cookies = Array.from(byKey.values());
+          if (cookies.length === 0) {
             finish(false, '未获取到有效会话，请重试');
             return;
           }
@@ -250,13 +261,23 @@ function loginWithCredentials(mainWindow, username, password) {
     loginWin.webContents.on('did-finish-load', handlePageLoad);
 
     loginWin.webContents.on('did-navigate', (_, url) => {
-      if (url.startsWith(LEARN_BASE_URL) && !url.includes('/f/login')) {
+      const onInfo = url.startsWith(INFO_BASE_URL) && !url.includes('/login');
+      const onLearn = url.startsWith(LEARN_BASE_URL) && !url.includes('/f/login');
+      if (onInfo || onLearn) {
         loginWin.webContents.once('did-finish-load', async () => {
           if (resolved) return;
           try {
-            const cookies = await loginSession.cookies.get({ url: LEARN_BASE_URL });
-            const valid = Array.isArray(cookies) && cookies.length > 0 && cookies.some((c) => c.name && c.value);
-            if (!valid) {
+            const allCookies = [];
+            for (const base of [INFO_BASE_URL, LEARN_BASE_URL, 'https://id.tsinghua.edu.cn']) {
+              const c = await loginSession.cookies.get({ url: base });
+              if (Array.isArray(c)) allCookies.push(...c);
+            }
+            const byKey = new Map();
+            for (const c of allCookies) {
+              if (c.name && c.value) byKey.set(`${c.domain || ''}::${c.name}`, c);
+            }
+            const cookies = Array.from(byKey.values());
+            if (cookies.length === 0) {
               finish(false, '未获取到有效会话，请重试');
               return;
             }
@@ -274,12 +295,11 @@ function loginWithCredentials(mainWindow, username, password) {
     });
 
     (async () => {
-      const casLoginUrl = await casLogin.getCasLoginUrl();
       loginSession.webRequest.onBeforeRequest(
         { urls: ['*://id.tsinghua.edu.cn/f/common/public/locale/*'] },
-        (_, callback) => callback({ redirectURL: casLoginUrl })
+        (_, callback) => callback({ redirectURL: 'https://id.tsinghua.edu.cn/' })
       );
-      loginWin.loadURL(casLoginUrl, {
+      loginWin.loadURL(INFO_BASE_URL + '/', {
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
         extraHeaders: 'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8'
       });
@@ -302,17 +322,18 @@ function getSessionForCrawler() {
 }
 
 /**
- * 将已保存的 cookies 恢复到主 session
+ * 将已保存的 cookies 恢复到主 session（支持 info、learn、id 等多域）
  */
 async function restoreAuthToSession(sess) {
   const saved = loadAuthState();
   if (!saved || !saved.length) return false;
   try {
     for (const c of saved) {
+      const domain = c.domain || '.tsinghua.edu.cn';
       await sess.cookies.set({
         name: c.name,
         value: c.value,
-        domain: c.domain || '.learn.tsinghua.edu.cn',
+        domain: domain.startsWith('.') ? domain : '.' + domain,
         path: c.path || '/',
         expirationDate: c.expires || (Date.now() / 1000) + 86400 * 7
       });
@@ -358,5 +379,6 @@ module.exports = {
   getCookieHeaderForCrawler,
   getXsrfToken,
   LEARN_LOGIN_URL,
-  LEARN_BASE_URL
+  LEARN_BASE_URL,
+  INFO_BASE_URL
 };
