@@ -158,36 +158,67 @@ function extractLoginForm(html, baseUrl) {
   return { actionUrl, inputs, publicKey };
 }
 
-async function loginProgrammatic(username, password) {
+/**
+ * 程序化登录
+ * @param {string} username
+ * @param {string} password
+ * @param {'info'|'learn'} [target='info'] - 目标：info 信息门户（培养方案）或 learn 网络学堂
+ */
+async function loginProgrammatic(username, password, target = 'info') {
   const jar = new CookieJar();
   const ua =
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
-  try {
-    // 从 info 信息门户入口获取 CAS 地址（培养方案、选课需从 info 进入）
-    const infoUrl = new URL(INFO_LOGIN);
+  const getCasFromInfo = async () => {
     const infoRes = await request({
-      hostname: infoUrl.hostname,
-      path: infoUrl.pathname || '/',
+      hostname: new URL(INFO_LOGIN).hostname,
+      path: new URL(INFO_LOGIN).pathname || '/',
       method: 'GET',
       headers: { 'User-Agent': ua }
     });
     jar.setFromHeaders(infoRes.headers['set-cookie'], INFO_LOGIN);
-
-    let casLoginUrl = extractCasUrl(infoRes.body);
-    if (!casLoginUrl && infoRes.body.includes('id.tsinghua')) {
-      const m = infoRes.body.match(/href=["']([^"']*id\.tsinghua[^"']*)["']/);
-      if (m) casLoginUrl = m[1].startsWith('http') ? m[1] : new URL(m[1], INFO_BASE).href;
+    if (infoRes.statusCode === 302 && infoRes.location && infoRes.location.includes('id.tsinghua')) {
+      return infoRes.location.startsWith('http') ? infoRes.location : new URL(infoRes.location, INFO_BASE).href;
     }
-    if (!casLoginUrl) {
-      const learnRes = await request({
-        hostname: new URL(LEARN_LOGIN).hostname,
-        path: new URL(LEARN_LOGIN).pathname,
-        method: 'GET',
-        headers: { 'User-Agent': ua }
-      });
-      jar.setFromHeaders(learnRes.headers['set-cookie'], LEARN_LOGIN);
-      casLoginUrl = extractCasUrl(learnRes.body);
+    let url = extractCasUrl(infoRes.body);
+    if (!url && infoRes.body?.includes('id.tsinghua')) {
+      const m = infoRes.body.match(/href=["']([^"']*id\.tsinghua[^"']*)["']/);
+      if (m) url = m[1].startsWith('http') ? m[1] : new URL(m[1], INFO_BASE).href;
+    }
+    if (!url && infoRes.body?.includes('id.sigs')) {
+      const m = infoRes.body.match(/href=["']([^"']*id\.sigs[^"']*)["']/);
+      if (m) url = m[1].startsWith('http') ? m[1] : new URL(m[1], INFO_BASE).href;
+    }
+    if (!url) {
+      const onloadMatch = infoRes.body.match(/class="onload"[^>]*href=["']([^"']+)["']/);
+      if (onloadMatch) url = onloadMatch[1].startsWith('http') ? onloadMatch[1] : new URL(onloadMatch[1], INFO_BASE).href;
+    }
+    if (!url) {
+      const aHref = infoRes.body.match(/<a[^>]+class="[^"]*onload[^"]*"[^>]+href=["']([^"']+)["']/);
+      if (aHref) url = aHref[1].startsWith('http') ? aHref[1] : new URL(aHref[1], INFO_BASE).href;
+    }
+    return url;
+  };
+
+  const getCasFromLearn = async () => {
+    const learnRes = await request({
+      hostname: new URL(LEARN_LOGIN).hostname,
+      path: new URL(LEARN_LOGIN).pathname,
+      method: 'GET',
+      headers: { 'User-Agent': ua }
+    });
+    jar.setFromHeaders(learnRes.headers['set-cookie'], LEARN_LOGIN);
+    return extractCasUrl(learnRes.body);
+  };
+
+  try {
+    let casLoginUrl = null;
+    if (target === 'learn') {
+      casLoginUrl = await getCasFromLearn();
+      if (!casLoginUrl) casLoginUrl = await getCasFromInfo();
+    } else {
+      casLoginUrl = await getCasFromInfo();
+      if (!casLoginUrl) casLoginUrl = await getCasFromLearn();
     }
     if (!casLoginUrl) return { success: false, error: '无法获取 CAS 登录地址' };
 
@@ -317,27 +348,35 @@ async function loginProgrammatic(username, password) {
 
 /**
  * 获取 CAS 登录页 URL（用于 BrowserWindow）
- * 优先从 info 入口获取，失败则回退 learn
+ * @param {'learn'|'info'} [prefer='learn'] - 主登录用 learn，选课用 info
  */
-async function getCasLoginUrl() {
+async function getCasLoginUrl(prefer = 'learn') {
   const ua =
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
   try {
-    const infoRes = await request({
-      hostname: new URL(INFO_LOGIN).hostname,
-      path: new URL(INFO_LOGIN).pathname || '/',
-      method: 'GET',
-      headers: { 'User-Agent': ua }
-    });
-    let url = extractCasUrl(infoRes.body);
-    if (url) return url;
-    const learnRes = await request({
-      hostname: new URL(LEARN_LOGIN).hostname,
-      path: new URL(LEARN_LOGIN).pathname,
-      method: 'GET',
-      headers: { 'User-Agent': ua }
-    });
-    url = extractCasUrl(learnRes.body);
+    const tryLearn = async () => {
+      const learnRes = await request({
+        hostname: new URL(LEARN_LOGIN).hostname,
+        path: new URL(LEARN_LOGIN).pathname,
+        method: 'GET',
+        headers: { 'User-Agent': ua }
+      });
+      return extractCasUrl(learnRes.body);
+    };
+    const tryInfo = async () => {
+      const infoRes = await request({
+        hostname: new URL(INFO_LOGIN).hostname,
+        path: new URL(INFO_LOGIN).pathname || '/',
+        method: 'GET',
+        headers: { 'User-Agent': ua }
+      });
+      if (infoRes.statusCode === 302 && infoRes.location?.includes('id.tsinghua')) {
+        return infoRes.location.startsWith('http') ? infoRes.location : new URL(infoRes.location, INFO_BASE).href;
+      }
+      return extractCasUrl(infoRes.body);
+    };
+    let url = prefer === 'learn' ? await tryLearn() : await tryInfo();
+    if (!url) url = prefer === 'learn' ? await tryInfo() : await tryLearn();
     return url || LEARN_LOGIN;
   } catch {
     return LEARN_LOGIN;

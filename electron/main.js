@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+﻿const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const auth = require('./auth');
 const crawler = require('./crawler');
@@ -8,7 +8,11 @@ const agentStore = require('./agentStore');
 
 const isDev = process.env.NODE_ENV === 'development';
 if (isDev) {
-  require('electron-reload')(__dirname, { electron: process.execPath });
+  // 监听整个项目，electron 或 src 改动后自动重启应用
+  require('electron-reload')(path.join(__dirname, '..'), {
+    electron: process.execPath,
+    hardResetMethod: 'exit'
+  });
 }
 
 // 高 DPI 缩放：避免 Windows 高分辨率屏下模糊、文字发虚
@@ -48,13 +52,17 @@ function createWindow() {
 }
 
 function setupIpc() {
-  ipcMain.handle('auth:login', async (_, { username, password }) => {
+  ipcMain.handle('auth:login', async (_, { username, password, forceWindow, saveCredentials }) => {
     if (!username?.trim() || !password) {
       return { success: false, error: '请输入账号和密码' };
     }
-    const result = await auth.loginWithCredentialsAsync(mainWindow, username.trim(), password);
+    const result = forceWindow
+      ? await auth.loginWithCredentials(mainWindow, username.trim(), password)
+      : await auth.loginWithCredentialsAsync(mainWindow, username.trim(), password);
     if (!result.success) return result;
-    // 调试阶段：登录成功后尝试抓取，失败也不影响登录状态
+    if (saveCredentials) {
+      auth.saveCredentials(username.trim(), password);
+    }
     try {
       const fetchResult = await crawler.fetchAll();
       const data = fetchResult.success ? fetchResult.data : crawler.getCachedData();
@@ -63,6 +71,9 @@ function setupIpc() {
       return { success: true, data: crawler.getCachedData() };
     }
   });
+
+  ipcMain.handle('auth:hasCredentials', () => auth.hasCredentials());
+  ipcMain.handle('auth:clearCredentials', () => auth.clearCredentials());
 
   ipcMain.handle('auth:logout', () => {
     auth.clearAuthState();
@@ -147,7 +158,11 @@ function setupIpc() {
     const onLog = (msg) => {
       try { event.sender.send('courseSelection:log', msg); } catch (_) {}
     };
-    return courseSelectionCrawler.fetchTrainingPlanHTML({ onLog });
+    try {
+      return await courseSelectionCrawler.fetchTrainingPlanHTML({ onLog });
+    } catch (e) {
+      return { success: false, error: e?.message || '抓取失败' };
+    }
   });
   ipcMain.handle('courseSelection:getData', () => {
     const p = require('path').join(storageConfig.getDataBasePath(), 'course-selection-data.json');
@@ -163,6 +178,12 @@ function setupIpc() {
     const p = path.join(base, 'course-selection-data.json');
     fs.writeFileSync(p, JSON.stringify(data || {}, null, 2), 'utf8');
     return { ok: true };
+  });
+  ipcMain.handle('courseSelection:getDataPath', () => {
+    return require('path').join(storageConfig.getDataBasePath(), 'course-selection-data.json');
+  });
+  ipcMain.handle('courseSelection:loadFromHtmlFile', async () => {
+    return courseSelectionCrawler.loadFromHtmlFile?.() ?? { success: false, html: null, error: '未实现' };
   });
 
   ipcMain.handle('storage:selectFolder', async () => {
@@ -203,10 +224,10 @@ function setupIpc() {
 
 app.whenReady().then(async () => {
   setupIpc();
-  // 启动时恢复已保存的登录态到 session，供爬虫使用
+  // 启动时恢复已保存的登录态到 session，供爬虫和课程选课使用
   try {
-    const sess = auth.getSessionForCrawler();
-    await auth.restoreAuthToSession(sess);
+    await auth.restoreAuthToSession(auth.getSessionForCrawler());
+    await auth.restoreAuthToSession(auth.getSessionForCourseSelection());
   } catch (_) {}
   createWindow();
 
@@ -220,3 +241,4 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+

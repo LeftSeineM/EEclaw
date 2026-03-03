@@ -1,4 +1,4 @@
- /**
+﻿ /**
  * 培养方案抓取模块
  * 流程：加载 info 建立会话 → 打开应用搜索页 → 点击「培养方案完成情况」→ 提取 HTML
  *
@@ -7,11 +7,8 @@
  */
 
 const { BrowserWindow } = require('electron');
-const path = require('path');
-const fs = require('fs');
 const auth = require('./auth');
 const casLogin = require('./casLogin');
-const storageConfig = require('./storageConfig');
 
 const INFO_BASE = 'https://info.tsinghua.edu.cn';
 
@@ -67,11 +64,10 @@ async function fetchTrainingPlanHTML(opts = {}) {
     });
 
     let resolved = false;
-    function safe() { return !resolved && win && !win.isDestroyed(); }
-    function finish(success, html, error, silent) {
+    function finish(success, html, error) {
       if (resolved) return;
       resolved = true;
-      if (!silent) log("[位置] finish 被调用: success=" + !!success + ", error=" + (error || "(无)"));
+      log("[位置] finish 被调用: success=" + !!success + ", error=" + (error || "(无)"));
       try {
         win.destroy();
       } catch (_) {}
@@ -82,8 +78,7 @@ async function fetchTrainingPlanHTML(opts = {}) {
 
     // 若应用在新窗口打开，改为在当前窗口加载（培养方案链接常为 target="_blank"）
     win.webContents.setWindowOpenHandler(({ url }) => {
-      if (!win || win.isDestroyed()) return { action: 'deny' };
-      if (url && (url.includes('jhBks') || url.includes('zhjw') || url.includes('zhjwxk') || url.includes('j_acegi_login') || url.includes('info.tsinghua'))) {
+      if (url && (url.includes('jhBks') || url.includes('zhjw') || url.includes('zhjwxk') || url.includes('info.tsinghua'))) {
         log(`应用在新窗口打开，改为当前窗口加载: ${url.slice(0, 70)}…`);
         win.loadURL(url, { userAgent: ua });
       }
@@ -229,7 +224,6 @@ async function fetchTrainingPlanHTML(opts = {}) {
         win.loadURL(searchUrl, { userAgent: ua });
         win.webContents.once('did-finish-load', async () => {
           try {
-          if (!safe()) return;
           const u = win.webContents.getURL();
           if (u.includes('login') || u.includes('id.tsinghua')) {
             log('❌ 被重定向到登录页，请确认已从信息门户登录');
@@ -239,7 +233,6 @@ async function fetchTrainingPlanHTML(opts = {}) {
           log(`步骤 4: 当前 URL: ${u}`);
           log('  等待 2 秒让搜索结果加载…');
           await new Promise((r) => setTimeout(r, 2000));
-          if (!safe()) return;
 
           const execWithTimeout = (script, ms = 8000) => {
             const p = win.webContents.executeJavaScript(script);
@@ -282,7 +275,6 @@ async function fetchTrainingPlanHTML(opts = {}) {
           if (tabClicked) {
             log('  已点击应用导航，等待 3 秒…');
             await new Promise((r) => setTimeout(r, 3000));
-            if (!safe()) return;
           }
           log('  正在查找并点击培养方案应用卡片…');
           const currentUrlBeforeFind = win.webContents.getURL();
@@ -376,16 +368,16 @@ async function fetchTrainingPlanHTML(opts = {}) {
           }
           if (!directUrl && result.onclick) {
             const o = result.onclick + '';
-            let m = o.match(/['"](https?:\/\/[^'"]*(?:jhBks|zhjw|j_acegi_login)[^'"]*)["'"]/);
-            if (!m) m = o.match(/(https?:\/\/[^'"\\s]*(?:jhBks|zhjw|j_acegi_login)[^'"\\s]*)/);
+            let m = o.match(/['"](https?:\/\/[^'"]+(?:jhBks|zhjw)[^'"]*)['"]/);
+            if (!m) m = o.match(/(https?:\/\/[^'"\\s]+(?:jhBks|zhjw)[^'"\\s]*)/);
             if (m) directUrl = m[1];
           }
-          if (directUrl && (directUrl.includes('jhBks') || directUrl.includes('zhjw') || directUrl.includes('j_acegi_login'))) {
+          if (directUrl && (directUrl.includes('jhBks') || directUrl.includes('zhjw'))) {
             log(`✓ 找到直接链接，加载: ${directUrl.slice(0, 70)}…`);
             win.loadURL(directUrl, { userAgent: ua });
             win.webContents.once('did-finish-load', async () => {
               const u = win.webContents.getURL();
-              if (u.includes('jhBks') || u.includes('zhjw') || u.includes('j_acegi_login')) {
+              if (u.includes('jhBks') || u.includes('zhjw')) {
                 await tryExtractWithRefresh(win, finish, log);
               } else {
                 log(`直接加载后 URL: ${u}`);
@@ -478,7 +470,7 @@ async function fetchTrainingPlanHTML(opts = {}) {
           log('✓ 已点击，等待跳转…');
           const navPromise = new Promise((resolve) => {
             const onNav = (_, url) => {
-              if (url && (url.includes('jhBks') || url.includes('zhjw.cic') || url.includes('zhjw') || url.includes('j_acegi_login'))) {
+              if (url && (url.includes('jhBks') || url.includes('zhjw.cic'))) {
                 win.webContents.off('did-navigate', onNav);
                 resolve(true);
               }
@@ -490,15 +482,13 @@ async function fetchTrainingPlanHTML(opts = {}) {
             }, 8000);
           });
           const navOk = await navPromise;
-          if (!safe()) return;
           if (navOk) {
-            await new Promise((r) => setTimeout(r, 3000));
-            if (!safe()) return;
+            await new Promise((r) => setTimeout(r, 1500));
             await tryExtractWithRefresh(win, finish, log);
             return;
           }
           let u2 = win.webContents.getURL();
-          if (u2.includes('jhBks') || u2.includes('zhjw') || u2.includes('j_acegi_login')) {
+          if (u2.includes('jhBks') || u2.includes('zhjw')) {
             await tryExtractWithRefresh(win, finish, log);
             return;
           }
@@ -507,7 +497,7 @@ async function fetchTrainingPlanHTML(opts = {}) {
           win.loadURL(fallbackUrl, { userAgent: ua });
           win.webContents.once('did-finish-load', async () => {
             const u2After = win.webContents.getURL();
-            if (u2After.includes('jhBks') || u2After.includes('zhjw') || u2After.includes('j_acegi_login')) {
+            if (u2After.includes('jhBks') || u2After.includes('zhjw')) {
               await tryExtractWithRefresh(win, finish, log);
             } else {
               log(`当前 URL: ${u2After}`);
@@ -515,32 +505,22 @@ async function fetchTrainingPlanHTML(opts = {}) {
             }
           });
           } catch (err) {
-            const msg = (err && err.message) || String(err);
-            if (msg.includes('destroyed') || msg.includes('Object has been destroyed')) {
-              finish(false, null, '窗口已关闭');
-              return;
-            }
-            log(`❌ 异常: ${msg}`);
-            finish(false, null, msg || '抓取异常');
+            log(`❌ 异常: ${err?.message || err}`);
+            finish(false, null, err?.message || '抓取异常');
           }
         });
         return;
       }
 
       // 其他情况（如已在 zhjw 等）也尝试提取
-      if (url.includes('zhjw.cic') || url.includes('zhjw') || url.includes('jhBks') || url.includes('j_acegi_login')) {
+      if (url.includes('zhjw.cic') || url.includes('jhBks')) {
         win.webContents.off('did-finish-load', onLoad);
         await tryExtractWithRefresh(win, finish, log);
         return;
       }
       } catch (err) {
-        const msg = (err && err.message) || String(err);
-            if (msg.includes('destroyed') || msg.includes('Object has been destroyed')) {
-              finish(false, null, '窗口已关闭');
-              return;
-            }
-            log(`❌ 异常: ${msg}`);
-            finish(false, null, msg || '抓取异常');
+        log(`❌ 异常: ${err?.message || err}`);
+        finish(false, null, err?.message || '抓取异常');
       }
     };
 
@@ -552,7 +532,10 @@ async function fetchTrainingPlanHTML(opts = {}) {
       }
     });
     setTimeout(() => {
-      if (!resolved) finish(false, null, '抓取超时', true);
+      if (!resolved) {
+        log('❌ 抓取超时 (60s)');
+        finish(false, null, '抓取超时');
+      }
     }, 60000);
   });
 }
@@ -603,34 +586,12 @@ async function tryExtractWithRefresh(win, finish, log = () => {}) {
       return;
     }
     log('✓ 提取成功');
-    try {
-      const htmlPath = path.join(storageConfig.getDataBasePath(), 'training-plan-last.html');
-      fs.writeFileSync(htmlPath, result.html, 'utf8');
-      log('已保存原始 HTML 到本地: ' + htmlPath);
-    } catch (_) {}
     finish(true, result.html);
   } catch (e) {
-    const msg = (e && e.message) || String(e);
-    if (msg.includes('destroyed') || msg.includes('Object has been destroyed')) {
-      finish(false, null, '窗口已关闭');
-    } else {
-      finish(false, null, e?.message || '提取失败');
-    }
+    finish(false, null, e?.message || '提取失败');
   }
 }
 
-async function loadFromHtmlFile() {
-  const htmlPath = path.join(storageConfig.getDataBasePath(), 'training-plan-last.html');
-  try {
-    if (!fs.existsSync(htmlPath)) return { success: false, html: null, error: '本地无缓存，请先点击「更新培养方案」抓取' };
-    const html = fs.readFileSync(htmlPath, 'utf8');
-    return { success: true, html };
-  } catch (e) {
-    return { success: false, html: null, error: e?.message || '读取失败' };
-  }
-}
-
-module.exports = { fetchTrainingPlanHTML, getInfoSearchUrl, loadFromHtmlFile };
-
+module.exports = { fetchTrainingPlanHTML, getInfoSearchUrl };
 
 

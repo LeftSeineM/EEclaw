@@ -3,18 +3,6 @@ import { useTheme } from '../contexts/ThemeContext';
 
 const SETTINGS_KEY = 'ee-info-settings';
 
-declare global {
-  interface Window {
-    eeInfo?: {
-      storage?: {
-        getDataPath: () => Promise<{ dataPath: string | null; effectivePath: string; defaultPath: string }>;
-        setDataPath: (path: string | null) => Promise<{ ok: boolean }>;
-        selectFolder: () => Promise<{ path: string | null }>;
-      };
-    };
-  }
-}
-
 export interface AppSettings {
   theme?: 'light' | 'dark' | 'cyberpunk' | 'system';
   modelApi1?: { name: string; apiKey?: string; baseUrl?: string; model?: string };
@@ -60,6 +48,7 @@ const SettingsPanel: React.FC = () => {
   const [dataPath, setDataPath] = useState<string | null>(null);
   const [effectivePath, setEffectivePath] = useState('');
   const [dataPathInput, setDataPathInput] = useState('');
+  const [hasCredentials, setHasCredentials] = useState(false);
 
   useEffect(() => {
     saveSettings({ ...settings, theme });
@@ -73,6 +62,7 @@ const SettingsPanel: React.FC = () => {
         setDataPathInput(r.dataPath ?? '');
       }
     });
+    window.eeInfo?.auth?.hasCredentials?.().then(setHasCredentials);
   }, []);
 
   const handleSelectFolder = async () => {
@@ -143,7 +133,32 @@ const SettingsPanel: React.FC = () => {
           </div>
         </section>
 
-        {/* 2. 本地数据存储位置 */}
+        {/* 2. 凭据管理 */}
+        <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
+          <h3 className="text-sm font-semibold text-slate-200 mb-3">凭据管理</h3>
+          <p className="text-[10px] text-slate-500 mb-2">
+            保存凭据后，网络学堂和 info 信息门户可分开按需自动登录，无需每次手动输入。
+          </p>
+          {hasCredentials ? (
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-emerald-400">已保存凭据</span>
+              <button
+                type="button"
+                onClick={async () => {
+                  await window.eeInfo?.auth?.clearCredentials?.();
+                  setHasCredentials(false);
+                }}
+                className="px-2 py-1 rounded text-red-400/90 text-[10px] hover:bg-red-500/10 border border-red-500/30"
+              >
+                清除凭据
+              </button>
+            </div>
+          ) : (
+            <p className="text-[10px] text-slate-500">未保存凭据。登录时可勾选「保存凭据」以启用按需自动登录。</p>
+          )}
+        </section>
+
+        {/* 3. 本地数据存储位置 */}
         <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
           <h3 className="text-sm font-semibold text-slate-200 mb-3">本地数据存储位置</h3>
           <p className="text-[10px] text-slate-500 mb-2">课程缓存、登录会话等数据存储目录。不设置则使用默认位置。</p>
@@ -190,7 +205,7 @@ const SettingsPanel: React.FC = () => {
           </div>
         </section>
 
-        {/* 3. 模型 API 配置 */}
+        {/* 4. 模型 API 配置 */}
         <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
           <h3 className="text-sm font-semibold text-slate-200 mb-3">模型 API 配置</h3>
           <div className="space-y-4">

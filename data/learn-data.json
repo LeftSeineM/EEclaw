@@ -1,0 +1,484 @@
+{
+  "fetchedAt": 1772500991737,
+  "semester": "2025-2026-2",
+  "semesters": [
+    "2025-2026-2",
+    "2025-2026-1",
+    "2024-2025-3",
+    "2024-2025-2",
+    "2024-2025-1"
+  ],
+  "courses": [
+    {
+      "wlkcid": "2025-2026-2151368644",
+      "kcm": "物理实验B(2)",
+      "jsm": "梁昌林",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期第0节(全周)，"
+    },
+    {
+      "wlkcid": "2025-2026-2151369115",
+      "kcm": "二年级男生滑冰",
+      "jsm": "李波",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期三第2节(全周)，北体育馆冰场"
+    },
+    {
+      "wlkcid": "2025-2026-2151369471",
+      "kcm": "词汇的力量",
+      "jsm": "王英",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期二第3节(全周)，六教6B312"
+    },
+    {
+      "wlkcid": "2025-2026-2151369979",
+      "kcm": "信号与系统",
+      "jsm": "谷源涛",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期一第1节(全周)，三教2102；星期五第1节(全周)，三教2102"
+    },
+    {
+      "wlkcid": "2025-2026-2151369984",
+      "kcm": "电磁场与波",
+      "jsm": "刘仿",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期五第2节(全周)，二教403"
+    },
+    {
+      "wlkcid": "2025-2026-2151370008",
+      "kcm": "数字逻辑与处理器基础实验",
+      "jsm": "张超",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期第0节(全周)，"
+    },
+    {
+      "wlkcid": "2025-2026-2151370010",
+      "kcm": "数字系统设计",
+      "jsm": "贾弘洋",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期二第3节(全周)，四教4403；星期二第4节(全周)，四教4403"
+    },
+    {
+      "wlkcid": "2025-2026-2151370016",
+      "kcm": "概率论与随机过程 (1)（英）",
+      "jsm": "沈渊",
+      "xnxq": "2025-2026-2",
+      "skddxx": "星期二第2节(全周)，五教5102"
+    }
+  ],
+  "notices": [
+    {
+      "ggid": "26ef84e89bacfc1b019ca470b4287914",
+      "bt": "Homework for Week 1",
+      "fbr": "王英",
+      "fbsj": "2026-02-28 21:29",
+      "ggnrStr": null,
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e89bacfc1b019ca470b4287914"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019ca3430ef559c9",
+      "bt": "课程微信群二维码",
+      "fbr": "陈曦竹",
+      "fbsj": "2026-02-28 16:00",
+      "ggnrStr": "&lt;p&gt;各位同学好！&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;欢迎选择《数字系统设计》课程，请扫码进入课程微信群，后续课程信息会在微信群中通知。&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;如有问题可随时在群里提出或与助教联系。&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;期待同学们课上课下多多交流！&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151370010",
+      "courseName": "数字系统设计",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151370010&id=26ef84e79bacfc07019ca3430ef559c9"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c997494d3096b",
+      "bt": "Updated 5.2 Preview for Wk 1 class (2)",
+      "fbr": "王英",
+      "fbsj": "2026-02-26 18:13",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;Idioms Story:&amp;nbsp;Graffiti Makes Him See Red&lt;/p&gt; \n  &lt;p&gt;Using the words and expressions given, tell a story according to the pictures given. Then recite the provided story fluently.&amp;nbsp;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e89bacfc1b019c997494d3096b"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c996dbd61073e",
+      "bt": "5. Previewing 2 - 2 : Voc. (12,000+)",
+      "fbr": "王英",
+      "fbsj": "2026-02-26 18:06",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;&lt;strong&gt;Vocabulary Workbook IV&amp;nbsp;(12,000+ word level)&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt; \n  &lt;p&gt;While you&#39;re studying Unit 1, Vocabulary Workbook IV (12,000+ word level) to get ready for Week 3 achievement test, please listen to the recordings (MP3) of the first five Final Checks to get ready for the Speaking homework assignment.&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e89bacfc1b019c996dbd61073e"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c996586ef0428",
+      "bt": "Word Parts and Head Words, Ch. 3, WPME",
+      "fbr": "王英",
+      "fbsj": "2026-02-26 17:58",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size:48px;&quot;&gt;&lt;strong&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;Chapter 3 Word Parts &lt;/span&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&amp;amp; &lt;/span&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;Head Words, WPME&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;&lt;span style=&quot;font-size:28px;&quot;&gt;Summary of the word parts and head words derived from them.&lt;/span&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e89bacfc1b019c996586ef0428"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c92e810475cf1",
+      "bt": "Class Rescheduling Announcement",
+      "fbr": "邱依涵",
+      "fbsj": "2026-02-25 11:44",
+      "ggnrStr": "&lt;p&gt;Please note that &lt;b&gt;THIS week&#39;s class&lt;/b&gt; has been rescheduled to &lt;b&gt;&lt;span style=&quot;background-color:#ffff33;&quot;&gt;Saturday (Feb 28), 9:50-11:25&lt;/span&gt;&lt;/b&gt;. The regular Tuesday schedule will resume next week.&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151370016",
+      "courseName": "概率论与随机过程 (1)（英）",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151370016&id=26ef84e79bacfc07019c92e810475cf1"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c92b643443b89",
+      "bt": "About the recitation section",
+      "fbr": "邱依涵",
+      "fbsj": "2026-02-25 10:45",
+      "ggnrStr": "&lt;p&gt;The recitation section will start from this week at Rohm 9-206.&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;&lt;b&gt;Please note that &lt;em&gt;&lt;span style=&quot;background-color:#ffff33;&quot;&gt;The FIRST WEEK&#39;S&lt;/span&gt;&lt;/em&gt; session will be held on SUNDAY (February 28, 19:30-20:30).&lt;/b&gt;&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;&lt;em&gt;&lt;span style=&quot;background-color:#ffff33;&quot;&gt;Normally&lt;/span&gt;&lt;/em&gt;, it will be on Wednesdays, 19:30-20:30.&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;We will also use Tencent VOOV Meeting App (Meeting ID: 447-5287-7465) for online students.&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151370016",
+      "courseName": "概率论与随机过程 (1)（英）",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151370016&id=26ef84e79bacfc07019c92b643443b89"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c92aec2803693",
+      "bt": "Please join our WeChat group",
+      "fbr": "邱依涵",
+      "fbsj": "2026-02-25 10:41",
+      "ggnrStr": "&lt;p&gt;Hi, everyone! Welcome to Probability and Stochastic Processes(1)!&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;Please join our WeChat group. Thank you!&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151370016",
+      "courseName": "概率论与随机过程 (1)（英）",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151370016&id=26ef84e79bacfc07019c92aec2803693"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c92609cf0638d",
+      "bt": "数字逻辑实验课从第三周开始上课",
+      "fbr": "张超",
+      "fbsj": "2026-02-25 09:17",
+      "ggnrStr": "&lt;p&gt;\n   &lt;/p&gt; \n  &lt;p&gt;各位同学好，数字逻辑实验课将从第三周开始上课，上课前会通过网络学堂发布具体上课时间地点安排，请大家关注网络学堂通知。&lt;/p&gt; \n  &lt;p&gt;谢谢！&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151370008",
+      "courseName": "数字逻辑与处理器基础实验",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151370008&id=26ef84e79bacfc07019c92609cf0638d"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c90af7041173c",
+      "bt": "8. Grading",
+      "fbr": "王英",
+      "fbsj": "2026-02-25 01:22",
+      "ggnrStr": "&lt;p&gt;&lt;span style=&quot;font-family:Comic Sans MS,cursive;&quot;&gt;&lt;span style=&quot;font-size:16px;&quot;&gt;I stubbornly believe this is the part that concerns&amp;nbsp;each and every one of you&amp;nbsp;most, and therefore&amp;nbsp;to stay or not to stay is very likely up to what you make of how grading goes for this class.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;&lt;img height=&quot;550&quot; src=&quot;https://learn.tsinghua.edu.cn/b/wlxt/common/downloadFiles?wjid=1991990061_GG_1771953844839420fad692-3bac-4873-9d34-63be0a2c93f9&amp;amp;wlkcid=2025-2026-2151369471&quot; width=&quot;745&quot;&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c90af7041173c"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c90a99def1715",
+      "bt": "7. Tentative Course Schedule",
+      "fbr": "王英",
+      "fbsj": "2026-02-25 01:18",
+      "ggnrStr": "&lt;p&gt;&lt;span style=&quot;font-size:14px;&quot;&gt;&lt;img height=&quot;544&quot; src=&quot;https://learn.tsinghua.edu.cn/b/wlxt/common/downloadFiles?wjid=1991990061_GG_1771953537733276b355262-8496-457c-89ce-89b86797b216&amp;amp;wlkcid=2025-2026-2151369471&quot; width=&quot;750&quot;&gt;&lt;/span&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c90a99def1715"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c90a6f3151703",
+      "bt": "6. Course Content",
+      "fbr": "王英",
+      "fbsj": "2026-02-25 01:10",
+      "ggnrStr": "&lt;p&gt;&lt;span style=&quot;font-size:18px;&quot;&gt;&lt;span style=&quot;font-family:楷体_GB2312;&quot;&gt;Your advance knowledge of the course content may help you better underderstand what you may expect from, or may be expected&amp;nbsp;to learn&amp;nbsp;from, the&amp;nbsp;&lt;span style=&quot;color:#660099;&quot;&gt;&lt;em&gt;&lt;strong&gt;Word Power Made Easy&lt;/strong&gt;&lt;/em&gt;&lt;/span&gt;&amp;nbsp;class.&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align: center;&quot;&gt;&lt;img height=&quot;538&quot; src=&quot;https://learn.tsinghua.edu.cn/b/wlxt/common/downloadFiles?wjid=1991990061_GG_1771953365747085db4872e-6580-4de0-a31d-16209dad2c4d&amp;amp;wlkcid=2025-2026-2151369471&quot; width=&quot;722&quot;&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c90a6f3151703"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c8ddf96ca3495",
+      "bt": "5.2 Preview for Wk 1 class (2)",
+      "fbr": "王英",
+      "fbsj": "2026-02-24 12:18",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;Idioms Story:&amp;nbsp;Graffiti Makes Him See Red&lt;/p&gt; \n  &lt;p&gt;Study the pictures and then tell a story according to the pictures given.&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e89bacfc1b019c8ddf96ca3495"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c8dc4fd772b3a",
+      "bt": "5.1.2 Preview for Wk 1 class (1) (MP3)",
+      "fbr": "王英",
+      "fbsj": "2026-02-24 11:48",
+      "ggnrStr": "&lt;p&gt;Final Check, Chapter 28 (MP3): first listen and then recite.&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e89bacfc1b019c8dc4fd772b3a"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c8dc15eb629b9",
+      "bt": "请大家扫码进群吧",
+      "fbr": "李波",
+      "fbsj": "2026-02-24 11:46",
+      "ggnrStr": null,
+      "wlkcid": "2025-2026-2151369115",
+      "courseName": "二年级男生滑冰",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369115&id=26ef84e89bacfc1b019c8dc15eb629b9"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c8dc207d02a15",
+      "bt": "5.1.1 Preview for Wk 1 class (1)",
+      "fbr": "王英",
+      "fbsj": "2026-02-24 11:44",
+      "ggnrStr": "&lt;p&gt;Please study carefully the attached file:&lt;b&gt;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;color:#ff0033;&quot;&gt;&lt;strong&gt;Chapter 28&lt;/strong&gt;&lt;/span&gt;&lt;b&gt;&amp;nbsp;from&amp;nbsp;&lt;/b&gt;&lt;strong&gt;&lt;em&gt;Unit 6,&amp;nbsp;Vocabulary Workbook (12,000+ word level)&amp;nbsp;&lt;/em&gt;&lt;/strong&gt;&lt;b&gt;to get prepared for Week 1 classes&lt;/b&gt;&lt;b&gt;. M&lt;/b&gt;ake sure you understand everything so as to learn more efficiently, and most importantly, you learn everything off by heart.&amp;nbsp;&lt;b&gt;Reciting&amp;nbsp;the &quot;&lt;/b&gt;&lt;span style=&quot;color:#ff0033;&quot;&gt;&lt;strong&gt;Final Check&lt;/strong&gt;&lt;/span&gt;&lt;b&gt;&quot;&lt;/b&gt;&amp;nbsp;of the chapter&amp;nbsp;is also part of the oral homework assignments for this course. And please listen to the&amp;nbsp;&lt;span style=&quot;color:#ff0033;&quot;&gt;&lt;strong&gt;recording&lt;/strong&gt;&lt;/span&gt;&amp;nbsp;for the&amp;nbsp;&lt;strong&gt;Final Check&lt;/strong&gt;&amp;nbsp;as many times as possible&amp;nbsp; before you start trying to recite it.&amp;nbsp;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e89bacfc1b019c8dc207d02a15"
+    },
+    {
+      "ggid": "26ef84e89bacfc1b019c8db7e68325eb",
+      "bt": "请加入课程微信群",
+      "fbr": "刘仿",
+      "fbsj": "2026-02-24 11:16",
+      "ggnrStr": "&lt;p&gt;请大家扫描入群，方便后续沟通交流。&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;入群后，群内名字改为&ldquo;班级+真实姓名&rdquo;&lt;/p&gt; \n  &lt;p&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p&gt;刘仿&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369984",
+      "courseName": "电磁场与波",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369984&id=26ef84e89bacfc1b019c8db7e68325eb"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c89a303c50d0a",
+      "bt": "【重要通知1】",
+      "fbr": "夏一纯",
+      "fbsj": "2026-02-23 16:38",
+      "ggnrStr": "&lt;p style=&quot;text-indent: 21pt; text-align: left;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;各位同学好！欢迎大家本学期选修王英老师开设的《词汇的力量》课程，下面有几点通知请大家注意：&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;一. 由于合班缘故，各位同学网络学堂上显示的&lt;span style=&quot;background:yellow&quot;&gt;课序号均为&lt;b&gt;91班&lt;/b&gt;&lt;/span&gt;，但请大家按照&lt;span style=&quot;background:yellow&quot;&gt;选课的&lt;b&gt;课表时间&lt;/b&gt;&lt;/span&gt;去教室上课。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;分班具体信息如下：&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;周二91（二/3）、92（二/4），上课地点：六教6B312，助教：夏一纯； &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;周三93（三/3）、94（三/4），上课地点：六教6B312，助教：巴音；&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;周五95（五/3）、96（五/4），上课地点：六教6B312，助教：齐宇。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;二.为方便课程教学，每名同学须加入&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;两个微信群&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;：&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;1.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;由91-96班共6个班组成的&lt;span style=&quot;background:yellow&quot;&gt;大课程群&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;（群名：&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;26&lt;/span&gt;&lt;span style=&quot;background:yellow&quot;&gt;春91-96班&lt;/span&gt;&lt;/b&gt;）。本群主要用于发布重要通知、分享课程资料以及解答同学们针对课程内容提出的问题（可由其他同学先解答；若无人回答，最后由王老师解答）。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;【注意1】&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;由于该群人数庞大，大家进群需要有人邀请才能进群。大家可以先进班级群，然后找&lt;span style=&quot;background:yellow&quot;&gt;各班级助教拉入大群&lt;/span&gt;或者已经在&lt;span style=&quot;background:yellow&quot;&gt;大群的同学相互拉一下新同学&lt;/span&gt;。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;2.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:yellow; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;班级群&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;由同一天上课的2个小班组成&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;：周二91-92班群（群名：&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;26&lt;/span&gt;&lt;span style=&quot;background:yellow&quot;&gt;春91-92班&lt;/span&gt;&lt;/b&gt;；助教：夏一纯）；周三93-94班群（群名：&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;26&lt;/span&gt;&lt;span style=&quot;background:yellow&quot;&gt;春93-94班&lt;/span&gt;&lt;/b&gt;；助教：巴音）；周五95-96班群（群名：&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;26&lt;/span&gt;&lt;span style=&quot;background:yellow&quot;&gt;春95-96班&lt;/span&gt;&lt;/b&gt;；助教：齐宇）。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;【注意2】&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;群二维码&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;和&lt;b&gt;助教的微信名片见附件&lt;/b&gt;。群二维码过期会失效，请同学们尽快进群以免错过重要通知，后续二维码失效请联系各班助教。同学们加入&lt;b&gt;大群&lt;/b&gt;和&lt;b&gt;自己班级的小群&lt;/b&gt;即可，不要进错群，如调整班级需从原班级群退出再进入其他的班级群。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;【注意3】&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;重要的通知内容会同时发布在&lt;b&gt;课程大群&lt;/b&gt;，&lt;b&gt;班级群&lt;/b&gt;和&lt;b&gt;网络学堂&lt;/b&gt;的&lt;b&gt;课程公告&lt;/b&gt;里，请同学们务必认真阅读。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;三&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;. &lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;本课程&lt;span style=&quot;background:red&quot;&gt;不开腾讯会议&lt;/span&gt;。同学们因故不能到教室上课请提供相关证明。&lt;span style=&quot;background:yellow&quot;&gt;因公&lt;/span&gt;缺课请出示盖有相关单位红章的&lt;span style=&quot;background:yellow&quot;&gt;请假条&lt;/span&gt;，上面须有相关单位负责人的姓名和手机号码。&lt;span style=&quot;background:yellow&quot;&gt;因病&lt;/span&gt;缺课请出示&lt;span style=&quot;background:yellow&quot;&gt;医院诊断证明&lt;/span&gt;或缺课当天&lt;span style=&quot;background:yellow&quot;&gt;校医院开药处方以及缴费证明&lt;/span&gt;）。&lt;span style=&quot;background:yellow&quot;&gt;因其他私&lt;/span&gt;人原因&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;缺课一次&lt;/span&gt;&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;span style=&quot;background:red&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;扣5分&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;，&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;缺课二次&lt;/span&gt;&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;span style=&quot;background:red&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;请退课&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;【注意4】&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;因选课原因需要串班上课的&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;同学，请与王老师和助教协商后在&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;固定的班级上课&lt;/span&gt;&lt;/b&gt;。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;四&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;.&lt;a rel=&quot;nofollow&quot;&gt; &lt;/a&gt;&lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;span style=&quot;background:lime&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;要想在本门课上取得好成绩，认真学习课程材料、做好笔记、按时且高质量完成各项作业是关键&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;。王老师每周在网络学堂发布的&lt;span style=&quot;background:yellow&quot;&gt;课程课后（包括预习）作业&lt;/span&gt;需要同学们&lt;span style=&quot;background:red&quot;&gt;在上完当周的课后完成&lt;/span&gt;，例如： &lt;span style=&quot;background:yellow&quot;&gt;Homework for Week 1&lt;/span&gt;。该项作业需要大家在第一周上完课后、第二周上课之前完成。每周作业设定的作业完成截止日期（DDL）已经充分考虑到大家的各种情况，所以请同学们一定按时完成作业并提前预习以期达到本课程预期的最佳学习效果。如果无法达到相关要求请及时退课。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;【注意5】&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;从本学期开始，本课程&lt;span style=&quot;background:red&quot;&gt;将不允许同学补做作业&lt;/span&gt;，请大家谅解（一般情况下，接近期末时老师和助教会给大家提供补做作业的机会）。&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;上学期有同学因未完成相关作业导致成绩不及格，请大家不要效仿。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:等线&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;五&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;. &lt;/span&gt;&lt;span style=&quot;border:none windowtext 1.0pt; background:white; padding:0cm&quot;&gt;开学需要&lt;b&gt;&lt;span style=&quot;background:yellow&quot;&gt;收取材料费20元&lt;/span&gt;&lt;/b&gt;，具体收取时间和方式详见各班助教安排。&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-indent:21.0pt; text-align:justify&quot;&gt;&amp;nbsp;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c89a303c50d0a"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6eecdd724c06",
+      "bt": "5. Previewing 1: WPME (MP3)",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 12:02",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;&lt;em&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Word Power Made Easy&lt;/span&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt; \n  &lt;p&gt;While you&#39;re studing Chapters 3 ~ 7 (P26 ~ P181) and getting ready for week 3 achievement test, please listen to the correspondent MP3 to help you learn more efficiently.&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6eecdd724c06"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6ec457cf49c1",
+      "bt": "Listening and Summary Writing",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 11:12",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size:18px;&quot;&gt;&lt;em&gt;&lt;strong&gt;&lt;span&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Cambridge English Readers Stories&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Listen to one of the two Cambridge English Readers Stories: &lt;em&gt;&lt;strong&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;1. This Time It&#39;s Personal&lt;/span&gt;&lt;/strong&gt;&lt;/em&gt;, and &lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;the summary of the story is due in Week 5&lt;/span&gt;&lt;/span&gt;.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6ec457cf49c1"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6eba3d0b493e",
+      "bt": "5. Previewing 2 - 1 : Voc. (12,000+)",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 11:05",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;&lt;strong&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;&lt;span style=&quot;font-size:18px;&quot;&gt;Vocabulary Workbook IV&lt;/span&gt; (12,000+ word level)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt; \n  &lt;p&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Study Chapters 1 ~ 5, Unit 1, Vocabulary Workbook IV (12,000+ word level) and get ready for Week 3 achievement test.&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6eba3d0b493e"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6eb5b9ac4903",
+      "bt": "5. Previewing 1: WPME (PDF)",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 11:01",
+      "ggnrStr": "&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size:18px;&quot;&gt;&lt;strong&gt;&lt;em&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Word Power Made Easy&lt;/span&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Please study Chapters 3 ~ 7 (P26 ~ P181) and get ready for week 3 achievement test.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6eb5b9ac4903"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6eb15905486b",
+      "bt": "5. Previewing",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 10:51",
+      "ggnrStr": "&lt;p style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;b&gt;&lt;span style=&quot;font-size:24.0pt&quot;&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;Previewing&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Teaching at Tsinghua for well over 30 years, there are so many things I like about Tsinghua students, and of course there are quite a few things I don&#39;t like about them. And you know what I hate most about some Tsinghua students? At the top of the list&amp;nbsp;are definitely those who show up for a class for no other reason than to secure only a high score or 2 credits. If this is why you registered for my class, I strongly recommend you drop it at the beginning of the upcoming&amp;nbsp;semester when you can, because no freeloaders, never, ever, could make it to the end of the term.&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background:red&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;Please!!!&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Speaking of study skills, &lt;strong&gt;&lt;i&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;previewing&lt;/span&gt;&lt;/span&gt;&lt;/i&gt;&lt;/strong&gt; is always an important learning strategy. The 2025~2026 spring semester is about to start one week from now.&lt;/span&gt;&lt;/span&gt; Are you ready? And this is where you&rsquo;re supposed to get started: Please preview and get ready for Week 1 &amp;amp; Week 2 classes: 1) Study Chapters 3 ~ 7(P), Word Power Made Easy (WPME for short); 2) Study Chapters 1 ~ 5, Unit 1, Vocabulary Workbook IV (12,000+ word level); 3) Listen to one of the two Cambridge English Readers Stories: 1. This Time It&#39;s Personal (&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;the summary of which is due in Week 5&lt;/span&gt;&lt;/span&gt;). The above mentioned course materials/textbooks (PDF) will soon be available in the course files under correspondent titles for you to (listen to or) study ahead of course schedule throughout the upcoming semester.&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;There will be a test the first week&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt; on the above-mentioned items 1) Ch. 3 ~ Ch. 7, WPME &amp;amp; 2) Unit 1, Voc. Workbook IV (12,000+) to find out how good an autonomous learner you are and of course your English proficiency level, too! &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Studying the course materials beforehand is very important if you want to hold on to the class till the end of the semester. Hopefully you can!&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align:left&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Good luck!&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6eb15905486b"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6e97b32e4767",
+      "bt": "4. (updated) To whom It May Concern ",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 10:27",
+      "ggnrStr": "&lt;p style=&quot;text-align:center&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;strong style=&quot;font-family: inherit; font-size: inherit;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-size:24.0pt&quot;&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;Pre-class Warning&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:center&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;margin-bottom:8px; text-align:center&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;strong&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;NO &lt;/span&gt;&lt;/span&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;FREE LOADERS&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/strong&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;（混学分者）&lt;/span&gt;&lt;/span&gt;&lt;strong&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;, never, ever, are allowed in this class!!!&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;margin-bottom:8px; text-align:center&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;strong&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;NO &lt;/span&gt;&lt;/span&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;NATIVE SPEAKERS OF ENGLISH&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;font-weight:normal&quot;&gt; are accepted, either!!!&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;If any of the following statements fits you, please consider dropping the course; if you happen to &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;fall into more than two categories&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt; &lt;b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:#00b050&quot;&gt;(&lt;span style=&quot;background:yellow&quot;&gt;inclusive&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;, please drop the course immediately for the benefits of those who want to register for my class but are unable to do so for lack of&amp;nbsp;vacancy:&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;ol&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;you are&amp;nbsp;a &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;senior student&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt; (enrolled in 2022, 2021, 2020 or earlier) &lt;span style=&quot;color:black&quot;&gt;who is just coming to grab credits rather than study&amp;nbsp;for a Master&#39;s Degree or PHD at Tsinghua or abroad;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;you are a &lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:red&quot;&gt;freshman&lt;/span&gt;&lt;/u&gt;&lt;/b&gt; whose &lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:red&quot;&gt;English placement test results&lt;/span&gt;&lt;/u&gt;&lt;/b&gt; belong in &lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:red&quot;&gt;Band 3 and below&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;you are&amp;nbsp;an &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;athlete&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&amp;nbsp;or an&amp;nbsp;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:red&quot;&gt;art student&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;a rel=&quot;nofollow&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;your &lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;vocabulary size&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt; is &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;below 8,000&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt; (&lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:#00b050&quot;&gt;this is not compulsory&lt;/span&gt;&lt;/u&gt;&lt;/b&gt; but you have to work very much harder, and you have to spend, maybe, two or three hours a day studying the course materials to keep pace with the rest of the class)&lt;span style=&quot;color:black&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;your &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;vocabulary size&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt; is &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;larger than 20,000&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt; (because this course will be too easy for you, and you will not learn much as expected)&lt;span style=&quot;color:black&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;you have registered for &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;more than 22-credit classes&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt; &lt;b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:#00b050&quot;&gt;(&lt;span style=&quot;background:yellow&quot;&gt;inclusive&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;you &lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:red&quot;&gt;cannot&amp;nbsp;afford at least an hour&amp;nbsp;a day on average&lt;/span&gt;&lt;/u&gt; &lt;/b&gt;to&amp;nbsp;study the course materials and do your homework;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;you &lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:red&quot;&gt;hold myths&amp;nbsp;and wrong expectations&lt;/span&gt;&lt;/u&gt;&lt;/b&gt; about language teaching and learning;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;a rel=&quot;nofollow&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;you often &lt;b&gt;&lt;u&gt;&lt;span style=&quot;color:red&quot;&gt;miss more than two classes&lt;/span&gt;&lt;/u&gt;&lt;/b&gt; &lt;b&gt;&lt;span style=&quot;color:#00b050&quot;&gt;(&lt;span style=&quot;background:yellow&quot;&gt;inclusive&lt;/span&gt;)&lt;/span&gt;&lt;/b&gt; for each course you have registered in the past terms for private reasons and/or without asking for leave; &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;vertical-align:top&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;you registered for this course but never intended to show up&amp;nbsp;for class, and&amp;nbsp;will not drop it&amp;nbsp;until the&amp;nbsp;last&amp;nbsp;minute to&amp;nbsp;do so (&lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;personally I do not understand why this is so&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;); &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n  &lt;/ol&gt; \n  &lt;p style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;It is for no other reason than that most of the above-mentioned students will be too busy to put in enough time to study for the course, or will not learn as much as expected, hence I strongly advise that &lt;/span&gt;&lt;/span&gt;&lt;b&gt;&lt;u&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;such students drop this class as soon as possible&lt;/span&gt;&lt;/span&gt;&lt;/u&gt;&lt;/b&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;!&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify&quot;&gt;&amp;nbsp;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify&quot;&gt;&lt;span style=&quot;font-family:Times New Roman,Times,serif;&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-size:12.0pt&quot;&gt;&lt;span style=&quot;color:black&quot;&gt;Thank you for your understanding and cooperation! &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6e97b32e4767"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6e70d91c45ac",
+      "bt": "3. Supplementary Videos",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 09:49",
+      "ggnrStr": "&lt;p style=&quot;text-align:center; text-indent:21.0pt&quot;&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;background:white&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;strong&gt;&lt;span style=&quot;border:none windowtext 1.0pt; font-size:22.0pt; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Criminal Minds&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; font-size:22.0pt; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; font-size:22.0pt; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;b&gt;&lt;span style=&quot;border:none windowtext 1.0pt; font-size:22.0pt; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;&lt;span style=&quot;color:#444444&quot;&gt; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;span style=&quot;color:#27ae60;&quot;&gt;&lt;strong&gt;&lt;span style=&quot;border:none windowtext 1.0pt; font-size:22.0pt; padding:0cm&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;Mind hunters&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;From what I understand about language learning, or language acquisition, watching videos is the best way to help learners improve their language proficiency, and&amp;nbsp;&lt;b&gt;&lt;i&gt;Criminal Minds&lt;/i&gt;&lt;/b&gt;&amp;nbsp;is such American TV drama series&amp;nbsp;(which is composed of 324 episodes out of 15 seasons),&amp;nbsp;and is, personally, the best, ever.&amp;nbsp; Here are the links to &quot;&lt;b&gt;&lt;i&gt;Criminal Minds&lt;/i&gt;&lt;/b&gt;&quot; &amp;amp; &quot;&lt;b&gt;&lt;i&gt;Mind hunters&lt;/i&gt;&lt;/b&gt;&quot; (which is about the establishment of the predecessor of BAU those resourceful FBI agents work for.)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;i&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Criminal Minds&lt;/span&gt;&lt;/span&gt;&lt;/i&gt;&lt;b&gt;&lt;i&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt; &lt;/span&gt;&lt;/i&gt;&lt;/b&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&amp;nbsp;(S01 - S015) (324 episodes)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;margin-left:84px; text-align:justify; text-indent:21.0pt; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;清华云盘链接：&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;https://cloud.tsinghua.edu.cn/d/93ce0e5f329742dcad67/&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;【特别提示】从&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;S01E01&lt;/span&gt;到&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;S15E10&lt;/span&gt;，本人开设的四门课程里的各种级别的词汇被反反复复用到，所以从语言习得的角度，个人以为&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Criminal Minds&lt;/span&gt;绝对是最好的美剧！请同学们一定要花时间去看哈！加油！！！&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;strong&gt;&lt;i&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Mind Hunters&lt;/span&gt;&lt;/span&gt;&lt;/i&gt;&lt;/strong&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt; (S01 - S02) (19 episodes) &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;margin-left:84px; text-align:justify; text-indent:21.0pt; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;清华云盘链接：&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;(&lt;span style=&quot;background:red&quot;&gt;to be continued&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;【特别提示】&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Mind Hunters &lt;/span&gt;讲的是&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Criminal Minds&lt;/span&gt;里的&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;FBI&lt;/span&gt;探员隶属的工作单位&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;BAU&lt;/span&gt;的前身&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;BSU&lt;/span&gt;（好像是叫这个）。&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;S01&lt;/span&gt;尤其超级棒！&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6e70d91c45ac"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6e6d7b2d4582",
+      "bt": "2. Textbooks",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 09:45",
+      "ggnrStr": "&lt;p&gt;&lt;img height=&quot;778&quot; src=&quot;https://learn.tsinghua.edu.cn/b/wlxt/common/downloadFiles?wjid=1991990061_GG_17713791874397154df58de-091b-4e82-883f-eb48a234e8d5&amp;amp;wlkcid=2025-2026-2151369471&quot; width=&quot;508&quot;&gt;&lt;/p&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6e6d7b2d4582"
+    },
+    {
+      "ggid": "26ef84e79bacfc07019c6e682c9c4501",
+      "bt": "1. Hello",
+      "fbr": "王英",
+      "fbsj": "2026-02-18 09:34",
+      "ggnrStr": "&lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Hi, guys! &lt;/span&gt;&lt;b&gt;&lt;span style=&quot;font-size:14.0pt&quot;&gt;&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Monotype Corsiva&amp;quot;&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;Happy New Year!&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;I am WANG Ying, instructor of the English&amp;nbsp;course&amp;nbsp;&ndash; &lt;em&gt;&lt;b&gt;Word Power Made Easy&lt;/b&gt;&lt;/em&gt;&amp;nbsp;for the upcoming spring term of the school year 2025 - 2026. At the beginning of each semester, I am so eager to meet&amp;nbsp;all of you that&amp;nbsp;I cannot wait to see you in class because I &quot;enjoy so much torturing you&quot;&amp;nbsp;as some former students of mine&amp;nbsp;referred to it. With due&amp;nbsp;reflection of previous semesters&#39;&amp;nbsp;teaching, students&#39; feedback and careful preparations, I think I can do a better job than before this semester.&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;But are you ready?&amp;nbsp;If you have ever heard anything about my classes, you should have known it: No freeloaders, never, ever, could make it to the end of the semester. Hopefully, you are not one of those guys. But if you are, please drop this course immediately&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size:10.5pt&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;if possible&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt; to make room for other students who want to study the course wholeheartedly.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;By the way,&amp;nbsp;could you please bring to class&amp;nbsp;some scratch paper, or note paper, and a colored pen, or a highlighter, if you will, when you show up for class the first week? And, of course, bring yourself, too!&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;See you guys soon!&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;p style=&quot;margin-left:57px; text-align:justify; text-indent:-42.5pt; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;【&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;P.S.&lt;/span&gt;】&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;Please make sure you have secured a copy of the textbooks to be used in class (e-copies of which will be available in the course files under correspondent titles) (also see &lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;Announcement #2&lt;/span&gt;&lt;/span&gt; for detail):&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; \n  &lt;ol style=&quot;margin-top:5px; margin-bottom:5px&quot;&gt; \n   &lt;li style=&quot;margin-left:36px; text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;strong&gt;&lt;i&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Word Power Made Easy&lt;/span&gt;&lt;/span&gt;&lt;/i&gt;&lt;/strong&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt; (&lt;i&gt;by Norman Lewis&lt;/i&gt;);&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;margin-left:36px; text-align:justify; margin-top:5px; margin-bottom:5px&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;strong&gt;&lt;i&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Tuesdays with Morrie&lt;/span&gt;&lt;/span&gt;&lt;/i&gt;&lt;/strong&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt; (&lt;i&gt;by Mitch Albom&lt;/i&gt;);&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n   &lt;li style=&quot;margin-top:5px; margin-right:-42px; margin-bottom:5px; margin-left:36px; text-align:justify&quot;&gt;&lt;span style=&quot;font-size:12pt&quot;&gt;&lt;span style=&quot;text-justify:inter-ideograph&quot;&gt;&lt;span style=&quot;font-family:宋体&quot;&gt;&lt;strong&gt;&lt;i&gt;&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&lt;span style=&quot;background-color:#27ae60;&quot;&gt;Merriam-Webster&rsquo;s Vocabulary Builder&lt;/span&gt;&lt;/span&gt;&lt;/i&gt;&lt;/strong&gt; &lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;(New Ed.) (&lt;span style=&quot;background:yellow&quot;&gt;&lt;span style=&quot;color:#00b050&quot;&gt;supplementary&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt; （俗称&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&ldquo;&lt;/span&gt;韦小绿&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;&rdquo;&lt;/span&gt;）&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,serif&quot;&gt;.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt; \n  &lt;/ol&gt;",
+      "wlkcid": "2025-2026-2151369471",
+      "courseName": "词汇的力量",
+      "hasRead": true,
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kcgg/wlkc_ggb/student/beforeViewXs?wlkcid=2025-2026-2151369471&id=26ef84e79bacfc07019c6e682c9c4501"
+    }
+  ],
+  "homework": [
+    {
+      "zyid": "26ef84e89bacfc1b019c9d5baaf80170",
+      "xszyid": "26ef84e89bacfc1b019c9d5bab6801b3",
+      "bt": "作业1",
+      "wlkcid": "2025-2026-2151369984",
+      "kssj": 1772166480000,
+      "jzsj": 1772812740000,
+      "zywcfs": 1,
+      "status": "已批改",
+      "isUnsubmitted": false,
+      "courseName": "电磁场与波",
+      "hasRead": true,
+      "submitUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151369984&xszyid=26ef84e89bacfc1b019c9d5bab6801b3",
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/viewCj?wlkcid=2025-2026-2151369984&xszyid=26ef84e89bacfc1b019c9d5bab6801b3"
+    },
+    {
+      "zyid": "26ef84e79bacfc07019ca43713374c52",
+      "xszyid": "26ef84e79bacfc07019ca43713854c98",
+      "bt": "Problem Set 1",
+      "wlkcid": "2025-2026-2151370016",
+      "kssj": 1772281500000,
+      "jzsj": 1772812740000,
+      "zywcfs": 1,
+      "status": "未提交",
+      "isUnsubmitted": true,
+      "courseName": "概率论与随机过程 (1)（英）",
+      "hasRead": true,
+      "submitUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370016&xszyid=26ef84e79bacfc07019ca43713854c98",
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370016&xszyid=26ef84e79bacfc07019ca43713854c98"
+    },
+    {
+      "zyid": "26ef84e79bacfc07019ca41a1eba429b",
+      "xszyid": "TBBFZY151991278",
+      "bt": "Week1-Reading",
+      "wlkcid": "2025-2026-2151370010",
+      "kssj": 1772294340000,
+      "jzsj": 1773158340000,
+      "zywcfs": 1,
+      "status": "未提交",
+      "isUnsubmitted": true,
+      "courseName": "数字系统设计",
+      "hasRead": true,
+      "submitUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370010&xszyid=TBBFZY151991278",
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370010&xszyid=TBBFZY151991278"
+    }
+  ],
+  "unsubmittedHomework": [
+    {
+      "zyid": "26ef84e79bacfc07019ca43713374c52",
+      "xszyid": "26ef84e79bacfc07019ca43713854c98",
+      "bt": "Problem Set 1",
+      "wlkcid": "2025-2026-2151370016",
+      "kssj": 1772281500000,
+      "jzsj": 1772812740000,
+      "zywcfs": 1,
+      "status": "未提交",
+      "isUnsubmitted": true,
+      "courseName": "概率论与随机过程 (1)（英）",
+      "hasRead": true,
+      "submitUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370016&xszyid=26ef84e79bacfc07019ca43713854c98",
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370016&xszyid=26ef84e79bacfc07019ca43713854c98"
+    },
+    {
+      "zyid": "26ef84e79bacfc07019ca41a1eba429b",
+      "xszyid": "TBBFZY151991278",
+      "bt": "Week1-Reading",
+      "wlkcid": "2025-2026-2151370010",
+      "kssj": 1772294340000,
+      "jzsj": 1773158340000,
+      "zywcfs": 1,
+      "status": "未提交",
+      "isUnsubmitted": true,
+      "courseName": "数字系统设计",
+      "hasRead": true,
+      "submitUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370010&xszyid=TBBFZY151991278",
+      "detailUrl": "https://learn.tsinghua.edu.cn/f/wlxt/kczy/zy/student/tijiao?wlkcid=2025-2026-2151370010&xszyid=TBBFZY151991278"
+    }
+  ],
+  "contentState": {
+    "noticeSeen": {
+      "26ef84e89bacfc1b019c8dc15eb629b9": "2026-02-24 11:46",
+      "26ef84e89bacfc1b019ca470b4287914": "2026-02-28 21:29",
+      "26ef84e89bacfc1b019c997494d3096b": "2026-02-26 18:13",
+      "26ef84e89bacfc1b019c996dbd61073e": "2026-02-26 18:06",
+      "26ef84e89bacfc1b019c996586ef0428": "2026-02-26 17:58",
+      "26ef84e79bacfc07019c90af7041173c": "2026-02-25 01:22",
+      "26ef84e79bacfc07019c90a99def1715": "2026-02-25 01:18",
+      "26ef84e79bacfc07019c90a6f3151703": "2026-02-25 01:10",
+      "26ef84e89bacfc1b019c8ddf96ca3495": "2026-02-24 12:18",
+      "26ef84e89bacfc1b019c8dc4fd772b3a": "2026-02-24 11:48",
+      "26ef84e89bacfc1b019c8dc207d02a15": "2026-02-24 11:44",
+      "26ef84e79bacfc07019c89a303c50d0a": "2026-02-23 16:38",
+      "26ef84e79bacfc07019c6eecdd724c06": "2026-02-18 12:02",
+      "26ef84e79bacfc07019c6ec457cf49c1": "2026-02-18 11:12",
+      "26ef84e79bacfc07019c6eba3d0b493e": "2026-02-18 11:05",
+      "26ef84e79bacfc07019c6eb5b9ac4903": "2026-02-18 11:01",
+      "26ef84e79bacfc07019c6eb15905486b": "2026-02-18 10:51",
+      "26ef84e79bacfc07019c6e97b32e4767": "2026-02-18 10:27",
+      "26ef84e79bacfc07019c6e70d91c45ac": "2026-02-18 09:49",
+      "26ef84e79bacfc07019c6e6d7b2d4582": "2026-02-18 09:45",
+      "26ef84e79bacfc07019c6e682c9c4501": "2026-02-18 09:34",
+      "26ef84e89bacfc1b019c8db7e68325eb": "2026-02-24 11:16",
+      "26ef84e79bacfc07019c92609cf0638d": "2026-02-25 09:17",
+      "26ef84e79bacfc07019ca3430ef559c9": "2026-02-28 16:00",
+      "26ef84e79bacfc07019c92aec2803693": "2026-02-25 10:41",
+      "26ef84e79bacfc07019c92e810475cf1": "2026-02-25 11:44",
+      "26ef84e79bacfc07019c92b643443b89": "2026-02-25 10:45"
+    },
+    "homeworkSeen": {
+      "26ef84e89bacfc1b019c9d5baaf80170": 1772812740000,
+      "26ef84e79bacfc07019ca41a1eba429b": 1773158340000,
+      "26ef84e79bacfc07019ca43713374c52": 1772812740000
+    }
+  },
+  "newCount": 0
+}

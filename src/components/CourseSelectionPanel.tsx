@@ -5,20 +5,12 @@ import { TrainingPlanAnalyzer } from '../utils/trainingPlanAnalyzer';
 
 const REVIEW_API = 'https://yourschool.cc/thucourse_api/api/review/';
 
-declare global {
-  interface Window {
-    eeInfo?: {
-      courseSelection?: {
-        fetchTrainingPlan: () => Promise<{ success: boolean; html?: string; error?: string }>;
-        getData: () => Promise<unknown>;
-        setData: (data: unknown) => Promise<{ ok: boolean }>;
-        onLog?: (cb: (msg: string) => void) => () => void;
-      };
-    };
-  }
+interface CourseSelectionPanelProps {
+  onFetchStart?: () => void;
+  onFetchComplete?: () => void;
 }
 
-export default function CourseSelectionPanel() {
+export default function CourseSelectionPanel({ onFetchStart, onFetchComplete }: CourseSelectionPanelProps) {
   const [data, setData] = useState<CourseSelectionData | null>(null);
   const [trainingPlanLoading, setTrainingPlanLoading] = useState(false);
   const [reviewsLoading, setReviewsLoading] = useState(false);
@@ -28,6 +20,7 @@ export default function CourseSelectionPanel() {
   const [modalCourse, setModalCourse] = useState<{ courseName: string; courseId: string; credits: number } | null>(null);
   const [logs, setLogs] = useState<string[]>([]);
   const [logPanelOpen, setLogPanelOpen] = useState(false);
+  const [dataPath, setDataPath] = useState<string | null>(null);
 
   const loadData = useCallback(async () => {
     const d = await window.eeInfo?.courseSelection?.getData?.();
@@ -39,9 +32,11 @@ export default function CourseSelectionPanel() {
     setData(next);
   }, []);
 
+  useEffect(() => { loadData(); }, [loadData]);
+
   useEffect(() => {
-    loadData();
-  }, [loadData]);
+    window.eeInfo?.courseSelection?.getDataPath?.().then((p: string) => setDataPath(p ?? null));
+  }, []);
 
   useEffect(() => {
     const unsub = window.eeInfo?.courseSelection?.onLog?.(msg => setLogs(prev => [...prev, msg]));
@@ -73,10 +68,12 @@ export default function CourseSelectionPanel() {
   };
 
   const fetchTrainingPlan = async () => {
+    onFetchStart?.();
     setTrainingPlanLoading(true);
     setError(null);
     setLogs([]);
     setLogPanelOpen(true);
+    setLogs(prev => [...prev, '[前端] 开始抓取，onFetchStart 已调用，应保持 EE选课']);
     try {
       const result = await window.eeInfo?.courseSelection?.fetchTrainingPlan?.();
       if (!result?.success || !result?.html) {
@@ -91,6 +88,30 @@ export default function CourseSelectionPanel() {
       await saveData({ ...(data || {}), trainingPlan: { report, recommendations, parsedData }, lastUpdate: Date.now() });
     } catch (e) {
       setError(e instanceof Error ? e.message : '抓取培养方案失败');
+    } finally {
+      setTrainingPlanLoading(false);
+      setLogs(prev => [...prev, '[前端] 抓取结束，onFetchComplete 即将调用，应保持 EE选课']);
+      setTimeout(() => onFetchComplete?.(), 100);
+    }
+  };
+
+  const loadFromHtmlFile = async () => {
+    setTrainingPlanLoading(true);
+    setError(null);
+    try {
+      const result = await window.eeInfo?.courseSelection?.loadFromHtmlFile?.();
+      if (!result?.success || !result?.html) {
+        setError(result?.error || '本地无缓存');
+        return;
+      }
+      const parser = new TrainingPlanParser(result.html);
+      const parsedData = parser.parse();
+      const analyzer = new TrainingPlanAnalyzer(parsedData);
+      const report = analyzer.generateReport();
+      const recommendations = analyzer.generateRecommendations(report);
+      await saveData({ ...(data || {}), trainingPlan: { report, recommendations, parsedData }, lastUpdate: Date.now() });
+    } catch (e) {
+      setError(e instanceof Error ? e.message : '从本地加载失败');
     } finally {
       setTrainingPlanLoading(false);
     }
@@ -169,12 +190,16 @@ export default function CourseSelectionPanel() {
     <section className="flex-1 min-h-0 flex flex-col gap-3 p-4 overflow-hidden">
       <div className="ee-header-khaki flex items-center justify-between -mx-4 px-4 pb-2 shrink-0">
         <div>
-          <h2 className="text-sm font-semibold tracking-tight">课程选课</h2>
+          <h2 className="text-sm font-semibold tracking-tight">EE选课</h2>
           <p className="text-xs text-slate-400 mt-0.5">培养方案、选课评价、开课信息</p>
+          {dataPath && <p className="text-[10px] text-slate-500 mt-1 truncate max-w-[200px]" title={dataPath}>数据: {dataPath}</p>}
         </div>
         <div className="flex items-center gap-2 text-xs">
           <button onClick={fetchTrainingPlan} disabled={trainingPlanLoading} className="px-2 py-1.5 rounded-md border border-slate-700 text-slate-300 hover:bg-slate-800 disabled:opacity-50">
             {trainingPlanLoading ? '抓取中…' : '🔄 更新培养方案'}
+          </button>
+          <button onClick={loadFromHtmlFile} disabled={trainingPlanLoading} className="px-2 py-1.5 rounded-md border border-slate-700 text-slate-300 hover:bg-slate-800 disabled:opacity-50" title="从上次抓取保存的 HTML 加载">
+            📂 从本地 HTML 加载
           </button>
           <button onClick={fetchReviews} disabled={reviewsLoading} className="px-2 py-1.5 rounded-md border border-slate-700 text-slate-300 hover:bg-slate-800 disabled:opacity-50">
             {reviewsLoading ? '更新中…' : '📊 更新选课评价'}
@@ -236,26 +261,57 @@ export default function CourseSelectionPanel() {
         <main className="flex-1 min-h-0 rounded-lg border border-slate-700/80 bg-slate-900/50 p-4 overflow-y-auto">
           {!selectedGroup ? (
             <div className="h-full flex items-center justify-center text-slate-500 text-sm">从左侧选择课程组</div>
-          ) : selectedGroup.incompleteCourseList?.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-emerald-400 text-sm">✅ 该课程组已完成</div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-4">
               <h3 className="text-sm font-semibold text-slate-200">{selectedGroup.groupName}</h3>
-              <div className="grid gap-2">
-                {selectedGroup.incompleteCourseList?.map(c => {
-                  const reviews = getReviewsByName(c.courseName);
-                  return (
-                    <button key={c.courseId} onClick={() => setModalCourse({ courseName: c.courseName, courseId: c.courseId, credits: c.credits })} className="w-full text-left rounded-lg border border-slate-700/60 px-3 py-2 hover:bg-slate-800/60 transition">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <div className="font-medium text-slate-200">{c.courseName}</div>
-                          <div className="text-[10px] text-slate-500">{c.courseId} · {c.credits} 学分</div>
-                        </div>
-                        {reviews.length > 0 && <div className="text-amber-400 text-xs">⭐ {reviews[0].rating.toFixed(1)} ({reviews.length} 位教师)</div>}
-                      </div>
-                    </button>
-                  );
-                })}
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-xs font-medium text-emerald-400 mb-2">已完成</h4>
+                  <div className="space-y-2">
+                    {(selectedGroup.completedCourseList || []).length === 0 && <p className="text-[10px] text-slate-500 py-1">暂无</p>}
+
+                    {(selectedGroup.completedCourseList || []).map(c => (
+                      <button key={c.courseId} onClick={() => setModalCourse({ courseName: c.courseName, courseId: c.courseId, credits: c.credits })} className="w-full text-left rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 hover:bg-emerald-500/20 transition">
+                        <div className="font-medium text-slate-200">{c.courseName}</div>
+                        <div className="text-[10px] text-slate-500">{c.courseId} · {c.credits} 学分{c.grade ? ` · ${c.grade}` : ''}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-medium text-blue-400 mb-2">正在完成</h4>
+                  <div className="space-y-2">
+                    {(selectedGroup.enrolledCourseList || []).length === 0 && <p className="text-[10px] text-slate-500 py-1">暂无</p>}
+
+                    {(selectedGroup.enrolledCourseList || []).map(c => (
+                      <button key={c.courseId} onClick={() => setModalCourse({ courseName: c.courseName, courseId: c.courseId, credits: c.credits })} className="w-full text-left rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-2 hover:bg-blue-500/20 transition">
+                        <div className="font-medium text-slate-200">{c.courseName}</div>
+                        <div className="text-[10px] text-slate-500">{c.courseId} · {c.credits} 学分</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-medium text-amber-400 mb-2">未完成</h4>
+                  <div className="space-y-2">
+                    {(selectedGroup.incompleteCourseList || []).length === 0 && <p className="text-[10px] text-slate-500 py-1">暂无</p>}
+
+                    {(selectedGroup.incompleteCourseList || []).map(c => {
+                      const reviews = getReviewsByName(c.courseName);
+                      return (
+                        <button key={c.courseId} onClick={() => setModalCourse({ courseName: c.courseName, courseId: c.courseId, credits: c.credits })} className="w-full text-left rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 hover:bg-amber-500/20 transition">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <div className="font-medium text-slate-200">{c.courseName}</div>
+                              <div className="text-[10px] text-slate-500">{c.courseId} · {c.credits} 学分</div>
+                            </div>
+                            {reviews.length > 0 && <div className="text-amber-400 text-xs">⭐ {reviews[0].rating.toFixed(1)} ({reviews.length} 位教师)</div>}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -321,3 +377,7 @@ export default function CourseSelectionPanel() {
     </section>
   );
 }
+
+
+
+

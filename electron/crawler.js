@@ -474,11 +474,18 @@ function mergeContentState(oldData, newNotices, newHomework) {
  */
 async function fetchAll(semesterId = null) {
   const auth = require('./auth');
+  // 若无 learn 会话但有保存的凭据，尝试按需登录
+  if (!auth.hasValidLearnSession() && auth.hasCredentials()) {
+    const cred = auth.loadCredentials();
+    const loginResult = await auth.ensureLoginToLearn(cred);
+    if (!loginResult.success) {
+      return { success: false, error: 'SESSION_EXPIRED', message: loginResult.error || '请先登录网络学堂' };
+    }
+  }
   const cookieHeader = getCookieHeader();
   if (!cookieHeader) {
-    return { success: false, error: 'SESSION_EXPIRED', message: '请先登录' };
+    return { success: false, error: 'SESSION_EXPIRED', message: '请先登录网络学堂' };
   }
-  // 每次抓取前确保 session 已恢复（应对冷启动或长时间未用）
   try {
     await auth.restoreAuthToSession(auth.getSessionForCrawler());
   } catch (_) {}

@@ -15,11 +15,20 @@ function getCourseColorIndex(courseName: string): number {
 }
 
 const navItems = [
-  { key: 'assignments', label: 'EE工作台' },
+  { key: 'assignments', label: 'EE学堂' },
   { key: 'agent', label: 'EE智能体' },
-  { key: 'courses', label: '课程选课' },
-  { key: 'login', label: '登录' },
+  { key: 'courses', label: 'EE选课' },
   { key: 'settings', label: '设置' }
+];
+
+/** 公开日志（写死在代码中，非用户本地数据） */
+const PUBLIC_LOGS = [
+  '[v0.0.2] EE Info 课程 · 作业 · 日程',
+  '[更新] EE学堂：课表、作业、通知汇总',
+  '[更新] EE智能体：课程学习助手',
+  '[更新] EE选课：培养方案、选课评价',
+  '[更新] 支持网络学堂与信息门户登录',
+  '[更新] 培养方案抓取与解析',
 ];
 
 interface Course {
@@ -57,6 +66,7 @@ interface LearnData {
 }
 
 const READ_STORAGE_KEY = 'ee-info-read';
+const NAV_STORAGE_KEY = 'ee-info-activeNav';
 
 function getItemKey(item: { _type?: string; wlkcid?: string; ggid?: string; xszyid?: string; detailUrl?: string | null; courseName?: string; bt?: string }): string {
   const t = item._type === 'notice' ? 'n' : 'h';
@@ -100,7 +110,7 @@ const App: React.FC = () => {
   const { markAsRead, getIsRead } = useReadState();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [activeNav, setActiveNav] = useState('assignments');
+  const [activeNav, setActiveNav] = useState(() => { try { const s = sessionStorage.getItem(NAV_STORAGE_KEY); if (s && ['assignments','agent','courses','settings'].includes(s)) return s; } catch {} return 'assignments'; });
   const [learnData, setLearnData] = useState<LearnData | null>(null);
   const [fetching, setFetching] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
@@ -108,6 +118,7 @@ const App: React.FC = () => {
   const [selectedSemester, setSelectedSemester] = useState<string | null>(null);
   const [contentModalOpen, setContentModalOpen] = useState(false);
   const [contentDetailItem, setContentDetailItem] = useState<ContentItem | null>(null);
+  const [publicLogModalOpen, setPublicLogModalOpen] = useState(false);
   const loadCached = useCallback(async () => {
     const data = await window.eeInfo?.crawler?.getCached?.();
     if (data) setLearnData(data);
@@ -175,8 +186,16 @@ const App: React.FC = () => {
 
   const handleNavClick = (key: string) => {
     setActiveNav(key);
-    if (key === 'login') setLoginModalOpen(true);
+    try { sessionStorage.setItem(NAV_STORAGE_KEY, key); } catch {}
   };
+
+  useEffect(() => {
+    if (!loggedIn) return;
+    try {
+      const s = sessionStorage.getItem(NAV_STORAGE_KEY);
+      if (s && ['assignments','agent','courses','settings'].includes(s)) setActiveNav(s);
+    } catch {}
+  }, [loggedIn]);
 
   return (
     <div className="h-screen w-screen bg-slate-950 text-slate-100 flex">
@@ -190,6 +209,33 @@ const App: React.FC = () => {
         onClose={() => { setContentModalOpen(false); setContentDetailItem(null); }}
         item={contentDetailItem}
       />
+
+      {publicLogModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={() => setPublicLogModalOpen(false)}
+        >
+          <div
+            className="w-full max-w-md rounded-xl border border-slate-700 bg-slate-900/95 p-4 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-slate-200">公开日志</h3>
+              <button
+                onClick={() => setPublicLogModalOpen(false)}
+                className="text-slate-500 hover:text-slate-300"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="max-h-64 overflow-y-auto space-y-1.5 font-mono text-[11px] text-slate-400">
+              {PUBLIC_LOGS.map((line, i) => (
+                <div key={i} className="break-words">{line}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 左侧边栏 */}
       <aside className="ee-sidebar-left w-[var(--ee-sidebar-left-width)] min-w-[var(--ee-sidebar-left-width)] shrink-0 border-r border-slate-800 flex flex-col bg-slate-950/80 backdrop-blur">
@@ -215,26 +261,26 @@ const App: React.FC = () => {
                 <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400/80" />
                 <span>{item.label}</span>
               </span>
-              {item.key === 'login' && (
-                <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                    loggedIn ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'
-                  }`}
-                >
-                  {loggedIn ? '已登录' : '未登录'}
-                </span>
-              )}
             </button>
           ))}
         </nav>
 
         <div className="px-4 py-3 border-t border-slate-800 text-xs text-slate-500 space-y-2">
-          <div className="flex items-center justify-between">
+          <button
+            onClick={() => setPublicLogModalOpen(true)}
+            className="w-full flex items-center justify-between rounded-lg border border-slate-700/80 px-3 py-2 hover:bg-slate-800/60 hover:text-slate-300 transition text-left"
+          >
             <span>未读更新</span>
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-900 text-[10px] text-slate-300">
               {learnData?.newCount ?? 0} 条
             </span>
-          </div>
+          </button>
+          <button
+            onClick={() => setLoginModalOpen(true)}
+            className="w-full rounded-lg border border-slate-700/80 px-3 py-2 text-[10px] text-slate-400 hover:bg-slate-800/60 hover:text-slate-300 transition text-center"
+          >
+            {loggedIn ? '已登录' : '登录'}
+          </button>
           {loggedIn && (
             <button
               onClick={async () => {
@@ -258,7 +304,7 @@ const App: React.FC = () => {
           ) : activeNav === 'agent' ? (
             <span className="text-sm font-medium text-slate-200">EE智能体</span>
           ) : activeNav === 'courses' ? (
-            <span className="text-sm font-medium text-slate-200">课程选课</span>
+            <span className="text-sm font-medium text-slate-200">EE选课</span>
           ) : (
           <>
           <div className="flex items-center gap-2 text-sm text-slate-300">
@@ -337,7 +383,10 @@ const App: React.FC = () => {
           </section>
         ) : activeNav === 'courses' ? (
           <section className="flex-1 min-h-0 overflow-hidden flex flex-col">
-            <CourseSelectionPanel />
+            <CourseSelectionPanel
+              onFetchStart={() => { setActiveNav('courses'); try { sessionStorage.setItem('ee-info-activeNav', 'courses'); } catch {} }}
+              onFetchComplete={() => { setActiveNav('courses'); try { sessionStorage.setItem('ee-info-activeNav', 'courses'); } catch {} }}
+            />
           </section>
         ) : (
         <section className="flex-1 min-h-0 flex flex-col gap-3 p-4 overflow-hidden">

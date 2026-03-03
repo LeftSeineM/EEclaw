@@ -1,17 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-declare global {
-  interface Window {
-    eeInfo?: {
-      auth: {
-        login: (username: string, password: string) => Promise<{ success: boolean; error?: string; data?: unknown }>;
-        logout: () => Promise<{ ok: boolean }>;
-        getStatus: () => Promise<{ loggedIn: boolean }>;
-      };
-    };
-  }
-}
-
 interface LoginModalProps {
   open: boolean;
   onClose: () => void;
@@ -23,6 +11,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [useWindowLogin, setUseWindowLogin] = useState(false);
+  const [saveCredentials, setSaveCredentials] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -51,7 +41,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
 
     setLoading(true);
     try {
-      const result = await api.login(username.trim(), password);
+      const result = await api.login(username.trim(), password, { forceWindow: useWindowLogin, saveCredentials });
       if (result.success) {
         onSuccess?.(result.data);
         onClose();
@@ -128,6 +118,27 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
             </div>
           )}
 
+          <div className="space-y-2">
+            <label className="flex cursor-pointer items-center gap-2 text-xs text-slate-400">
+              <input
+                type="checkbox"
+                checked={saveCredentials}
+                onChange={(e) => setSaveCredentials(e.target.checked)}
+                className="rounded border-slate-600 bg-slate-800"
+              />
+              保存凭据，用于按需自动登录（网络学堂、info 可分开登录）
+            </label>
+            <label className="flex cursor-pointer items-center gap-2 text-xs text-slate-400">
+              <input
+                type="checkbox"
+                checked={useWindowLogin}
+                onChange={(e) => setUseWindowLogin(e.target.checked)}
+                className="rounded border-slate-600 bg-slate-800"
+              />
+              使用内置窗口登录（若程序化登录失败可勾选）
+            </label>
+          </div>
+
           <div className="flex gap-2 pt-1">
             <button
               type="submit"
@@ -147,7 +158,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
         </form>
 
         <p className="mt-4 text-center text-[10px] text-slate-500">
-          密码仅用于本次登录，不会保存。应用直接调用清华 CAS 接口完成认证。若需二次验证，将自动切换为窗口登录。
+          {saveCredentials ? '凭据将加密保存于本地，用于网络学堂、info 的按需自动登录。' : '未勾选保存时，密码仅用于本次登录。'} 若需二次验证，将自动切换为窗口登录。
         </p>
         <div className="mt-3 space-y-2">
           <button

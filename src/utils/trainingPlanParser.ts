@@ -136,6 +136,7 @@ export class TrainingPlanParser {
         if (courseId && courseName) {
           let status: ParsedCourse['status'] = 'unknown';
           if (grade.includes('未修')) status = 'not_taken';
+          else if (grade.includes('在修')) status = 'enrolled';
           else if (grade.includes('选课') || grade === 'P' || /^[A-D][+-]?$/.test(grade) || grade?.trim()) status = 'completed';
           else if (grade === 'W') status = 'withdrawn';
           else if (grade === 'F') status = 'failed';

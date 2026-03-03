@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+﻿const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('eeInfo', {
   crawler: {
@@ -16,7 +16,15 @@ contextBridge.exposeInMainWorld('eeInfo', {
     downloadFile: (url, filename) => ipcRenderer.invoke('crawler:downloadFile', url, filename)
   },
   auth: {
-    login: (username, password) => ipcRenderer.invoke('auth:login', { username, password }),
+    login: (username, password, opts) =>
+      ipcRenderer.invoke('auth:login', {
+        username,
+        password,
+        forceWindow: opts?.forceWindow,
+        saveCredentials: opts?.saveCredentials
+      }),
+    hasCredentials: () => ipcRenderer.invoke('auth:hasCredentials'),
+    clearCredentials: () => ipcRenderer.invoke('auth:clearCredentials'),
     logout: () => ipcRenderer.invoke('auth:logout'),
     getStatus: () => ipcRenderer.invoke('auth:status'),
     getCookiesForCrawler: () => ipcRenderer.invoke('auth:getCookiesForCrawler'),
@@ -37,6 +45,8 @@ contextBridge.exposeInMainWorld('eeInfo', {
     fetchTrainingPlan: () => ipcRenderer.invoke('courseSelection:fetchTrainingPlan'),
     getData: () => ipcRenderer.invoke('courseSelection:getData'),
     setData: (data) => ipcRenderer.invoke('courseSelection:setData', data),
+    getDataPath: () => ipcRenderer.invoke('courseSelection:getDataPath'),
+    loadFromHtmlFile: () => ipcRenderer.invoke('courseSelection:loadFromHtmlFile'),
     onLog: (cb) => {
       const handler = (_, msg) => cb(msg);
       ipcRenderer.on('courseSelection:log', handler);
@@ -50,3 +60,4 @@ contextBridge.exposeInMainWorld('eeInfo', {
     saveMemory: (memories) => ipcRenderer.invoke('agent:saveMemory', memories)
   }
 });
+

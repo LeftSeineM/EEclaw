@@ -1,0 +1,75 @@
+{
+  "cookies": [
+    {
+      "name": "XSRF-TOKEN",
+      "value": "128bfcf8-c991-45d1-a33b-f063465c9410",
+      "domain": ".info.tsinghua.edu.cn",
+      "path": "/",
+      "expires": 1773024002
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "B93EB5BCFD6AB345E2D1C66F8B21FA45.info20211",
+      "domain": ".info.tsinghua.edu.cn",
+      "path": "/",
+      "expires": 1773105855
+    },
+    {
+      "name": "!Proxy!PHPSESSID",
+      "value": "bl0r3ugicbgi4ftbmthtq40ld2",
+      "domain": ".learn.tsinghua.edu.cn",
+      "path": "/",
+      "expires": 1773028219
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "636692B6CEEDFBC93C67D2DE20C056BA.wlxt20181",
+      "domain": ".learn.tsinghua.edu.cn",
+      "path": "/",
+      "expires": 1773105735
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "4E070D5D28D2D27696AEA97F5269A51A.wlxt20181",
+      "domain": "learn.tsinghua.edu.cn",
+      "path": "/",
+      "expires": null
+    },
+    {
+      "name": "XSRF-TOKEN",
+      "value": "e1d88681-fb80-48d3-a365-f081d7d76442",
+      "domain": "learn.tsinghua.edu.cn",
+      "path": "/",
+      "expires": 1772504589
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "224B7862795A93C1AE3006305DA86EB2.authweb2",
+      "domain": ".id.tsinghua.edu.cn",
+      "path": "/",
+      "expires": 1773105855
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "224B7862795A93C1AE3006305DA86EB2.authweb2",
+      "domain": "id.tsinghua.edu.cn",
+      "path": "/",
+      "expires": null
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "cdaMsw59EjS_vcqcFUSYz",
+      "domain": ".zhjw.cic.tsinghua.edu.cn",
+      "path": "/",
+      "expires": 1773029323
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "B93EB5BCFD6AB345E2D1C66F8B21FA45.info20211",
+      "domain": "info.tsinghua.edu.cn",
+      "path": "/",
+      "expires": null
+    }
+  ],
+  "updatedAt": 1772501060035
+}
