@@ -1,0 +1,145 @@
+/**
+  样式说明：
+  webfx-menu      － 菜单样式
+  webfx-menu a    － 菜单项样式
+  webfx-menu div  － 分隔符样式
+  webfx-menu-bar  － 菜单条样式
+  
+  ZhengWangLi 2004.4.2
+*/
+ 
+.webfx-menu, .webfx-menu * {
+  box-sizing:       content-box;
+  -moz-box-sizing:  content-box;
+}
+
+.webfx-menu {
+  position:     absolute;
+  z-index:      100;
+  visibility:   hidden;
+  width:        120px;  
+  border:       0px solid black;
+  padding:      1px;  
+  background:   E5EEF7;  
+  filter:       progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=4)
+  alpha(Opacity=90);
+  -moz-opacity: 0.9;
+}
+
+.webfx-menu-empty {
+  display:    block;
+  border:     1px solid white;
+  padding:    2px 5px 2px 5px;  
+  font-size:  12px;
+  font-family:Tahoma, Verdan, Helvetica, Sans-Serfif;  
+  color:      ffffff;
+}
+
+.webfx-menu a {
+  display:    block;
+  width:      expression(constExpression(ieBox ? "100%": "auto"));	/* should be ignored by mz and op */
+  height:     expression(constExpression("1px"));
+  overflow:   visible;	
+  padding:    2px 0px 2px 5px;  
+  font-size:  13px;
+  
+  font-family:      宋体,Tahoma, Verdan, Helvetica, Sans-Serfif;
+  text-decoration:  none;
+  vertical-align:   center;
+  
+  color:          5683CA;
+  border-top:     1px solid ffffff;
+  border-left:    0px solid ffffff;
+  border-right:   0px solid ffffff;
+  border-bottom:  0px solid ffffff;
+}	
+
+.webfx-menu a:visited,
+.webfx-menu a:visited:hover {
+  color:	5683CA;
+}
+
+.webfx-menu a:hover {
+  color:      e78300;
+  background: ffffff;
+  border-top:     1px solid ffffff;
+  border-left:    0px solid ffffff;
+  border-right:   0px solid ffffff;
+  border-bottom:  0px solid ffffff;
+}	
+
+.webfx-menu a .arrow {
+  float:    right;
+  border:   0;
+  width:    3px;
+  margin-right: 3px;
+  margin-top:   4px;
+}
+
+/* separtor */
+.webfx-menu div {
+  height:     0;
+  height:     expression(constExpression(ieBox ? "2px" : "0"));
+  border-top:     1px solid red;
+  border-bottom:  1px solid rgb(234,242,255);
+  overflow:       hidden;
+  margin:         2px 0px 2px 0px;
+  font-size:      0mm;
+}
+
+.webfx-menu-bar {
+  background:   5683CA;
+  padding:      2px;
+  heigh:        20px
+  font-family:  Verdana, Helvetica, Sans-Serif;
+  font-size:    13px;
+  
+  /* IE5.0 has the wierdest box model for inline elements */
+  padding:      expression(constExpression(ie50 ? "0px" : "2px"));
+}
+
+.webfx-menu-bar a,
+.webfx-menu-bar a:visited {
+  border-top:     0px solid ffffff;
+  border-left:    0px solid ffffff;
+  border-right:   1px solid ffffff;
+  border-bottom:  0px solid ffffff;
+  padding:        1px 10px 1px 10px;
+  
+  color:            ffffff;
+  text-decoration:  none;
+  
+  /* IE5.0 Does not paint borders and padding on inline elements without a height/width */
+  height:   expression(constExpression(ie50 ? "18px" : "auto"));
+  /*height:   19px;*/
+}
+
+.webfx-menu-bar a:hover {
+  
+  color:         e78300;  
+  background:    e7eff7;
+  border-top:    0px solid ffffff;
+  border-left:   0px solid ffffff;
+  border-right:  1px solid ffffff;
+  border-bottom: 0px solid ffffff;
+}
+
+.webfx-menu-bar a .arrow {
+  border:   0;
+  float:    none;
+}
+
+.webfx-menu-bar a:active, .webfx-menu-bar a:focus {
+  -moz-outline: none;
+  outline:      none;
+  /*
+  ie does not support outline but ie55 can hide the outline using
+  a proprietary property on HTMLElement. Did I say that IE sucks at CSS?
+  */
+  ie-dummy:   expression(this.hideFocus=true);
+  
+  border-top:     0px solid ffffff;
+  border-left:    0px solid ffffff;
+  border-right:   1px solid ffffff;
+  border-bottom:  0px solid ffffff;
+}

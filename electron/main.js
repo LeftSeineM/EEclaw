@@ -1,4 +1,4 @@
-﻿const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const auth = require('./auth');
 const crawler = require('./crawler');
@@ -72,6 +72,24 @@ function setupIpc() {
     }
   });
 
+  ipcMain.handle('auth:loginWithSavedCredentials', async (_, { forceWindow } = {}) => {
+    const credentials = auth.loadCredentials();
+    if (!credentials?.username || !credentials?.password) {
+      return { success: false, error: '未找到已保存凭据，请先手动登录并勾选保存凭据' };
+    }
+    const result = forceWindow
+      ? await auth.loginWithCredentials(mainWindow, credentials.username, credentials.password)
+      : await auth.loginWithCredentialsAsync(mainWindow, credentials.username, credentials.password);
+    if (!result.success) return result;
+    try {
+      const fetchResult = await crawler.fetchAll();
+      const data = fetchResult.success ? fetchResult.data : crawler.getCachedData();
+      return { success: true, data };
+    } catch (_) {
+      return { success: true, data: crawler.getCachedData() };
+    }
+  });
+
   ipcMain.handle('auth:hasCredentials', () => auth.hasCredentials());
   ipcMain.handle('auth:clearCredentials', () => auth.clearCredentials());
 
@@ -88,6 +106,12 @@ function setupIpc() {
   ipcMain.handle('auth:getCookiesForCrawler', () => {
     const header = auth.getCookieHeaderForCrawler();
     return { cookieHeader: header };
+  });
+
+  ipcMain.handle('app:restart', () => {
+    app.relaunch();
+    app.exit(0);
+    return { ok: true };
   });
 
   ipcMain.handle('crawler:fetch', async (_, semesterId) => crawler.fetchAll(semesterId));
@@ -159,8 +183,30 @@ function setupIpc() {
       try { event.sender.send('courseSelection:log', msg); } catch (_) {}
     };
     try {
-      return await courseSelectionCrawler.fetchTrainingPlanHTML({ onLog });
+      const result = await courseSelectionCrawler.fetchTrainingPlanHTML({ onLog });
+      // 抓取成功则直接返回
+      if (result && result.success && result.html) {
+        return result;
+      }
+      // 抓取失败时自动回退到本地 MHTML/HTML
+      const local = await courseSelectionCrawler.loadFromHtmlFile?.();
+      if (local && local.success && local.html) {
+        onLog('[后端] 抓取失败，已自动回退使用本地 MHTML 培养方案快照');
+        return local;
+      }
+      return {
+        success: false,
+        error: result?.error || local?.error || '抓取失败'
+      };
     } catch (e) {
+      const local = await courseSelectionCrawler.loadFromHtmlFile?.();
+      if (local && local.success && local.html) {
+        const onLog = (msg) => {
+          try { event.sender.send('courseSelection:log', msg); } catch (_) {}
+        };
+        onLog('[后端] 抓取异常，已自动回退使用本地 MHTML 培养方案快照');
+        return local;
+      }
       return { success: false, error: e?.message || '抓取失败' };
     }
   });
@@ -184,6 +230,9 @@ function setupIpc() {
   });
   ipcMain.handle('courseSelection:loadFromHtmlFile', async () => {
     return courseSelectionCrawler.loadFromHtmlFile?.() ?? { success: false, html: null, error: '未实现' };
+  });
+  ipcMain.handle('courseSelection:loadFromFullHtmlFile', async () => {
+    return courseSelectionCrawler.loadFromFullHtmlFile?.() ?? { success: false, html: null, error: '未实现' };
   });
 
   ipcMain.handle('storage:selectFolder', async () => {

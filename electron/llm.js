@@ -4,6 +4,22 @@
 
 const ZHIPU_BASE = 'https://open.bigmodel.cn/api/paas/v4';
 const OLLAMA_BASE = 'http://localhost:11434';
+const DEFAULT_TIMEOUT_MS = 120000;
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = DEFAULT_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } catch (e) {
+    if (e?.name === 'AbortError') {
+      throw new Error(`请求超时（>${Math.round(timeoutMs / 1000)}s）`);
+    }
+    throw e;
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 /** Ollama 本地 API，无需 API Key */
 async function chatWithOllama({ baseUrl, model, messages, think }) {
@@ -14,7 +30,7 @@ async function chatWithOllama({ baseUrl, model, messages, think }) {
   const body = { model: modelId, messages, stream: false };
   if (typeof think === 'boolean') body.think = think;
 
-  const res = await fetch(url, {
+  const res = await fetchWithTimeout(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
@@ -37,7 +53,7 @@ async function chatWithZhipu({ apiKey, baseUrl, model, messages }) {
   const url = (baseUrl || ZHIPU_BASE).replace(/\/$/, '') + '/chat/completions';
   const modelId = model || 'glm-4.7-flash';
 
-  const res = await fetch(url, {
+  const res = await fetchWithTimeout(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

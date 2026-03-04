@@ -6,13 +6,14 @@ const fs = require('fs');
 const path = require('path');
 
 const projectRoot = path.resolve(__dirname, '..');
-const projectDataDir = path.join(projectRoot, '..', 'data');
+const projectDataDir = path.join(projectRoot, 'data');
 
-// Electron userData 可能路径（dev 用 ee-info/Electron，打包后用 EE Info）
+// Electron userData 可能路径（dev 用 ee-info/Electron，打包后用 EE Info / EEclaw）
 const appData = process.env.APPDATA || path.join(process.env.USERPROFILE || '', 'AppData', 'Roaming');
 const userDataDirs = [
   path.join(appData, 'ee-info'),
   path.join(appData, 'EE Info'),
+  path.join(appData, 'EEclaw'),
   path.join(appData, 'Electron')
 ];
 
@@ -21,7 +22,13 @@ const DATA_FILES = [
   'ee-info-agent-memory.json',
   'learn-data.json',
   'auth-session.json',
-  'ee-info-config.json'
+  'auth-credentials.json',
+  'ee-info-config.json',
+  'course-selection-data.json',
+  'training-plan-last.html',
+  'training-plan-last.mhtml',
+  'training-plan-last.txt',
+  'training-plan-page-full.html'
 ];
 
 function rmFile(p) {
@@ -74,8 +81,8 @@ for (const userData of userDataDirs) {
   for (const f of DATA_FILES) {
     rmFile(path.join(userData, f));
   }
-  // 彻底清空 ee-info / EE Info 的 userData（登出、清空配置、会话、课表）
-  if (userData.includes('ee-info') || userData.includes('EE Info')) {
+  // 彻底清空 ee-info / EE Info / EEclaw 的 userData（登出、清空配置、会话、课表）
+  if (userData.includes('ee-info') || userData.includes('EE Info') || userData.includes('EEclaw')) {
     try {
       const files = fs.readdirSync(userData);
       for (const f of files) {

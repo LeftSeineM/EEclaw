@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import type { TrainingPlanReport } from '../types/courseSelection';
 
 const SETTINGS_KEY = 'ee-info-settings';
 const MAX_MEMORY_LENGTH = 3;
@@ -10,7 +11,7 @@ interface LearnDataContext {
   semester?: string;
 }
 
-function buildContextBlock(data: LearnDataContext | null): string {
+function buildLearnContextBlock(data: LearnDataContext | null): string {
   if (!data) return '（暂无课程数据，请先在 EE 工作台点击刷新抓取）';
   const parts: string[] = [];
   if (data.semester) parts.push(`当前学期：${data.semester}`);
@@ -37,10 +38,27 @@ function buildContextBlock(data: LearnDataContext | null): string {
   return parts.length ? parts.join('\n') : '（暂无数据）';
 }
 
-const BASE_SYSTEM = `你是 EE 智能体，帮助用户管理课程、作业和日程。你可以：
+function buildTrainingPlanContextBlock(report: TrainingPlanReport | null | undefined): string | null {
+  if (!report) return null;
+  const parts: string[] = [];
+  const s = report.summary;
+  parts.push(
+    `总学分要求：${s.totalRequired}，已完成：${s.totalCompleted}，剩余：${s.totalRemaining}，完成率：${s.completionRate}%`
+  );
+  const groups = report.incompleteGroups || [];
+  if (groups.length) {
+    parts.push('\n【未完成课组示例】');
+    groups.slice(0, 5).forEach((g) => {
+      parts.push(`- ${g.groupName}（剩余 ${g.remainingCredits} 学分，需完成课程约 ${g.remainingCourses} 门）`);
+    });
+  }
+  return parts.join('\n');
+}
+
+const BASE_SYSTEM = `你是 EE 智能体，帮助用户管理课程、作业、日程与培养方案规划。你可以：
 - 根据下方提供的课程、通知、作业信息回答用户问题
-- 帮助规划学习与作业时间
-- 提供学习建议与复习思路
+- 结合培养方案完成情况，给出选课与补修建议
+- 帮助规划学习与作业时间，提供学习建议与复习思路
 请简洁、友好地回复，基于实际数据作答。`;
 
 interface Message {
@@ -98,6 +116,7 @@ const LearningAgentPanel: React.FC<LearningAgentPanelProps> = ({ learnData: lear
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [trainingPlanContext, setTrainingPlanContext] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
   const currentSession = sessions.find((s) => s.id === currentSessionId);
@@ -131,6 +150,21 @@ const LearningAgentPanel: React.FC<LearningAgentPanelProps> = ({ learnData: lear
       setSessions(s);
       setMemory(m);
       setCurrentSessionId(s.length ? s[s.length - 1].id : null);
+    })();
+  }, []);
+
+  // 加载培养方案分析结果，供对话上下文使用
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await window.eeInfo?.courseSelection?.getData?.();
+        const report = (data as { trainingPlan?: { report?: TrainingPlanReport } } | null | undefined)?.trainingPlan
+          ?.report;
+        const ctx = buildTrainingPlanContextBlock(report || null);
+        if (ctx) setTrainingPlanContext(ctx);
+      } catch {
+        // 静默失败，不影响正常对话
+      }
     })();
   }, []);
 
@@ -225,8 +259,11 @@ const LearningAgentPanel: React.FC<LearningAgentPanelProps> = ({ learnData: lear
     }
     setLoading(true);
 
-    const contextBlock = buildContextBlock(learnDataProp ?? null);
-    let systemContent = `${BASE_SYSTEM}\n\n【用户当前的课程与作业数据】\n${contextBlock}`;
+    const learnContext = buildLearnContextBlock(learnDataProp ?? null);
+    let systemContent = `${BASE_SYSTEM}\n\n【用户当前的课程与作业数据】\n${learnContext}`;
+    if (trainingPlanContext) {
+      systemContent += `\n\n【用户培养方案与已修学分】\n${trainingPlanContext}`;
+    }
     if (memory.length > 0) {
       systemContent += `\n\n【历史对话记忆】\n${memory.map((m, i) => `${i + 1}. ${m}`).join('\n')}`;
     }

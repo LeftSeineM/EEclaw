@@ -1,0 +1,714 @@
+TR.loginBannerTopTR {
+  background-color: #5783CA;	
+}
+TR.loginBannerMiddleTR {
+  background-color: #99B8E7;	
+  text-align:left;
+}
+TR.loginBannerBottomTR {
+  background-color: #5783CA;	
+}
+TD.loginTitleTD {
+  border-top-width: 1px;
+	border-top-color: #cccccc;
+	border-right-width: 1px;
+	border-right-color: #cccccc;
+	border-bottom-width: 1px;	
+	border-bottom-style: solid;	
+	border-bottom-color: #cccccc;
+	border-left-width: 1px;	
+	border-left-color: #cccccc;
+	font-family: "宋体";
+	font-size: 16px;
+	font-weight:bold;
+	color: #E58200;	
+	vertical-align: bottom;	
+}
+.loginFont {
+  font-family: "宋体";
+	font-size: 13px;
+	color: #8c8c8c;
+}
+.loginInputText {
+  font-size: 9pt;
+	font-family: "宋体";	
+	vertical-align: middle;	
+	border: 1px solid #cccccc;
+	width: 180px;	
+	height: 20px;
+}
+
+.txt-warning {
+	font-family: "宋体";
+	font-size: 16px;
+	color: #d40000;
+	font-weight: bold;
+	text-align: center;
+}
+
+TABLE.topBannerTable {    
+  width: 100%;  
+  background-color: #5683CA;	
+}
+
+TR.topBannerTR {
+  background-color:#cccccc;
+}
+
+TD.topBannerTD {
+  font-family: "宋体";
+	font-size: 16px;	
+	text-decoration: none;
+	font-weight: normal;
+	text-indent: 10pt;		
+	TEXT-ALIGN: right;
+	vertical-align:bottom;	
+}
+
+TD.topBannerBottomTD {  
+  font-family: "宋体";
+	font-size: 12px;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #5783CA;
+	background-color: #DFEAFA;
+}
+
+body.infoBody{
+	font-family: "宋体";
+	SCROLLBAR-FACE-COLOR: #DFEAFA;
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	SCROLLBAR-SHADOW-COLOR: #9AB8E7;
+	SCROLLBAR-3DLIGHT-COLOR: #9AB8E7;
+	SCROLLBAR-ARROW-COLOR: #9AB8E7;
+	SCROLLBAR-TRACK-COLOR: #eeeeee;
+	SCROLLBAR-DARKSHADOW-COLOR: #FCFCFC;
+	SCROLLBAR-BASE-COLOR: #ffffff;
+	margin-left: 2px;
+	margin-top: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;	
+}
+body.editBody{
+	font-family: "宋体";
+	SCROLLBAR-FACE-COLOR: #DFEAFA;
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	SCROLLBAR-SHADOW-COLOR: #9AB8E7;
+	SCROLLBAR-3DLIGHT-COLOR: #9AB8E7;
+	SCROLLBAR-ARROW-COLOR: #9AB8E7;
+	SCROLLBAR-TRACK-COLOR: #eeeeee;
+	SCROLLBAR-DARKSHADOW-COLOR: #FCFCFC;
+	SCROLLBAR-BASE-COLOR: #ffffff;
+	margin-left: 2px;
+	margin-top: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+  background-color: #F2F5FA;	
+}
+
+
+Table.infoTopSearch {
+	font-size: 9pt;
+	font-weight: normal;
+	color: #442350;
+	width: 100%;
+	height: 25px;
+	border-top: #ffffff 1px solid; 
+	border-bottom: #b595f4 1px solid;
+	filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#f7efff', endColorStr='#FFFFFF', gradientType='1');
+	padding:5px 0  5px 0;
+}
+
+Table.infoTopSearch_noline {
+	font-size: 9pt;
+	font-weight: normal;
+	color: #442350;
+  width: 100%;
+  height: 30;
+  border-top: #ffffff 1px solid; 
+  filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#faeaff', endColorStr='#FFFFFF', gradientType='1')
+}
+
+TD.infoTopSearchTD {    
+  font-family: "宋体";
+	font-size: 13px;
+	color: #ffffff;
+	text-decoration: none;	
+	text-indent: 2pt;		
+	height:25;
+  width:"100%";
+	TEXT-ALIGN: left;
+	vertical-align:middle;	
+}
+
+.infoTopFont {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #ffffff;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+.infoTopSelect{	
+  font-size: 9pt;
+  font-family: "宋体";
+  height: 18px; 
+	border: 1px solid #cccccc;
+}
+
+.infoTopSeachInput{	
+  font-family: "宋体";
+  background-color: #F2F5FA;
+  width:45px;
+  height:18px;
+  border: 1px solid #ff9600;
+  color: #05979c;
+  font-size:13px;
+}
+
+Table.infoTopFunction {
+	background-color: #ffffff;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ffffff;	
+  width: 100%;
+}
+
+Table.editTopFunction {
+	background-color: #F2F5FA;
+	border-bottom-width: 0px;
+	border-bottom-style: solid;
+	border-bottom-color: #ffffff;	
+  width: 100%;
+}
+
+TD.messageTD {    
+  width: 100%;
+  height:23px;
+  font-family: "宋体";
+	font-size: 13px;
+	color:#e78300;
+  border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #B3B3B3;
+	vertical-align: middle;	
+}
+
+TD.infoTopFunctionTD {  
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #5683CA;
+	text-decoration: none;	
+    width:"100%";  		
+	TEXT-ALIGN: right;
+	vertical-align: middle;
+}
+
+TD.editTopFunctionTD {  
+  font-family: "宋体";
+	font-size: 9pt;
+	color: #5683CA;
+	font-weight:bold;
+	background-color: #F2F5FA;
+	text-decoration: none;	
+	text-indent: 2pt;	
+	height:25;
+  width:"100%";  		
+	TEXT-ALIGN: right;
+	vertical-align: middle;
+}
+
+.infoTopButton {
+  BORDER-TOP: #c8c4bb 1px solid; BORDER-BOTTOM: #aba498 1px solid; BORDER-LEFT: #c8c4bb 1px solid; BORDER-RIGHT: #aba498 1px solid; PADDING-TOP: 2px; BACKGROUND: url(../img/input/bg_input_btn.png) #f4fbe1; VERTICAL-ALIGN: middle; COLOR: #584464; TEXT-DECORATION: none; cursor:hand; font-size: 9pt;
+}
+
+.infoTopButton:hover {
+  BORDER-TOP: #a800cc 1px solid; BORDER-BOTTOM: #7c00aa 1px solid; BORDER-LEFT: #a800cc 1px solid; BORDER-RIGHT: #7c00aa 1px solid; BACKGROUND: url(../img/input/bg_input_btn_hover.png) #f2dffa; COLOR: #460055; cursor:hand;
+}
+
+.NoLengthInput {
+	background-color: #fff5e8;
+	border: 1px solid #ff9600;
+	color: #e78300;	
+	filter: DropShadow(Color=ff0000, OffX=5, OffY=5, Positive=5);
+	height: 18px;	
+	vertical-align: middle;
+}
+
+TD.TreeDisTD  {		
+	border-right-width: 2px;
+	border-right-style: solid;
+	border-right-color: #cccccc;		
+}
+
+Table.infoDisplay {
+	background-color: #FFFFFF;
+	background-image:
+}
+
+TR.infoCaptionTR {
+  font-family: "宋体";
+	font-size: 13px;
+	color: #4C89C8;
+	text-decoration: none;
+	font-weight: bold;
+	text-indent: 2pt;		
+	text-align: left;
+	vertical-align:middle;	
+}
+
+
+Table.infoDisTable {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;
+	line-height: 16px;
+	cellspacing: 1px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #cccccc;
+	text-align: left;
+}
+
+TR.infoDisTopTR {
+  font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;	
+	background-color: #e8e8e8;	
+	text-indent: 6pt;	
+	height: 25px;
+	TEXT-ALIGN: center;
+	vertical-align:middle;	
+}
+
+TD.infoDisTopTD  {		
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #d7d7d7;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #d7d7d7;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #d7d7d7;	
+	height: 25px;
+	text-align: center;
+	vertical-align:middle;	
+}
+
+
+TR.infoDisTR  {		
+  height: 22px;		
+}
+
+TR.infoDisTR_Selected  {		
+  height: 22px;		
+	background-color: #f6f6f6;
+}
+
+
+TD.infoDisTD  {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;	
+	text-indent: 6pt;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #cccccc;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #cccccc;
+	height: 22px;		
+	text-align: left;
+	vertical-align:middle;			
+}
+
+/*单元格左边无线条*/
+TD.infoDisTDH  {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;	
+	text-indent: 6pt;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #cccccc;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #cccccc;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #cccccc;	
+}
+
+/*单元格右边有线条*/
+TD.infoDisTDR  {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;	
+	text-indent: 6pt;	
+}
+
+TD.infoDisNumTD  {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;	
+	text-indent: 6pt;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #cccccc;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #cccccc;	
+	height: 22px;		
+	width:10%;
+	TEXT-ALIGN: right;
+	vertical-align:middle;	
+}
+
+.infoDisInput {
+	border: ;
+	height: ;
+	width: ;
+	text-align: center;	
+}
+
+TR.infoDisBottomTR {
+ font-family: "宋体";
+ font-size: 12px;
+ color: #976498;
+ text-decoration: none;
+ text-align: right;
+ background-color: #F5F5F5; 
+ height: 30px;
+ border: #cccccc 1px solid; 
+}
+
+.infoDisBottomInput{
+	width: 20px;
+	height: 18;
+	border: 1px solid #cccccc;
+}
+
+.infoDisBottomButton {
+	BORDER-TOP: #c8c4bb 1px solid; BORDER-BOTTOM: #aba498 1px solid; BORDER-LEFT: #c8c4bb 1px solid; BORDER-RIGHT: #aba498 1px solid; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND: url(../img/input/bg_input_btn.png) #f4fbe1; VERTICAL-ALIGN: middle; COLOR: #584464; TEXT-DECORATION: none; cursor:hand;
+}
+
+.infoDisBottomButton:hover {
+	BORDER-TOP: #a800cc 1px solid; BORDER-BOTTOM: #7c00aa 1px solid; BORDER-LEFT: #a800cc 1px solid; BORDER-RIGHT: #7c00aa 1px solid; BACKGROUND: url(../img/input/bg_input_btn_hover.png) #f2dffa; COLOR: #460055; cursor:hand;
+}
+
+
+.table_title_blue25 { BORDER: 1px solid #6DA0D5; BACKGROUND: url(../img/button/bg_btn_bg_blue_25.png); height: 25px; }
+
+
+Table.editDisplay {
+	background-color: #F2F5FA;
+}
+
+Table.editCaption {
+	border-bottom-width: 0px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+	background-color: #F2F5FA;
+}
+
+TD.editCaptionTD {  
+}
+
+.editCaptionTitle {
+	font-family: "宋体";
+	font-size: 18px;
+	color: #4C89C8;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;	
+}
+
+Table.editTableBorder {
+	border: 1px solid #cccccc;
+	margin-top: 2px;
+}
+
+
+TABLE.editFromTable {	
+  width: 100%;
+}
+
+TABLE.editMoneyTable {	
+  width: 700px;
+}
+
+TD.editMoneyTD {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;	
+	background-color: #E5EEF7;	
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;		
+	height: 25px;	
+	width:10%;
+	TEXT-ALIGN: center;
+	vertical-align: middle;
+}
+
+TABLE.editMainTable {	
+  width: 700px;
+}
+
+TD.editMainConstLabelTD {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;	
+	background-color: #E5EEF7;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	text-indent: 6pt;	
+	background-position: center;	
+	width:15%;
+	height: 25px;	
+	TEXT-ALIGN: right;
+	vertical-align: middle;
+}
+
+TD.editMainConstTDBlue {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;	
+	background-color: #E5EEF7;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	text-indent: 6pt;	
+	background-position: center;
+	width:35%;
+	height: 25px;	
+	TEXT-ALIGN: left;
+	vertical-align: middle;	
+}
+
+TD.editMainConstTD {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;	
+	background-color: #FFFFD6;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	text-indent: 6pt;	
+	background-position: center;
+	width:35%;
+	height: 25px;	
+	TEXT-ALIGN: left;
+	vertical-align: middle;	
+}
+
+TD.editMainLabelTD {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;	
+	background-color: #DFDFDF;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	text-indent: 6pt;	
+	background-position: center;	
+	width:15%;
+	height: 25px;	
+	TEXT-ALIGN: right;
+	vertical-align: middle;
+}
+
+TD.editMainTD {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;	
+	background-color: #F2F2F2;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	text-indent: 6pt;	
+	background-position: center;	
+	width:50%;
+	height: 25px;	
+	TEXT-ALIGN: left;
+	vertical-align: middle;
+}
+
+TD.editMainBottomTD {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;
+	background-color: #e9e7e0;
+	border-top: #cdcdcd 1px solid;
+	border-bottom: #999999 1px solid;
+	border-left: none;
+	border-right: none;
+	text-indent: 6pt;	
+	background-position: center;	
+	height: 30px;	
+	TEXT-ALIGN: center;
+	vertical-align: middle;
+}
+
+
+.editMainText{	
+  BORDER-TOP: #c0bbb4 1px solid; BORDER-BOTTOM: #c0bbb4 1px solid; BORDER-LEFT: #c0bbb4 1px solid; BORDER-RIGHT: #c0bbb4 1px solid; PADDING-TOP: 2px; PADDING-BOTTOM: 2px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BACKGROUND: url(../img/input/bg_input_text.png) white repeat-x left top; VERTICAL-ALIGN: middle;	
+}
+
+.editMainText:hover{	
+  BORDER-TOP: #b70cdc 1px solid; BORDER-BOTTOM: #a800cc 1px solid; BORDER-LEFT: #b70cdc 1px solid; BORDER-RIGHT: #a800cc 1px solid; BACKGROUND: url(../img/input/bg_input_text_hover.png) white repeat-x left top;	
+}
+
+.editMainSelect{
+  font-size: 9pt;
+  font-family: "宋体";
+	width: 130px;
+	border: 1px solid #cccccc;
+	vertical-align: middle;	
+}
+.editMainNoWidthSelect{	
+  font-size: 9pt;
+  font-family: "宋体";
+	border: 1px solid #cccccc;
+	vertical-align: middle;	
+}
+
+.editMainChxRadio{
+  font-size: 9pt;
+  font-family: "宋体";
+	vertical-align: middle;
+}
+
+.editMainTextarea{
+  font-size: 9pt;
+	font-family: "宋体";
+	width: 200px;
+	border: 1px solid #cccccc;
+	height: 50px;
+	vertical-align: middle;
+	SCROLLBAR-FACE-COLOR: #ffffff;
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	SCROLLBAR-SHADOW-COLOR: #ffffff;
+	SCROLLBAR-3DLIGHT-COLOR: #bcbcbc;
+	SCROLLBAR-ARROW-COLOR: #bcbcbc;
+	SCROLLBAR-TRACK-COLOR: #eeeeee;
+	SCROLLBAR-DARKSHADOW-COLOR: #bcbcbc;
+	SCROLLBAR-BASE-COLOR: #ffffff;
+}
+.editNoSizeTextarea{	
+  font-size: 9pt;
+	font-family: "宋体";
+	border: 1px solid #cccccc;	
+	vertical-align: middle;
+	SCROLLBAR-FACE-COLOR: #ffffff;
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	SCROLLBAR-SHADOW-COLOR: #ffffff;
+	SCROLLBAR-3DLIGHT-COLOR: #bcbcbc;
+	SCROLLBAR-ARROW-COLOR: #bcbcbc;
+	SCROLLBAR-TRACK-COLOR: #eeeeee;
+	SCROLLBAR-DARKSHADOW-COLOR: #bcbcbc;
+	SCROLLBAR-BASE-COLOR: #ffffff;
+}
+
+.editMainButton {
+	font-size: 8pt;
+	font-family: "宋体";
+	font-weight: bold;
+	background-color: #ffffff;
+	border: 1px solid #97BEDF;
+	width:20px;
+	height:18px;
+	color: #97BEDF;	
+	vertical-align: middle;
+}
+
+.editBottomButton {
+  BORDER-TOP: #c8c4bb 1px solid; BORDER-BOTTOM: #aba498 1px solid; BORDER-LEFT: #c8c4bb 1px solid; BORDER-RIGHT: #aba498 1px solid; PADDING-TOP: 2px; BACKGROUND: url(../img/input/bg_input_btn.png) #f4fbe1; VERTICAL-ALIGN: middle; COLOR: #584464; TEXT-DECORATION: none; cursor:hand; font-size: 9pt;
+}
+
+.editBottomButton:hover {
+  BORDER-TOP: #a800cc 1px solid; BORDER-BOTTOM: #7c00aa 1px solid; BORDER-LEFT: #a800cc 1px solid; BORDER-RIGHT: #7c00aa 1px solid; BACKGROUND: url(../img/input/bg_input_btn_hover.png) #f2dffa; COLOR: #460055; cursor:hand;
+}
+
+TABLE.rightDisplay {	
+}
+TR.rightTR {
+  font-family: "宋体";
+	font-size: 13px;
+	color: #ffffff;
+	text-shadow:#666666;
+	text-decoration: none;
+	font-weight: normal;
+	text-indent: 2pt;		
+	background-color: #b2c8ec;		
+}
+
+TD.rightTD { 
+	background-color: #5E96D1;
+	font-family: "新宋体", "宋体", "黑体";
+	text-decoration: none;
+}
+
+a.mainHref:hover {
+	color: #FF0000;
+	font-family: "宋体";
+	font-size: 12px;
+	text-decoration: underline;
+}
+a.mainHref:link {
+	color: #003993;
+	font-family: "宋体";
+	font-size: 12px;
+	text-decoration: none;
+}
+a.mainHref:visited {
+	color: #003993;
+	font-family: "宋体";
+	font-size: 12px;
+	text-decoration: none;
+}
+a.mainHref:visited:hover {
+	color: #FF0000;
+	font-family: "宋体";
+	font-size: 12px;
+	text-decoration: none;
+}
+
+

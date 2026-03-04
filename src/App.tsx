@@ -282,15 +282,26 @@ const App: React.FC = () => {
             {loggedIn ? '已登录' : '登录'}
           </button>
           {loggedIn && (
-            <button
-              onClick={async () => {
-                await window.eeInfo?.auth?.logout?.();
-                setLoggedIn(false);
-              }}
-              className="w-full rounded-md border border-slate-700 py-1.5 text-[10px] text-slate-400 hover:bg-slate-800 hover:text-slate-300"
-            >
-              退出登录
-            </button>
+            <div className="w-full flex items-center gap-2">
+              <button
+                onClick={async () => {
+                  await window.eeInfo?.auth?.logout?.();
+                  setLoggedIn(false);
+                }}
+                className="flex-1 rounded-md border border-slate-700 py-1.5 text-[10px] text-slate-400 hover:bg-slate-800 hover:text-slate-300"
+              >
+                退出登录
+              </button>
+              <button
+                onClick={async () => {
+                  await window.eeInfo?.app?.restart?.();
+                }}
+                className="flex-1 rounded-md border border-emerald-700/70 py-1.5 text-[10px] text-emerald-300 hover:bg-emerald-900/30"
+                title="重启应用以应用最新更新"
+              >
+                重启应用
+              </button>
+            </div>
           )}
         </div>
       </aside>

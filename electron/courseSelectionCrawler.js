@@ -1,19 +1,29 @@
  /**
  * 培养方案抓取模块
- * 流程：加载 info 建立会话 → 打开应用搜索页 → 点击「培养方案完成情况」→ 提取 HTML
+ * 优先尝试：learn getzhjwTicket → 纯 HTTP 请求 zhjw 培养方案
+ * 失败则回退：BrowserWindow 加载 info → 搜索 → 点击进入
  *
  * 应用搜索 URL 格式（可复用）：
  *   https://info.tsinghua.edu.cn/f/info/portal_fg/common/yyfwsearch?searchParam=<编码后的关键词>
  */
 
 const { BrowserWindow } = require('electron');
+const https = require('https');
+const http = require('http');
 const path = require('path');
 const fs = require('fs');
+const iconv = require('iconv-lite');
+const { URL } = require('url');
 const auth = require('./auth');
 const casLogin = require('./casLogin');
 const storageConfig = require('./storageConfig');
 
 const INFO_BASE = 'https://info.tsinghua.edu.cn';
+const LEARN_BASE = 'https://learn.tsinghua.edu.cn';
+const ZHJW_BASE = 'https://zhjw.cic.tsinghua.edu.cn';
+const ZHJW_BASE_HTTP = 'http://zhjw.cic.tsinghua.edu.cn';
+
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 
 /** 构建 info 应用搜索 URL，searchParam 为要搜索的关键词（会自动编码） */
 function getInfoSearchUrl(keyword) {
@@ -25,13 +35,257 @@ function getSession() {
 }
 
 /**
+ * 方案 A：通过 learn 的 getzhjwTicket 接口，纯 HTTP 获取培养方案 HTML
+ * 无需 BrowserWindow，仅需 learn 登录态
+ * @param {{ onLog?: (msg: string) => void }} opts
+ * @returns {Promise<{ success: boolean, html?: string, error?: string }>}
+ */
+async function fetchTrainingPlanByTicket(opts = {}) {
+  const { onLog = () => {} } = opts;
+  const log = (msg) => { onLog(`[Ticket] [${new Date().toLocaleTimeString()}] ${msg}`); };
+
+  log('========== 开始 learn ticket 纯 HTTP 流程 ==========');
+
+  // 步骤 1：检查 learn 登录态
+  if (!auth.hasValidLearnSession()) {
+    log('❌ 无 learn 会话，请先在主界面登录网络学堂');
+    return { success: false, error: '无 learn 会话，请先登录网络学堂' };
+  }
+  log('✓ 已有 learn 会话');
+
+  const cookieHeader = auth.getCookieHeaderForCrawler();
+  if (!cookieHeader) {
+    log('❌ 无法获取 Cookie 头');
+    return { success: false, error: '无法获取 Cookie' };
+  }
+  log('✓ 已获取 Cookie 头（长度 ' + cookieHeader.length + '）');
+
+  const xsrf = auth.getXsrfToken?.();
+  if (!xsrf) {
+    log('⚠️ 无 XSRF-TOKEN，尝试请求 getzhjwTicket（部分接口可能不强制 XSRF）');
+  } else {
+    log('✓ 已获取 XSRF-TOKEN（长度 ' + xsrf.length + '）');
+  }
+
+  // 步骤 2：请求 learn getzhjwTicket
+  const ticketUrl = `${LEARN_BASE}/b/wlxt/common/auth/getzhjwTicket${xsrf ? '?_csrf=' + encodeURIComponent(xsrf) : ''}`;
+  log('步骤 2: 请求 getzhjwTicket');
+  log('  URL: ' + ticketUrl);
+
+  const ticket = await new Promise((resolve, reject) => {
+    const u = new URL(ticketUrl);
+    const req = https.request(
+      {
+        hostname: u.hostname,
+        path: u.pathname + u.search,
+        method: 'GET',
+        headers: {
+          'User-Agent': UA,
+          Cookie: cookieHeader,
+          'X-Requested-With': 'XMLHttpRequest',
+          Referer: LEARN_BASE + '/',
+          Accept: '*/*'
+        }
+      },
+      (res) => {
+        let body = '';
+        res.on('data', (c) => (body += c));
+        res.on('end', () => {
+          log('  getzhjwTicket 响应: status=' + res.statusCode + ', body长度=' + body.length);
+          if (res.statusCode === 401 || res.statusCode === 403) {
+            log('❌ getzhjwTicket 返回 ' + res.statusCode + '，可能未登录或会话过期');
+            reject(new Error('getzhjwTicket 认证失败: ' + res.statusCode));
+            return;
+          }
+          if (res.statusCode === 302 && res.headers.location?.includes('/f/login')) {
+            log('❌ 被重定向到登录页，learn 会话已过期');
+            reject(new Error('learn 会话已过期'));
+            return;
+          }
+          const trimmed = (body || '').trim();
+          if (!trimmed) {
+            log('❌ getzhjwTicket 返回空 body');
+            reject(new Error('getzhjwTicket 返回空'));
+            return;
+          }
+          if (trimmed.length > 500) {
+            log('⚠️ ticket 异常偏长，可能返回了 HTML 错误页');
+            if (trimmed.includes('<html') || trimmed.includes('<!DOCTYPE')) {
+              log('  确认为 HTML 页面，非 ticket');
+              reject(new Error('getzhjwTicket 返回 HTML 而非 ticket'));
+              return;
+            }
+          }
+          const cleaned = trimmed.replace(/^["']|["']$/g, '');
+          if (cleaned !== trimmed) {
+            log('  已去除 ticket 首尾引号');
+          }
+          log('✓ 获取到 ticket（长度 ' + cleaned.length + '）');
+          resolve(cleaned);
+        });
+      }
+    );
+    req.on('error', (e) => {
+      log('❌ getzhjwTicket 请求异常: ' + (e?.message || e));
+      reject(e);
+    });
+    req.end();
+  }).catch((e) => {
+    log('❌ getzhjwTicket 失败: ' + (e?.message || String(e)));
+    return null;
+  });
+
+  if (!ticket) {
+    return { success: false, error: '获取 zhjw ticket 失败' };
+  }
+
+  // 步骤 3：用 ticket 请求 zhjw 培养方案（参考 course-helper URL 格式）
+  const targetPath = `/jhBks.by_fascjgmxb_gr.do?m=queryFaScjgmx_gr&xsViewFlag=pyfa&pathContent=培养方案完成情况`;
+  const zhjwLoginUrl = `${ZHJW_BASE_HTTP}/j_acegi_login.do?ticket=${encodeURIComponent(ticket)}&url=${encodeURIComponent(targetPath)}`;
+  log('步骤 3: 用 ticket 访问 zhjw 培养方案');
+  log('  URL: ' + zhjwLoginUrl.slice(0, 120) + '…');
+
+  const html = await fetchWithRedirects(zhjwLoginUrl, cookieHeader, log);
+  if (!html) {
+    return { success: false, error: '访问 zhjw 培养方案失败' };
+  }
+
+  // 步骤 4：验证内容
+  const hasTable = html.includes('<table') || html.includes('<TABLE');
+  const hasKeyword = html.includes('课组') || html.includes('课程属性') || html.includes('培养方案');
+  log('步骤 4: 内容验证');
+  log('  包含 table: ' + hasTable + ', 包含关键词: ' + hasKeyword + ', HTML 长度: ' + html.length);
+
+  if (html.includes('请登录') || html.includes('会话已过期') || html.includes('未登录')) {
+    log('❌ 页面提示需登录，ticket 可能无效或已过期');
+    return { success: false, error: 'zhjw 返回登录页，ticket 可能无效' };
+  }
+  if (html.includes('认证失败') || html.includes('sso_fail')) {
+    log('❌ 页面为 SSO 认证失败页，ticket 无效');
+    return { success: false, error: 'zhjw 认证失败，ticket 无效' };
+  }
+  if (hasTable && !hasKeyword && html.length < 2000) {
+    log('❌ 内容过短且无培养方案关键词，疑似错误页');
+    return { success: false, error: '返回内容疑似错误页，非培养方案' };
+  }
+
+  if (!hasTable || !hasKeyword) {
+    log('⚠️ 内容可能不完整，但先返回供调试');
+  } else {
+    log('✓ 内容验证通过');
+  }
+
+  log('========== learn ticket 流程成功 ==========');
+  return { success: true, html };
+}
+
+/**
+ * 带重定向跟随的 HTTP/HTTPS 请求，返回最终 HTML
+ */
+function fetchWithRedirects(url, initialCookie, log, maxRedirects = 10) {
+  return new Promise((resolve) => {
+    let currentUrl = url;
+    let cookieHeader = initialCookie || '';
+    let redirectCount = 0;
+
+    function doRequest(targetUrl) {
+      const u = new URL(targetUrl);
+      const isHttps = u.protocol === 'https:';
+      const lib = isHttps ? https : http;
+      const req = lib.request(
+        {
+          hostname: u.hostname,
+          path: u.pathname + u.search,
+          method: 'GET',
+          headers: {
+            'User-Agent': UA,
+            Cookie: cookieHeader,
+            Accept: 'text/html,application/xhtml+xml,*/*;q=0.9'
+          }
+        },
+        (res) => {
+          const loc = res.headers.location;
+          const setCookies = res.headers['set-cookie'];
+
+          if (setCookies) {
+            const parts = (Array.isArray(setCookies) ? setCookies : [setCookies])
+              .map((s) => s.split(';')[0].trim())
+              .filter(Boolean);
+            if (parts.length) {
+              const extra = parts.join('; ');
+              cookieHeader = cookieHeader ? cookieHeader + '; ' + extra : extra;
+              log('  收到 Set-Cookie，已合并到后续请求');
+            }
+          }
+
+          if ((res.statusCode === 301 || res.statusCode === 302) && loc && redirectCount < maxRedirects) {
+            redirectCount++;
+            const next = loc.startsWith('http') ? loc : new URL(loc, targetUrl).href;
+            log('  跟随重定向 #' + redirectCount + ': ' + next.slice(0, 80) + '…');
+            if (next.includes('sso_fail')) {
+              log('❌ 重定向到 SSO 失败页，ticket 无效');
+              resolve(null);
+              return;
+            }
+            doRequest(next);
+            return;
+          }
+
+          let body = '';
+          res.on('data', (c) => (body += c));
+          res.on('end', () => {
+            log('  最终响应: status=' + res.statusCode + ', body长度=' + body.length);
+            if (res.statusCode >= 400) {
+              log('❌ HTTP ' + res.statusCode);
+              resolve(null);
+              return;
+            }
+            resolve(body);
+          });
+        }
+      );
+      req.on('error', (e) => {
+        log('❌ 请求异常: ' + (e?.message || e));
+        resolve(null);
+      });
+      req.end();
+    }
+
+    doRequest(currentUrl);
+  });
+}
+
+/**
  * 抓取培养方案 HTML
- * 流程：加载 info 建立会话 → 直接导航到培养方案 URL → 点击刷新 → 提取 HTML
+ * 优先：learn getzhjwTicket 纯 HTTP 流程
+ * 失败则回退：BrowserWindow + info 流程
  * @param {{ onLog?: (msg: string) => void }} opts
  */
 async function fetchTrainingPlanHTML(opts = {}) {
   const { onLog = () => {} } = opts;
   const log = (msg) => { onLog(`[${new Date().toLocaleTimeString()}] ${msg}`); };
+
+  // ========== 方案 A：优先尝试 learn ticket 纯 HTTP ==========
+  if (auth.hasValidLearnSession()) {
+    log('检测到 learn 会话，优先尝试 getzhjwTicket 纯 HTTP 流程…');
+    const ticketResult = await fetchTrainingPlanByTicket(opts);
+    if (ticketResult.success && ticketResult.html) {
+      log('✓ 纯 HTTP 流程成功，无需打开浏览器');
+      try {
+        const htmlPath = path.join(storageConfig.getDataBasePath(), 'training-plan-last.html');
+        fs.writeFileSync(htmlPath, ticketResult.html, 'utf8');
+        log('已保存原始 HTML 到: ' + htmlPath);
+      } catch (_) {}
+      return { success: true, html: ticketResult.html, error: null };
+    }
+    log('⚠️ 纯 HTTP 流程失败，回退到 BrowserWindow 流程');
+    log('  失败原因: ' + (ticketResult.error || '未知'));
+  } else {
+    log('无 learn 会话，跳过 ticket 流程，直接使用 BrowserWindow');
+  }
+
+  // ========== 方案 B：BrowserWindow + info 流程 ==========
+  log('========== 开始 BrowserWindow 流程 ==========');
 
   const sess = getSession();
   // 若无 info 会话且无保存凭据，需先登录并勾选「保存凭据」
@@ -572,42 +826,215 @@ async function tryExtractWithRefresh(win, finish, log = () => {}) {
     `);
 
     if (hasRefresh) {
-      log('  点击「刷新培养方案完成情况」按钮，等待 2.5 秒…');
-      await new Promise((r) => setTimeout(r, 2500));
+      log('  点击「刷新培养方案完成情况」按钮，等待 5 秒让表格加载…');
+      await new Promise((r) => setTimeout(r, 5000));
     }
-
-    const result = await win.webContents.executeJavaScript(`
+    // 某些页面先落在壳层，需要手动触发 frm 提交到 scBksPyfa 才会出真实表格
+    const submitTriggered = await win.webContents.executeJavaScript(`
       (function() {
-        var body = document.body ? document.body.textContent : '';
-        if (body.includes('请登录') || body.includes('会话已过期') || body.includes('未登录')) {
-          return { ok: false, reason: 'login_required' };
-        }
-        if (!document.querySelector('table') || !body.includes('课程属性')) {
-          return { ok: false, reason: 'no_table' };
-        }
-        return { ok: true, html: document.documentElement.outerHTML };
+        try {
+          if (document && document.frm && document.frm.m) {
+            document.frm.m.value = 'scBksPyfa';
+            if (document.frm.submit) {
+              document.frm.submit();
+              return true;
+            }
+          }
+        } catch (_) {}
+        return false;
       })();
     `);
+    if (submitTriggered) {
+      log('  检测到 frm 壳层，已触发 scBksPyfa 提交，等待 3 秒…');
+      await new Promise((r) => setTimeout(r, 3000));
+    }
 
+    let result;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      result = await win.webContents.executeJavaScript(`
+        (function() {
+          function getDocs() {
+            var docs = [document];
+            var frames = document.querySelectorAll('iframe, frame');
+            for (var i = 0; i < frames.length; i++) {
+              try {
+                if (frames[i].contentDocument) docs.push(frames[i].contentDocument);
+              } catch (_) {}
+            }
+            return docs;
+          }
+          function inspectDoc(doc, fromFrame) {
+            var body = doc && doc.body ? (doc.body.textContent || '') : '';
+            var table = doc ? doc.querySelector('table') : null;
+            var rows = table ? table.querySelectorAll('tr') : [];
+            var rowCount = rows ? rows.length : 0;
+            var hasTitle = body.includes('培养方案完成情况') || body.includes('培养方案');
+            var hasCourseAttr = body.includes('课程属性') || body.includes('课程号') || body.includes('学分');
+            var html = doc && doc.documentElement ? doc.documentElement.outerHTML : '';
+            return {
+              fromFrame: !!fromFrame,
+              body: body,
+              rowCount: rowCount,
+              hasTitle: hasTitle,
+              hasCourseAttr: hasCourseAttr,
+              html: html
+            };
+          }
+
+          var docs = getDocs();
+          var candidates = [];
+          var hasLoginRequired = false;
+          var hasSsoFail = false;
+          var mergedText = '';
+          for (var i = 0; i < docs.length; i++) {
+            var c = inspectDoc(docs[i], i > 0);
+            candidates.push(c);
+            mergedText += '\\n' + (c.body || '');
+            if (c.body.includes('请登录') || c.body.includes('会话已过期') || c.body.includes('未登录')) {
+              hasLoginRequired = true;
+            }
+            if (c.body.includes('认证失败') || c.body.includes('重新登录') || c.body.includes('sso_fail')) {
+              hasSsoFail = true;
+            }
+          }
+          if (hasLoginRequired) return { ok: false, reason: 'login_required', text: mergedText };
+          if (hasSsoFail) return { ok: false, reason: 'sso_fail', text: mergedText };
+
+          candidates.sort(function(a, b) {
+            return (b.rowCount || 0) - (a.rowCount || 0);
+          });
+          var best = candidates[0] || null;
+          if (!best || !best.rowCount) {
+            return { ok: false, reason: 'no_table', text: mergedText };
+          }
+          return {
+            ok: true,
+            html: best.html || '',
+            text: best.body || mergedText || '',
+            rowCount: best.rowCount || 0,
+            hasTitle: !!best.hasTitle,
+            hasCourseAttr: !!best.hasCourseAttr,
+            fromFrame: !!best.fromFrame
+          };
+        })();
+      `);
+
+      // 若页面提示需登录 / SSO 失败 / 完全无表格，直接跳出循环走后续失败逻辑
+      if (!result?.ok || result?.reason === 'login_required' || result?.reason === 'sso_fail' || result?.reason === 'no_table') {
+        break;
+      }
+
+      const hasEnoughRows = (result?.rowCount || 0) > 20;
+      const hasKeywords = !!(result?.hasTitle || result?.hasCourseAttr);
+      const hasHtml = typeof result?.html === 'string' && result.html.length > 1000;
+
+      if (hasEnoughRows && hasKeywords && hasHtml) {
+        log('  表格已加载（约 ' + result.rowCount + ' 行）' + (result?.fromFrame ? '（来自 iframe/frame）' : ''));
+        break;
+      }
+
+      if (attempt < 3) {
+        log('  表格信息不足（行数/关键词未达标），再等 3 秒后重试 (' + attempt + '/3)…');
+        if (attempt === 1) {
+          await win.webContents.executeJavaScript(`
+            (function() {
+              try {
+                if (document && document.frm && document.frm.m) {
+                  document.frm.m.value = 'scBksPyfa';
+                  if (document.frm.submit) document.frm.submit();
+                }
+              } catch (_) {}
+            })();
+          `);
+        }
+        await new Promise((r) => setTimeout(r, 3000));
+      } else {
+        break;
+      }
+    }
+
+    // 若完全拿不到结果 / 明确失败，按原逻辑走失败分支
     if (!result || !result.ok) {
       const currentUrl = win.webContents.getURL();
       log(`当前页面 URL: ${currentUrl}`);
       if (result?.reason === 'login_required') {
         log('❌ 页面提示需登录');
-      } else {
+      } else if (result?.reason === 'sso_fail') {
+        log('❌ 页面为 SSO 失败页（需重新登录）');
+      } else if (result?.reason === 'no_table') {
         log('❌ 页面无 table 或缺少「课程属性」文本，可能未进入正确页面');
+      } else {
+        log('❌ 页面结构不完整或解析失败');
+      }
+      // 便于排查：即使 HTML 不可用，也把可见文本落盘
+      try {
+        const txtPath = path.join(storageConfig.getDataBasePath(), 'training-plan-last.txt');
+        const text = typeof result?.text === 'string' ? result.text : '';
+        if (text) {
+          fs.writeFileSync(txtPath, text, 'utf8');
+          log('已保存页面文本到本地: ' + txtPath);
+        }
+      } catch (e) {
+        log('❌ 保存页面文本失败: ' + (e?.message || String(e)));
       }
       log('调试：窗口保持 8 秒供查看，请检查弹窗');
       await new Promise((r) => setTimeout(r, 8000));
-      finish(false, null, result?.reason === 'login_required' ? '未登录或会话已过期' : '未找到培养方案表格');
+      finish(
+        false,
+        null,
+        result?.reason === 'login_required'
+          ? '未登录或会话已过期'
+          : result?.reason === 'sso_fail'
+            ? 'SSO 失败页，请重新登录后重试'
+            : '未找到有效培养方案表格'
+      );
       return;
     }
-    log('✓ 提取成功');
+
+    // 走到这里说明 result.ok === true，但不一定满足“强校验”条件
+    if ((result.rowCount || 0) > 20 && (result.hasTitle || result.hasCourseAttr)) {
+      log('✓ 提取成功');
+    } else {
+      log(
+        '⚠️ 表格结构未完全满足强校验（rowCount=' +
+          (result.rowCount || 0) +
+          ', hasTitle=' +
+          !!result.hasTitle +
+          ', hasCourseAttr=' +
+          !!result.hasCourseAttr +
+          '），但已在页面看到表格，按成功处理并保存 HTML 供后续解析'
+      );
+    }
     try {
-      const htmlPath = path.join(storageConfig.getDataBasePath(), 'training-plan-last.html');
+      const base = storageConfig.getDataBasePath();
+      const htmlPath = path.join(base, 'training-plan-last.html');
       fs.writeFileSync(htmlPath, result.html, 'utf8');
-      log('已保存原始 HTML 到本地: ' + htmlPath);
-    } catch (_) {}
+      log('已保存主提取 HTML 到本地: ' + htmlPath);
+      const txtPath = path.join(storageConfig.getDataBasePath(), 'training-plan-last.txt');
+      if (typeof result?.text === 'string' && result.text.length) {
+        fs.writeFileSync(txtPath, result.text, 'utf8');
+        log('已保存页面文本到本地: ' + txtPath);
+      }
+      // 额外保存当前主文档 HTML，便于对比“主文档 vs frame 文档”
+      const pageHtml = await win.webContents.executeJavaScript(`
+        (function() {
+          return document && document.documentElement ? document.documentElement.outerHTML : '';
+        })();
+      `);
+      if (typeof pageHtml === 'string' && pageHtml.length) {
+        const fullHtmlPath = path.join(base, 'training-plan-page-full.html');
+        fs.writeFileSync(fullHtmlPath, pageHtml, 'utf8');
+        log('已保存当前页面完整 HTML 到本地: ' + fullHtmlPath);
+      }
+      // 再保存一份 MHTML（近似完整网页快照，包含资源引用）
+      const mhtmlPath = path.join(base, 'training-plan-last.mhtml');
+      await new Promise((resolve) => {
+        win.webContents.savePage(mhtmlPath, 'MHTML', () => resolve(null));
+      });
+      log('已保存 MHTML 快照到本地: ' + mhtmlPath);
+    } catch (e) {
+      log('❌ 保存 HTML 失败: ' + (e?.message || String(e)));
+    }
     finish(true, result.html);
   } catch (e) {
     const msg = (e && e.message) || String(e);
@@ -619,10 +1046,82 @@ async function tryExtractWithRefresh(win, finish, log = () => {}) {
   }
 }
 
+function extractHtmlFromMhtmlBuffer(buf, log = () => {}) {
+  // 先按 utf8 文本读取，方便解析 boundary 和各个 part
+  const text = buf.toString('utf8');
+  const boundaryMatch = text.match(/boundary="([^"]+)"/i);
+  if (!boundaryMatch) {
+    log('未找到 MHTML boundary');
+    return null;
+  }
+  const boundary = boundaryMatch[1];
+  const parts = text.split(`--${boundary}`);
+
+  // 找到第一个 text/html 的 part
+  const htmlPart = parts.find((p) => /Content-Type:\s*text\/html/i.test(p));
+  if (!htmlPart) {
+    log('未找到 text/html 段');
+    return null;
+  }
+
+  // header 与 body 之间用空行分隔
+  const bodyParts = htmlPart.split(/\r?\n\r?\n/);
+  if (bodyParts.length < 2) {
+    log('MHTML 段格式异常（无 header/body 分隔）');
+    return null;
+  }
+  const qpText = bodyParts.slice(1).join('\n');
+
+  // quoted-printable 解码：处理软换行和 =XX 序列
+  const qpDecoded = qpText
+    .replace(/=\r?\n/g, '') // 软换行
+    .replace(/=([0-9A-Fa-f]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+
+  // 页面为 GBK 编码，需转为 UTF-8
+  const bufGbk = Buffer.from(qpDecoded, 'binary');
+  const htmlUtf8 = iconv.decode(bufGbk, 'gbk');
+  return htmlUtf8;
+}
+
 async function loadFromHtmlFile() {
-  const htmlPath = path.join(storageConfig.getDataBasePath(), 'training-plan-last.html');
+  const base = storageConfig.getDataBasePath();
+  const mhtmlPath = path.join(base, 'training-plan-last.mhtml');
   try {
-    if (!fs.existsSync(htmlPath)) return { success: false, html: null, error: '本地无缓存，请先点击「更新培养方案」抓取' };
+    if (!fs.existsSync(mhtmlPath)) {
+      return {
+        success: false,
+        html: null,
+        error: '本地无 MHTML 缓存，请先抓取培养方案或手动保存 mhtml 到数据目录'
+      };
+    }
+    const buf = fs.readFileSync(mhtmlPath);
+    const html = extractHtmlFromMhtmlBuffer(buf, (msg) => {
+      try {
+        console.log('[MHTML]', msg);
+      } catch (_) {}
+    });
+    if (!html || !html.trim()) {
+      return { success: false, html: null, error: '从 MHTML 提取 HTML 失败' };
+    }
+    // 为方便调试和前端“从本地 HTML 加载”，顺便写出一份普通 HTML
+    try {
+      const htmlPath = path.join(base, 'training-plan-last.html');
+      fs.writeFileSync(htmlPath, html, 'utf8');
+    } catch (_) {}
+    return { success: true, html };
+  } catch (e) {
+    return {
+      success: false,
+      html: null,
+      error: e?.message || '读取 MHTML 失败'
+    };
+  }
+}
+
+async function loadFromFullHtmlFile() {
+  const htmlPath = path.join(storageConfig.getDataBasePath(), 'training-plan-page-full.html');
+  try {
+    if (!fs.existsSync(htmlPath)) return { success: false, html: null, error: '本地无完整页面缓存，请先点击「更新培养方案」抓取' };
     const html = fs.readFileSync(htmlPath, 'utf8');
     return { success: true, html };
   } catch (e) {
@@ -630,7 +1129,7 @@ async function loadFromHtmlFile() {
   }
 }
 
-module.exports = { fetchTrainingPlanHTML, getInfoSearchUrl, loadFromHtmlFile };
+module.exports = { fetchTrainingPlanHTML, getInfoSearchUrl, loadFromHtmlFile, loadFromFullHtmlFile };
 
 
 

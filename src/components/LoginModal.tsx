@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface LoginModalProps {
   open: boolean;
@@ -9,22 +9,27 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const usernameInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [useWindowLogin, setUseWindowLogin] = useState(false);
   const [saveCredentials, setSaveCredentials] = useState(false);
+  const [hasSavedCredentials, setHasSavedCredentials] = useState(false);
 
   useEffect(() => {
     if (open) {
       setError(null);
       setPassword('');
+      window.eeInfo?.auth?.hasCredentials?.().then((ok) => setHasSavedCredentials(!!ok)).catch(() => setHasSavedCredentials(false));
     }
   }, [open]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (!username.trim()) {
+    const rawUsername = usernameInputRef.current?.value ?? username;
+    const finalUsername = String(rawUsername || '').trim();
+    if (!finalUsername) {
       setError('请输入学号/用户名');
       return;
     }
@@ -41,12 +46,35 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
 
     setLoading(true);
     try {
-      const result = await api.login(username.trim(), password, { forceWindow: useWindowLogin, saveCredentials });
+      const result = await api.login(finalUsername, password, { forceWindow: useWindowLogin, saveCredentials });
       if (result.success) {
         onSuccess?.(result.data);
         onClose();
       } else {
         setError(result.error || '登录失败');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '登录异常');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLoginWithSavedCredentials = async () => {
+    setError(null);
+    const api = window.eeInfo?.auth;
+    if (!api?.loginWithSavedCredentials) {
+      setError('应用未就绪，请稍后重试');
+      return;
+    }
+    setLoading(true);
+    try {
+      const result = await api.loginWithSavedCredentials({ forceWindow: useWindowLogin });
+      if (result.success) {
+        onSuccess?.(result.data);
+        onClose();
+      } else {
+        setError(result.error || '使用已保存凭据登录失败');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : '登录异常');
@@ -89,6 +117,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
           <div>
             <label className="mb-1.5 block text-xs font-medium text-slate-400">学号 / 用户名</label>
             <input
+              ref={usernameInputRef}
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -155,6 +184,16 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, onClose, onSuccess }) => 
               取消
             </button>
           </div>
+          {hasSavedCredentials && (
+            <button
+              type="button"
+              disabled={loading}
+              onClick={handleLoginWithSavedCredentials}
+              className="w-full rounded-lg border border-emerald-700/60 bg-emerald-900/20 py-2.5 text-sm text-emerald-300 hover:bg-emerald-900/30 disabled:opacity-50"
+            >
+              {loading ? '登录中…' : '使用已保存凭据登录'}
+            </button>
+          )}
         </form>
 
         <p className="mt-4 text-center text-[10px] text-slate-500">

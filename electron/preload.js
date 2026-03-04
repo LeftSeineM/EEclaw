@@ -1,4 +1,4 @@
-﻿const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('eeInfo', {
   crawler: {
@@ -24,6 +24,10 @@ contextBridge.exposeInMainWorld('eeInfo', {
         saveCredentials: opts?.saveCredentials
       }),
     hasCredentials: () => ipcRenderer.invoke('auth:hasCredentials'),
+    loginWithSavedCredentials: (opts) =>
+      ipcRenderer.invoke('auth:loginWithSavedCredentials', {
+        forceWindow: opts?.forceWindow
+      }),
     clearCredentials: () => ipcRenderer.invoke('auth:clearCredentials'),
     logout: () => ipcRenderer.invoke('auth:logout'),
     getStatus: () => ipcRenderer.invoke('auth:status'),
@@ -32,6 +36,9 @@ contextBridge.exposeInMainWorld('eeInfo', {
   },
   shell: {
     openExternal: (url) => ipcRenderer.invoke('shell:openExternal', url)
+  },
+  app: {
+    restart: () => ipcRenderer.invoke('app:restart')
   },
   llm: {
     chat: (opts) => ipcRenderer.invoke('llm:chat', opts)
@@ -47,6 +54,7 @@ contextBridge.exposeInMainWorld('eeInfo', {
     setData: (data) => ipcRenderer.invoke('courseSelection:setData', data),
     getDataPath: () => ipcRenderer.invoke('courseSelection:getDataPath'),
     loadFromHtmlFile: () => ipcRenderer.invoke('courseSelection:loadFromHtmlFile'),
+    loadFromFullHtmlFile: () => ipcRenderer.invoke('courseSelection:loadFromFullHtmlFile'),
     onLog: (cb) => {
       const handler = (_, msg) => cb(msg);
       ipcRenderer.on('courseSelection:log', handler);

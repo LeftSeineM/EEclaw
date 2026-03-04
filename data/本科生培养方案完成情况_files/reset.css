@@ -1,0 +1,82 @@
+@charset "utf-8";
+/***************
+TsingStone Info&Art Design Studio
+the Academy of Arts & Design, Tsinghua University
+Author:Jason Woo 
+***************/
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,figcaption,code,del,dfn,em,image,q,dl,dt,dd,ol,ul,li,fieldset,form,legend,table,tf,tr,th {
+	border: 0px;
+	padding: 0px; 
+	font-size: 100%; 	
+	-webkit-text-size-adjust:none;
+	margin: 0px; 
+	font-family: inherit;
+}
+
+
+body {
+	background-color: #FFFFFF;
+	color: #333;
+	line-height: 18px;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+}
+
+
+input,textarea,select
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	outline:none;
+	background:#fff;
+}
+
+img {
+	border: 0px;
+	vertical-align:bottom;
+}
+
+a, a:link {
+	text-decoration: none;
+	color:#777777;
+}
+
+a:hover
+{
+	text-decoration:none;
+	color:#E95C0D;
+}
+
+ul, li {
+	list-style-type:none;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
+.clearfix:after {
+	display:block;
+	content:'.';
+	clear:both;
+	height:0px;
+	visibility: hidden;
+}
+
+.yahei{
+	font-family:"Microsoft yahei","微软雅黑","Tahoma","Verdana","Arial","sans-serif";
+}
+
+.relative
+{
+	position:relative;
+}
+
+.clearfix {
+*display:inline-block;
+*zoom:1;
+}
+

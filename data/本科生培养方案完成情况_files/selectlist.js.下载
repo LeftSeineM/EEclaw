@@ -1,0 +1,280 @@
+/**
+为按钮和选择框增加id属性。因为firefox只能通过id获得控件，不能通过name。
+ZhengWangli 2006.10.5
+
+左右选择树类。主要功能：
+1> 提供两种风格（普通和树状）。树状风格时，选择上级会自动级联处理下级；选择下级则上级默认半选中；如果所有下级都选中，则上级选中
+2> 允许用户为节点附加其他信息，通过getSelectedRows()函数可以得到节点的全部信息
+ZhengWangli 2006.3.30
+*/
+function GBPSelectList(items,size,useTreeStyle,showCode) {
+
+    this.multiple       = true;     //是否允许多选
+    this.listSize        = size ? size : 20;        //选择框的长度
+    this.treeStyle  = Boolean(useTreeStyle);     //是否用树状形式显示数据
+    this.showCode   = Boolean(showCode);     //如果是树状形式，是否显示层次码
+    
+    this.needOrder = true;	//是否需要排序。（只在普通形式下起作用，树状时必须排序）
+    
+    this.itemList =  items;    //存放所有选择元素的数组
+
+    this.leftSelect = null;     //左边的选择框控件
+    this.rightSelect = null;    //右边的选择框控件
+    this.leftDiv    = null;     //左边放置列表框的层
+    this.rightDiv   = null;     //右边放置列表框的层
+    this.leftDiv_innerHTML = ""; //左侧选择框层的内部元素，
+    this.rightDiv_innerHTML = ""; //右侧选择框层的内部元素
+    this.leftLabel = null;  //左边的文字标签控件
+    this.rightLabel = null; //右边的文字标签控件
+    
+    this.namespace = "gbp_sl_"; //控件名称的前缀
+    this.leftDivName = "divAll"; //左边放置列表框的层的名称
+    this.rightDivName = "divChecked"; //右边放置列表框的层的名称
+    this.leftSelectName = "sltAll"; //左边列表框的名称
+    this.rightSelectName = "sltChecked";    //右边列表框的名称
+    this.selectButton = "btnSelect";        //选中按钮的名称
+    this.selectAllButton = "btnSelectAll";        //选中所有按钮的名称
+    this.cancelButton = "btnCancel";        //取消选择按钮的名称
+    this.cancelAllButton = "btnCancelAll";        //取消所有按钮的名称
+    
+    this.o_children = [];
+    this.root = this;
+    this.nodes = {};    //存放所有节点
+    var o_this = this;
+    this.buildNode  = function(){ //构造树节点
+        if(this.treeStyle){ 
+            _build(o_this,0);
+        }else{
+            for(var i=0; i< this.itemList.length; i++){
+                new GBP_SL_Item(o_this,this.itemList[i]);
+            }
+        }
+    };
+    
+    function _build(father,level,start){ //之所以用这个递归函数，而在子类里迭代，是为了效率考虑
+        if(!start) start = 0
+        for(var i=start; i< o_this.itemList.length; i++){
+            curLevel = o_this.itemList[i][4];
+            if(curLevel == (level+1)){
+                var obj = new GBP_SL_Item(father,o_this.itemList[i]);
+                _build(obj, curLevel, i + 1);
+            }else if(curLevel <= level){
+                 break;
+            }
+        }
+    }
+}
+
+GBPSelectList.prototype.prepareData = function() { //对数据进行准备，处理
+    var list = new Array();
+    var arrays = this.itemList;
+    var _pre;
+    
+    function _sortByName(a,b){  //按显示名排序
+        if(a[1] == b[1]) return 0
+        return (a[1] > b[1]) ? 1 : -1;
+    }
+    function _sortByTreeCode(a,b){  //按层次码排序
+        if(a[3] == b[3]) return 0
+        return (a[3] > b[3]) ? 1 : -1;
+    }
+    
+    for(var n = 0; n < arrays.length; n++){
+        var len = list.length;
+        if((!this.treeStyle && arrays[n].length >= 2) || (this.treeStyle && arrays[n].length >= 5)){
+            list[len] = arrays[n];
+        }
+    }
+
+    if(this.treeStyle){
+        list.sort(_sortByTreeCode);
+    }else if(this.needOrder){
+        list.sort(_sortByName);
+    }
+    this.itemList = list;
+}
+
+GBPSelectList.prototype.make = function() {    //构造组件，并显示在页面上
+    this.prepareData(); //构造时再调用数据处理
+    
+    var txt , obj;
+    txt = "<table width='100%' height='100' border='0' align='center' cellpadding='0' cellspacing='0'>"
+             + " <tr align='center'>"
+             + "   <td valign='top' width='45%'><div align='left'>所有可用列表</div><br>"
+             + "     <div id='" + this.namespace + this.leftDivName + "'></div>"
+             + "   </td>"
+             + "   <td valign='middle' width='10%' >"
+             + "     <input type='button' id='" + this.namespace + this.selectButton + "' name='" + this.namespace + this.selectButton + "' value='  >  '><br><br>"
+             + "     <input type='button' id='" + this.namespace + this.selectAllButton + "' name='" + this.namespace + this.selectAllButton + "' value='  >> '><br><br>"
+             + "     <input type='button' id='" + this.namespace + this.cancelButton + "' name='" + this.namespace + this.cancelButton + "' value='  <  '><br><br>"
+             + "     <input type='button' id='" + this.namespace + this.cancelAllButton + "' name='" + this.namespace + this.cancelAllButton + "' value=' <<  '>"
+             + "   </td>"
+             + "   <td valign='top' width='45%'><div align='left'>已选择列表</div><br>"
+             + "     <div id='" + this.namespace + this.rightDivName + "' align='left'></div>"
+             + "   </td>"
+             + " </tr>"
+             + "</table>" ;
+    //container.innerHTML = txt;
+    document.write(txt);
+
+    var oThis = this; 
+    this.leftDiv    = document.getElementById(this.namespace + this.leftDivName);
+    this.rightDiv    = document.getElementById(this.namespace + this.rightDivName);
+
+    obj = document.getElementById(this.namespace + this.selectButton);
+    obj.onclick = function() { oThis.doSelect(1) };
+    
+    obj = document.getElementById(this.namespace + this.cancelButton);
+    obj.onclick = function() { oThis.doSelect(-1) };
+    
+    obj = document.getElementById(this.namespace + this.selectAllButton);
+    obj.onclick = function() { oThis.doAll(1) };
+    
+    obj = document.getElementById(this.namespace + this.cancelAllButton);
+    obj.onclick = function() { oThis.doAll(-1) };
+
+    this.buildNode();
+    
+    this.update();
+};
+
+GBPSelectList.prototype.update = function(){ //更新select元素的界面显示
+    //用innerHTML来设置select元素，可以加快速度，减少屏幕闪烁
+    
+    //给层元素赋初值
+    this.rightDiv_innerHTML = "<select id='" + this.namespace + this.rightSelectName + "' name='" + this.namespace + this.rightSelectName + "' " + (this.multiple ? "multiple" : "") + " size='" + this.listSize + "' style='width:100%'>";
+    this.leftDiv_innerHTML = "<select id='" + this.namespace + this.leftSelectName + "' name='" + this.namespace + this.leftSelectName + "' " + (this.multiple ? "multiple" : "") + " size='" + this.listSize + "' style='width:100%'>";
+
+    //处理子节点状态，根据子节点的状态设置父节点状态
+    for(var i=0; i < this.o_children.length; i++){
+        this.o_children[i].doStatus();
+    }       
+    for(var i=0; i < this.o_children.length; i++){
+            this.o_children[i].update();
+    }
+    //直接用innerHTML，速度最快
+    this.leftDiv.innerHTML = this.leftDiv_innerHTML + "</select>";
+    this.rightDiv.innerHTML = this.rightDiv_innerHTML + "</select>";
+    
+    //重新获取两侧select元素，并为其绑定双击事件
+    var oThis = this;
+    this.leftSelect = document.getElementById(this.namespace + this.leftSelectName);
+    this.leftSelect.ondblclick = function() { oThis.doSelect(1) };
+    
+    this.rightSelect  = document.getElementById(this.namespace + this.rightSelectName);
+    this.rightSelect .ondblclick = function() { oThis.doSelect(-1) };    
+};
+
+GBPSelectList.prototype.doSelect = function(isSelect) {  //选中/取消选中
+    var values = new Array();
+    var obj = (isSelect == 1) ? this.leftSelect : this.rightSelect;    //处理哪个对象
+    if(this.multiple){
+        for(var i=0;i < obj.options.length; i++){
+            if(obj.options[i].selected){
+                values[values.length] = obj.options[i].value;
+            }
+        }
+    }else{
+        if(obj.selectedIndex > -1){
+            values[0] = obj[obj.selectedIndex].value;
+        }
+    }
+        
+    if( values.length == 0) return;
+    for(var n=0;n < values.length; n++){
+        this.nodes[values[n]].doSelect(isSelect);  
+    }
+
+    this.update()
+};
+
+GBPSelectList.prototype.doAll = function(isSelect) {  //全部选中/取消
+    for(var i=0; i < this.o_children.length; i++){
+        this.o_children[i].doSelect(isSelect);
+    }
+    this.update()
+};
+
+GBPSelectList.prototype.getSelectedValues = function() {  //获得选中的值，数组
+    var values = new Array();
+    for(var n = 0; n < this.rightSelect.options.length; n++){
+        values[n] = this.rightSelect.options[n].value;
+    }
+    return values;
+};
+
+GBPSelectList.prototype.getRows = function() {  //查看右侧记录的详细信息，返回的是个二维数组
+    var values = new Array();
+    for(var n = 0; n < this.rightSelect.options.length; n++){
+        values[values.length] = this.root.nodes[this.rightSelect.options[n].value].info;
+    }
+    return values;
+};
+
+GBPSelectList.prototype.getSelectedRows = function() {  //查看选中记录的详细信息，返回的是个二维数组
+    var values = new Array();
+    for(var n = 0; n < this.rightSelect.options.length; n++){
+        if(this.rightSelect[n].selected) 
+            values[values.length] = this.root.nodes[this.rightSelect.options[n].value].info;
+    }
+    return values;
+};
+
+function GBP_SL_Item(o_parent, o_item){ //节点对象
+    this.father = o_parent;
+    this.root   = o_parent.root;
+    this.o_children = [];
+    this.info = o_item;
+    this.status = o_item[2] ?  1 : -1 ;
+    this.level = this.root.treeStyle ? o_item[4] : 1;
+    this.value = o_item[0];
+    this.showText = o_item[1];
+    if(this.root.showCode) this.showText = o_item[3] + " " + this.showText;
+    if(this.level > 0) this.showText = "__________________".substr(0,(this.level-1)).replace(/_/g,"&nbsp;&nbsp;") + this.showText;
+    
+    o_parent.o_children[o_parent.o_children.length] = this;
+    this.root.nodes[this.value] = this;
+
+}
+
+GBP_SL_Item.prototype.doSelect = function(isSelected){   //节点的选择函数
+    this.status = isSelected;
+    for(var i=0; i < this.o_children.length; i++){ //选择上级会自动选择其所有下级
+        this.o_children[i].doSelect(isSelected);
+    }
+};
+
+GBP_SL_Item.prototype.doStatus = function(){ //处理节点状态
+    if(this.o_children.length == 0) return this.status;
+    var len1=0,len2=0,len3=0;
+    var s;
+    for(var i = 0; i < this.o_children.length; i++){
+        s = this.o_children[i].doStatus();
+        if(s == 1) len1 +=1;
+        if(s == 0) len2 +=1;
+        if(s == -1) len3 +=1;
+    }
+    if(len1 > 0 && len3 == 0 && len2 == 0){
+        this.status = 1;
+    }else if(len3 > 0 && len1 == 0 && len2 == 0){
+        this.status = -1;
+    }else{
+        this.status = 0;
+    }
+    return this.status;
+};
+
+GBP_SL_Item.prototype.update = function(){   //更新界面显示
+    if(this.status == 1 || this.status == 0){
+        this.root.rightDiv_innerHTML += "<option value='" + this.value + "'>" + this.showText + "</option>\n";
+        //this.root.rightSelect.add (new Option(this.showText, this.value));
+    }
+    if(this.status == -1 || this.status == 0){
+        this.root.leftDiv_innerHTML += "<option value='" + this.value + "'>" + this.showText + "</option>\n";
+        //this.root.leftSelect.add (new Option(this.showText, this.value));
+    }
+    
+    for(var i = 0; i < this.o_children.length; i++){
+        this.o_children[i].update();
+    }
+};

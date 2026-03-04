@@ -71,21 +71,72 @@ export default function CourseSelectionPanel({ onFetchStart, onFetchComplete }: 
     onFetchStart?.();
     setTrainingPlanLoading(true);
     setError(null);
-    setLogs([]);
     setLogPanelOpen(true);
-    setLogs(prev => [...prev, '[前端] 开始抓取，onFetchStart 已调用，应保持 EE选课']);
+    setLogs(prev => [
+      ...prev,
+      '[==== 新一轮抓取 ====]',
+      '[前端] 开始抓取，onFetchStart 已调用，应保持 EE选课'
+    ]);
     try {
       const result = await window.eeInfo?.courseSelection?.fetchTrainingPlan?.();
       if (!result?.success || !result?.html) {
         setError(result?.error || '抓取失败');
         return;
       }
-      const parser = new TrainingPlanParser(result.html);
-      const parsedData = parser.parse();
-      const analyzer = new TrainingPlanAnalyzer(parsedData);
-      const report = analyzer.generateReport();
-      const recommendations = analyzer.generateRecommendations(report);
+      const html = result.html; // 类型安全：此时已确保 html 存在
+      setLogs(prev => [...prev, `[前端] 抓取返回 HTML 长度: ${html.length}`]);
+      const parseAndAnalyze = (html: string) => {
+        const parser = new TrainingPlanParser(html);
+        const parsedData = parser.parse();
+        const analyzer = new TrainingPlanAnalyzer(parsedData);
+        const report = analyzer.generateReport();
+        const recommendations = analyzer.generateRecommendations(report);
+        const totalGroups =
+          (report.byType.required?.groups?.length || 0) +
+          (report.byType.elective?.groups?.length || 0) +
+          (report.byType.optional?.groups?.length || 0);
+        return { parsedData, report, recommendations, totalGroups };
+      };
+
+      let { parsedData, report, recommendations, totalGroups } = parseAndAnalyze(html);
+      if (totalGroups === 0) {
+        setLogs(prev => [...prev, '[前端] 首次解析分组为 0，自动尝试回退解析…']);
+        // 先尝试完整页面 HTML
+        const full = await window.eeInfo?.courseSelection?.loadFromFullHtmlFile?.();
+        if (full?.success && full.html) {
+          const fallback = parseAndAnalyze(full.html);
+          if (fallback.totalGroups > 0) {
+            ({ parsedData, report, recommendations, totalGroups } = fallback);
+            setLogs(prev => [...prev, `[前端] 回退解析（完整页面）成功：分组 ${fallback.totalGroups}`]);
+          }
+        }
+        // 如果还是 0，再尝试从本地 MHTML/HTML 加载
+        if (totalGroups === 0) {
+          setLogs(prev => [...prev, '[前端] 继续尝试从本地 MHTML/HTML 加载…']);
+          const local = await window.eeInfo?.courseSelection?.loadFromHtmlFile?.();
+          if (local?.success && local.html) {
+            const fallback2 = parseAndAnalyze(local.html);
+            if (fallback2.totalGroups > 0) {
+              ({ parsedData, report, recommendations, totalGroups } = fallback2);
+              setLogs(prev => [...prev, `[前端] 回退解析（本地 MHTML/HTML）成功：分组 ${fallback2.totalGroups}`]);
+            } else {
+              setLogs(prev => [...prev, '[前端] 本地 MHTML/HTML 解析仍为 0 分组，请检查页面结构']);
+            }
+          } else {
+            setLogs(prev => [...prev, `[前端] 未找到本地 MHTML/HTML：${local?.error || '未知错误'}`]);
+          }
+        }
+      }
+
+      setLogs(prev => [
+        ...prev,
+        `[前端] 解析完成: 分组 ${totalGroups}，要求学分 ${report.summary.totalRequired}，已修 ${report.summary.totalCompleted}，完成率 ${report.summary.completionRate}%`
+      ]);
       await saveData({ ...(data || {}), trainingPlan: { report, recommendations, parsedData }, lastUpdate: Date.now() });
+      const savePath = await window.eeInfo?.courseSelection?.getDataPath?.();
+      if (savePath) {
+        setLogs(prev => [...prev, `[前端] 已写入 course-selection-data: ${savePath}`]);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : '抓取培养方案失败');
     } finally {

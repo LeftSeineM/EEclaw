@@ -239,24 +239,30 @@ function getInfoHomepageLoginScript() {
 function getAuthInjectScript(username, password) {
   return `
     (function() {
-      const un = ${JSON.stringify(username || '')};
+      const un = ${JSON.stringify(String(username || '').trim())};
       const pw = ${JSON.stringify(password || '')};
       if (!un || !pw) return { ok: false, reason: 'missing_credentials' };
 
       function tryDoc(doc) {
         if (!doc) return null;
-        const userInput = doc.querySelector(
-          'input[name="username"], input[name="i_user"], input[name="un"], input#username, input#i_user, ' +
-          'input[type="text"][autocomplete="username"], input[type="text"]'
-        );
         const passInput = doc.querySelector(
           'input[name="password"], input[name="i_pass"], input[name="pw"], input#password, input#i_pass, input[type="password"]'
         );
-        const loginForm = doc.querySelector('form#theform') || (userInput && userInput.closest('form'));
-        const submitBtn = doc.querySelector(
-          'form#theform button[type="button"][onclick*="doLogin"], form#theform .btn-primary, ' +
+        const loginForm = passInput ? passInput.closest('form') : doc.querySelector('form#theform');
+        const form = loginForm || doc;
+        const userInput = form.querySelector('input#i_user') || form.querySelector('input[name="i_user"]') ||
+          form.querySelector('input#username') || form.querySelector('input[name="username"]') ||
+          form.querySelector('input[name="un"]') ||
+          form.querySelector('input[type="text"][autocomplete="username"]') ||
+          (passInput ? Array.from(form.querySelectorAll('input[type="text"]')).find(function(inp) {
+            if (inp.name === 'locale' || inp.name === 'i_locale' || inp.id === 'locale') return false;
+            if (inp.maxLength === 1 || inp.size === 1) return false;
+            return inp.offsetParent !== null && inp.offsetWidth > 0;
+          }) : null);
+        const submitBtn = form.querySelector(
+          'button[type="button"][onclick*="doLogin"], .btn-primary, ' +
           'button[type="submit"], input[type="submit"], [id="loginButtonId"]'
-        );
+        ) || doc.querySelector('[id="loginButtonId"]');
         const loginBtnByText = Array.from(doc.querySelectorAll('button, input[type="submit"], input[type="button"]'))
           .find(el => (el.value || el.textContent || '').trim() === '登录');
 
@@ -265,7 +271,7 @@ function getAuthInjectScript(username, password) {
           passInput.value = pw;
           userInput.dispatchEvent(new Event('input', { bubbles: true }));
           passInput.dispatchEvent(new Event('input', { bubbles: true }));
-          if (loginForm && loginForm.id === 'theform') {
+          if (form.id === 'theform') {
             const sm2pass = doc.querySelector('#sm2pass');
             const pk = doc.querySelector('#sm2publicKey');
             if (sm2pass && pk && typeof sm2Util !== 'undefined' && sm2Util.doEncryptStr) {
@@ -280,12 +286,8 @@ function getAuthInjectScript(username, password) {
             btn.click();
             return { ok: true };
           }
-          if (loginForm && loginForm.id === 'theform') {
-            loginForm.submit();
-            return { ok: true };
-          }
-          if (loginForm && !loginForm.action.includes('locale')) {
-            loginForm.submit();
+          if (form.id === 'theform' || !form.action.includes('locale')) {
+            form.submit();
             return { ok: true };
           }
         }
