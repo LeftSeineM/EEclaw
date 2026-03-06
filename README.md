@@ -18,3 +18,6 @@
 ### 配置EE智能体：
 推荐在设置中**配置智谱API**，网址：https://open.bigmodel.cn/
 （或配置本地Ollama）
+
+
+
